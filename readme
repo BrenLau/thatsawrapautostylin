@@ -1,5 +1,8 @@
 To create virtual environment: python -m venv venv
 
-To start backend: activate virtual environment (. .venv/bin/activate)
+To start backend: activate virtual environment (. venv/bin/activate)
 export FLASK_APP=backend
 flask run
+
+
+to start frontend: npm run dev
