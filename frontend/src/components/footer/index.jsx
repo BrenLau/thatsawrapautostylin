@@ -1,7 +1,4 @@
 import "./footer.css"
-import { SocialIcon } from 'react-social-icons'
-import { Link } from 'react-router-dom'
-
 
 const Footer = () => {
 
