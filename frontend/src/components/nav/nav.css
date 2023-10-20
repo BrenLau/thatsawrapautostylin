@@ -48,6 +48,7 @@
   padding-bottom: 1rem;
   border-bottom: 1px solid gray;
   margin-bottom: 0;
+  z-index: -1;
 }
 
 #menu-dropdown-div-hidden {

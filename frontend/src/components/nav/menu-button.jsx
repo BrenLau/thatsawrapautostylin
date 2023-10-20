@@ -26,7 +26,7 @@ const MenuButton = () => {
     if (showMenu) {
       console.log(transitioning)
       setTransitioning(true)
-      setTimeout(setTransitioning, 200, false)
+      setTimeout(setTransitioning, 400, false)
     }
   };
 
