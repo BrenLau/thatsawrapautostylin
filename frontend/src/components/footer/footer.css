@@ -1,0 +1,34 @@
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background-color: black;
+    color: grey;
+    text-align: center;
+    padding-right: 20px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+}
+
+.footer a{
+    color: grey;
+}
+
+.footer a:hover{
+    color: grey
+}
+
+.email{
+    cursor: pointer;
+}
+
+
+/* for phones */
+@media screen and (max-width: 768px) {}
+
+/* for larger devices */
+@media screen and (min-width: 768px) and (max-width: 992px) {}
