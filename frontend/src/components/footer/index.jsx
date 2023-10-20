@@ -3,7 +3,7 @@ import "./footer.css"
 const Footer = () => {
 
     const email = () => {
-        window.open('mailto:thatsawrapautostylin@gmail.com/?subject=&body=')
+        window.open('mailto:thatsawrapautostylin@gmail.com?subject=&body=')
     }
 
     return (
