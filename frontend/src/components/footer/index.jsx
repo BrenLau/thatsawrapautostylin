@@ -1,6 +1,6 @@
 import "./footer.css"
 import { SocialIcon } from 'react-social-icons'
-import { NavLink } from 'react-router-dom'
+
 
 const Footer = () => {
 
