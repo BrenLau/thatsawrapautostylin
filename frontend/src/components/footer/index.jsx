@@ -1,5 +1,6 @@
 import "./footer.css"
 import { SocialIcon } from 'react-social-icons'
+import { Link } from 'react-router-dom'
 
 
 const Footer = () => {
@@ -11,9 +12,8 @@ const Footer = () => {
     return (
         <footer className="footer">
             <span>Vinson Zheng</span>
-            <SocialIcon className="email" network='email' onClick={email}></SocialIcon>
-            <SocialIcon url="https://www.instagram.com/thatsawrapautostylin/?igshid=MzRlODBiNWFlZA%3D%3D" />
-            {/* <i className="fa-brands fa-instagram"></i> */}
+            <span onClick={email} className="email"><i className="fa-regular fa-envelope"></i></span>
+            <a href='https://www.instagram.com/thatsawrapautostylin/?igshid=MzRlODBiNWFlZA%3D%3D'><i className="fa-brands fa-instagram"></i></a>
         </footer>
     )
 
