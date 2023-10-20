@@ -4,6 +4,7 @@ const MenuButton = () => {
   const [user, setUser] = useState({});
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
+  const [transitioning, setTransitioning] = useState(false)
 
   useEffect(() => {
     if (!showMenu) return;
@@ -17,16 +18,26 @@ const MenuButton = () => {
     document.addEventListener("click", closeMenu);
 
     return () => document.removeEventListener("click", closeMenu);
-  }, [showMenu])
+  }, [showMenu]);
+
+  const toggleMenu = () => {
+    setShowMenu(!showMenu)
+
+    if (showMenu) {
+      console.log(transitioning)
+      setTransitioning(true)
+      setTimeout(setTransitioning, 200, false)
+    }
+  };
 
   return (
     <div id="menu-button-div">
-      <i class="fa-solid fa-bars" onClick={() => setShowMenu(!showMenu)} ref={ulRef}></i>
+      <i class="fa-solid fa-bars" onClick={toggleMenu} ref={ulRef}></i>
       {showMenu ? (
         <div id="menu-dropdown-div">
-          <p>Book Now</p>
-          <p>Log In</p>
-          <p>Sign Up</p>
+          {transitioning ? null : <p>Book Now</p>}
+          {transitioning ? null : <p>Log In</p> }
+          {transitioning ? null : <p>Sign Up</p> }
         </div>
       ) : (
         <div id="menu-dropdown-div-hidden">

@@ -1,9 +1,12 @@
 /* for phones */
 #nav {
+  position: sticky;
+  top: 0px;
   display: flex;
   justify-content: space-around;
   background-color: black;
   padding: 0 1rem;
+  z-index: 1000;
 }
 
 #nav-title-div {
@@ -33,7 +36,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  transition: height 2000ms ease;
+  height: 10rem;
+  transition: height 200ms ease;
+  z-index: 0;
 }
 
 #menu-dropdown-div > p {
@@ -48,7 +53,7 @@
 #menu-dropdown-div-hidden {
   height: 0;
   width: 100%;
-  transition: height 2000ms ease;
+  transition: height 200ms ease;
 }
 
 @media screen and (max-width: 600px) {
@@ -58,7 +63,7 @@
   }
 
   #nav-logo {
-    height: 7rem;
+    height: calc(7rem - 1px);
   }
 
   #menu-dropdown-div {
