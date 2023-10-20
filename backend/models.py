@@ -13,6 +13,8 @@ class User(db.Model):
     phone_number = db.Column(db.String(50))
     instagram = db.Column(db.String(50))
     is_admin = db.Column(db.Boolean, nullable=False)
+    reviews = db.relationship("Review", back_populates="users")
+    bookings = db.relationship("Booking", back_populates="users")
 
 
 class CarType(db.Model):
@@ -44,6 +46,7 @@ class Booking(db.Model):
     service_id = db.Column(db.Integer, db.ForeignKey(
         "services.id"), nullable=False)
     car = db.Column(db.String(50), nullable=False)
+    user = db.relationship("User", back_populates="bookings")
 
 
 class Review(db.Model):
@@ -56,3 +59,4 @@ class Review(db.Model):
     service_id = db.Column(db.Integer, db.ForeignKey(
         "services.id"), nullable=False)
     image_url = db.Column(db.String, nullable=False)
+    user = db.relationship("User", back_populates="reviews")
