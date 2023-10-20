@@ -1,6 +1,73 @@
 /* for phones */
-@media screen and (max-width: 768px) {
+#nav {
+  display: flex;
+  justify-content: space-around;
+  background-color: black;
+  padding: 0 1rem;
+}
 
+#nav-title-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#nav-title {
+  color: goldenrod;
+}
+
+#menu-button-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+#menu-button-div > i {
+  color: goldenrod;
+}
+
+#menu-dropdown-div {
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: height 2000ms ease;
+}
+
+#menu-dropdown-div > p {
+  color: white;
+  text-align: center;
+  width: 100%;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid gray;
+  margin-bottom: 0;
+}
+
+#menu-dropdown-div-hidden {
+  height: 0;
+  width: 100%;
+  transition: height 2000ms ease;
+}
+
+@media screen and (max-width: 600px) {
+  #nav {
+    width: calc(100% - 2rem);
+    height: 7rem;
+  }
+
+  #nav-logo {
+    height: 7rem;
+  }
+
+  #menu-dropdown-div {
+    position: absolute;
+    top: 7rem;
+    left: 0;
+    right: 0;
+    width: 100%;
+  }
 }
 
 /* for larger devices */
