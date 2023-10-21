@@ -23,21 +23,21 @@ const MenuButton = () => {
   const toggleMenu = () => {
     setShowMenu(!showMenu)
 
-    if (showMenu) {
+    if (!showMenu) {
       console.log(transitioning)
       setTransitioning(true)
-      setTimeout(setTransitioning, 400, false)
+      setTimeout(setTransitioning, 200, false)
     }
   };
 
   return (
-    <div id="menu-button-div">
-      <i class="fa-solid fa-bars" onClick={toggleMenu} ref={ulRef}></i>
+    <div id="menu-button-div" ref={ulRef}>
+      <i id="menu-button" className="fa-solid fa-bars" onClick={toggleMenu} ></i>
       {showMenu ? (
         <div id="menu-dropdown-div">
-          {transitioning ? null : <p>Book Now</p>}
-          {transitioning ? null : <p>Log In</p> }
-          {transitioning ? null : <p>Sign Up</p> }
+          {transitioning ? null : <p className="menu-dropdown-button">Book Now</p>}
+          {transitioning ? null : <p className="menu-dropdown-button">Log In</p> }
+          {transitioning ? null : <p className="menu-dropdown-button">Sign Up</p> }
         </div>
       ) : (
         <div id="menu-dropdown-div-hidden">
