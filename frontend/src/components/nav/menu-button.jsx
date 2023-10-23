@@ -30,14 +30,16 @@ const MenuButton = () => {
     }
   };
 
+
+
   return (
     <div id="menu-button-div" ref={ulRef}>
       <i id="menu-button" className="fa-solid fa-bars" onClick={toggleMenu} ></i>
       {showMenu ? (
         <div id="menu-dropdown-div">
           {transitioning ? null : <p className="menu-dropdown-button">Book Now</p>}
-          {transitioning ? null : <p className="menu-dropdown-button">Log In</p> }
-          {transitioning ? null : <p className="menu-dropdown-button">Sign Up</p> }
+          {transitioning ? null : <p className="menu-dropdown-button">Log In</p>}
+          {transitioning ? null : <p className="menu-dropdown-button">Sign Up</p>}
         </div>
       ) : (
         <div id="menu-dropdown-div-hidden">
