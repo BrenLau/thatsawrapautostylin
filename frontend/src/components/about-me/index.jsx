@@ -11,8 +11,8 @@ const AboutMe = () => {
         </div>
         <div id="contact-info">
           <p>address: 123 Sesame Street</p>
-          <p>phone: (555) 867-5309</p>
-          <p>email: john-doe@example.com</p>
+          <p>phone: <a href='tel:555-876-5309'>(555) 867-5309</a></p>
+          <p> email: <a href='mailto:thatsawrapautostylin@gmail.com'>thatsawrapautostylin@gmail.com</a></p>
           <p>socials: FB,whatever</p>
 
         </div>
