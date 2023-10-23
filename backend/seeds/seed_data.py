@@ -1,4 +1,4 @@
-from ..models import db,User, CarType, SCHEMA
+from backend.models import db,User, CarType, environment, SCHEMA
 from sqlalchemy.sql import text
 
 
@@ -17,7 +17,11 @@ def seed_data():
         car_type='SUV/Truck'
     )
 
-    db.session.add_all(admin, Sedan, Suv)
+    db.session.add(admin)
+    db.session.add(Sedan)
+    db.session.add(Suv)
+
+    db.session.commit()
 
 
 def undo_data():

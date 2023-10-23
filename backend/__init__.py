@@ -2,7 +2,7 @@
 from flask import Flask
 from backend.models import db
 from flask_migrate import Migrate
-from .seeds import seed_commands
+from backend.seeds import seed_commands
 import os
 
 app = Flask(__name__)
