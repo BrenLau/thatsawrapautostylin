@@ -5,6 +5,12 @@ To start backend:
   pipenv shell
   flask run
 
+creating db instance:
+  flask db upgrade  
+  flask db migrate
+  flask seed all
+
+
 
 to start frontend: npm run dev
 
