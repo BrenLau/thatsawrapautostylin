@@ -20,12 +20,12 @@ def seed_data():
     db.session.add_all(admin, Sedan, Suv)
 
 
-    def undo_seeds():
-        if environment == "production":
-            db.session.execute(f"TRUNCATE table {SCHEMA}.car_types RESTART IDENTITY CASCADE;")
-            db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
-        else:
-            db.session.execute(text("DELETE FROM car_types"))
-            db.session.execute(text("DELETE FROM users"))
+def undo_data():
+    if environment == "production":
+        db.session.execute(f"TRUNCATE table {SCHEMA}.car_types RESTART IDENTITY CASCADE;")
+        db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
+    else:
+        db.session.execute(text("DELETE FROM car_types"))
+        db.session.execute(text("DELETE FROM users"))
 
         db.session.commit()
