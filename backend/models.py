@@ -1,5 +1,9 @@
 from flask_sqlalchemy import SQLAlchemy
 
+import os
+environment = os.getenv("FLASK_ENV")
+SCHEMA = os.environ.get("SCHEMA")
+
 db = SQLAlchemy()
 
 
@@ -13,8 +17,8 @@ class User(db.Model):
     phone_number = db.Column(db.String(50))
     instagram = db.Column(db.String(50))
     is_admin = db.Column(db.Boolean, nullable=False)
-    reviews = db.relationship("Review", back_populates="users")
-    bookings = db.relationship("Booking", back_populates="users")
+    reviews = db.relationship("Review", back_populates="user")
+    bookings = db.relationship("Booking", back_populates="user")
 
 
 class CarType(db.Model):
