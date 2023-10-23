@@ -40,17 +40,20 @@
   z-index: 0;
 }
 
-#menu-dropdown-div > p {
+#menu-dropdown-div > a {
+  text-decoration: none;
   color: white;
   text-align: center;
   width: 100%;
   padding-bottom: 1rem;
   border-bottom: 1px solid gray;
   margin-bottom: 0;
+  margin-top: 1rem;
   z-index: -1;
 }
 
 #menu-dropdown-div-hidden {
+  /* display: none; */
   height: 0;
   width: 100%;
   transition: height 200ms ease;
