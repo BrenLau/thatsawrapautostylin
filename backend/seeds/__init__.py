@@ -1,7 +1,7 @@
 from flask.cli import AppGroup
-from .seeds import seed_data, undo_data
+from backend.seeds.seed_data import seed_data, undo_data
 
-from ..models import db, environment, SCHEMA
+from backend.models import environment
 
 # Creates a seed group to hold our commands
 # So we can type `flask seed --help`
