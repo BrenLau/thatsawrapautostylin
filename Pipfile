@@ -8,6 +8,14 @@ psycopg2-binary = "*"
 alembic = "*"
 flask-migrate = "*"
 python-dotenv = "*"
+flask = "*"
+flask-cors = "*"
+flask-sqlalchemy = "*"
+flask-wtf = "*"
+werkzeug = "*"
+sqlalchemy = "*"
+flask-login = "*"
+wtforms = "*"
 
 [dev-packages]
 
