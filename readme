@@ -16,3 +16,12 @@ to start frontend: npm run dev
 
 CREATE USER thatsawrapautostylin WITH PASSWORD 'password' CREATEDB;
 CREATE DATABASE thatsawrapautostylin_db WITH OWNER thatsawrapautostylin;
+
+
+Styling:
+
+  black: #060606
+  red: #c00000
+  light-gold: #F0CD5F
+  dark-gold: #BA8F2F
+  whiteL #ffffff
