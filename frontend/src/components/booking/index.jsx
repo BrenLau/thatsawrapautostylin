@@ -72,7 +72,26 @@ const Booking = () => {
             </div>
             <div className='date-div'>
                 <label>
-                    Date and Time:
+                    Date and Time (Select 3):
+                    <input
+                        className='date/time'
+                        type='datetime-local'
+                        //value = {times}
+                        // onChange={(e) => setTimes(e.target.value)}
+                        required
+                    />
+                </label>
+                <label>
+                    <input
+                        className='date/time'
+                        type='datetime-local'
+                        //value = {times}
+                        // onChange={(e) => setTimes(e.target.value)}
+                        required
+                    />
+                </label>
+                <label>
+
                     <input
                         className='date/time'
                         type='datetime-local'
@@ -119,6 +138,7 @@ const Booking = () => {
                     Referral Code:
                     <input
                         type='text'
+                        placeholder='Referral Code'
                     />
                 </label>
             </div>
