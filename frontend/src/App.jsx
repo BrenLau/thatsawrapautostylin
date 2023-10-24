@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Footer from './components/footer';
 import Nav from './components/nav';
-import AboutMe from './components/about-me'
 import LoginFormModal from './components/login-modal';
 import Booking from './components/booking';
 import HomePage from './components/home-page';
