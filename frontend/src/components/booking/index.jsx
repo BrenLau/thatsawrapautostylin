@@ -1,4 +1,5 @@
 import './booking.css'
+import { DateTimePickerComponent } from '@syncfusion/ej2-react-calendars';
 
 const Booking = () => {
     return (
@@ -6,7 +7,7 @@ const Booking = () => {
             <h1>Book your service</h1>
             <div className='name-div'>
                 <label className='name'>
-                    Name:
+                    {/* Name: */}
                     <input
                         type="text"
                         placeholder="Name"
@@ -18,7 +19,7 @@ const Booking = () => {
             </div>
             <div className='email-div'>
                 <label>
-                    Email:
+                    {/* Email: */}
                     <input
                         className="email"
                         type="email"
@@ -31,7 +32,7 @@ const Booking = () => {
             </div>
             <div className='number-div'>
                 <label>
-                    Phone Number:
+                    {/* Phone Number: */}
                     <input
                         className='phone'
                         type='number'
@@ -46,7 +47,7 @@ const Booking = () => {
             </div>
             <div className='insta-div'>
                 <label>
-                    Instagram:
+                    {/* Instagram: */}
                     <input
                         className='insta'
                         placeholder='Instagram'
@@ -59,7 +60,7 @@ const Booking = () => {
             </div>
             <div className='car-div'>
                 <label>
-                    Car Model/Type:
+                    {/* Car Model/Type: */}
                     <input
                         className='car-type'
                         placeholder='Car Type'
@@ -71,37 +72,13 @@ const Booking = () => {
                 </label>
             </div>
             <div className='date-div'>
-                <label>
-                    Date and Time (Select 3):
-                    <input
-                        className='date/time'
-                        type='datetime-local'
-                        //value = {times}
-                        // onChange={(e) => setTimes(e.target.value)}
-                        required
-                    />
-                </label>
-                <label>
-                    <input
-                        className='date/time'
-                        type='datetime-local'
-                        //value = {times}
-                        // onChange={(e) => setTimes(e.target.value)}
-                        required
-                    />
-                </label>
-                <label>
-                    <input
-                        className='date/time'
-                        type='datetime-local'
-                        //value = {times}
-                        // onChange={(e) => setTimes(e.target.value)}
-                        required
-                    />
-                </label>
+                <h4>Select 3 dates and times that work for you</h4>
+                <DateTimePickerComponent id="datetimepicker" placeholder="Select a date and time" />
+                <DateTimePickerComponent id="datetimepicker" placeholder="Select a date and time" />
+                <DateTimePickerComponent id="datetimepicker" placeholder="Select a date and time" />
             </div>
             <div className='service-div'>
-                <label> Service:
+                <label>
                     <input
                         type='checkbox'
                     />
@@ -117,7 +94,7 @@ const Booking = () => {
                 </label>
             </div>
             <div className='addon-div'>
-                <label>Add ons:
+                <label>
                     <input
                         type='checkbox'
                     />
@@ -134,7 +111,7 @@ const Booking = () => {
             </div>
             <div className='referral-div'>
                 <label>
-                    Referral Code:
+                    {/* Referral Code: */}
                     <input
                         type='text'
                         placeholder='Referral Code'

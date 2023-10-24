@@ -1,73 +1,165 @@
-h1{
+@import url("https://cdn.syncfusion.com/ej2/material.css");
+
+h1 {
     display: flex;
     justify-content: center;
 }
-form{
+
+form {
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-family: Gabarito;
+    position: relative;
+    z-index: 1;
 }
-form label{
+
+form label {
     display: flex;
     justify-content: center;
 }
 
-button .booking-submit{
+button .booking-submit {
     display: flex;
     justify-content: center;
 }
 
+.booking-submit {
+    appearance: none;
+    background-color: transparent;
+    border: 2px solid #1A1A1A;
+    border-radius: 15px;
+    box-sizing: border-box;
+    color: #3B3B3B;
+    cursor: pointer;
+    display: inline-block;
+    font-family: Gabarito;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: normal;
+    margin: 0;
+    min-height: 60px;
+    min-width: 0;
+    outline: none;
+    padding: 16px 24px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: 100%;
+    will-change: transform;
+}
 
-.booking-submit{
-    width:150px;
+.booking-submit:disabled {
+    pointer-events: none;
+}
+
+.booking-submit:hover {
+    color: #fff;
+    background-color: #1A1A1A;
+    box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+    transform: translateY(-2px);
+}
+
+.booking-submit:active {
+    box-shadow: none;
+    transform: translateY(0);
+}
+
+.booking-submit {
+    width: 150px;
     border-radius: 20px;
     height: 40px;
     border-color: black;
     cursor: pointer;
 }
 
-.booking-submit:hover{
-    background-color: black;
-    color: white;
-}
 
 .addon-div {
     margin-bottom: 1rem;
 }
 
-.car-div{
+.car-div {
     margin-bottom: 1rem;
 }
 
-.date-div{
+.car-div input {
+    border: none;
+    border-bottom: 1px solid gray;
+    outline: none;
+    width: 20rem
+}
+
+.date-div {
+    margin-bottom: 1rem;
+    width: 20rem
+}
+
+.name-div {
     margin-bottom: 1rem;
 }
 
-.name-div{
-    margin-bottom: 1rem;
-
+.name-div input {
+    border: none;
+    border-bottom: 1px solid gray;
+    outline: none;
+    width: 20rem
 }
 
-.email-div{
-    margin-bottom: 1rem;
-}
-
-.service-div{
-    margin-bottom: 1rem;
-}
-
-.referral-div{
+.email-div {
     margin-bottom: 1rem;
 }
 
-.price-div{
+.email-div input {
+    border: none;
+    border-bottom: 1px solid gray;
+    outline: none;
+    width: 20rem
+}
+
+.service-div {
+    margin-bottom: 1rem;
+    width: 20rem;
+}
+.service-div input{
+    width: auto;
+}
+
+.referral-div {
     margin-bottom: 1rem;
 }
 
-.number-div{
+.referral-div input {
+    border: none;
+    border-bottom: 1px solid gray;
+    outline: none;
+    width: 20rem
+}
+
+.price-div {
     margin-bottom: 1rem;
 }
 
-.insta-div{
+.number-div {
     margin-bottom: 1rem;
+}
+
+.number-div input {
+    border: none;
+    border-bottom: 1px solid gray;
+    outline: none;
+    width: 20rem
+}
+
+.insta-div {
+    margin-bottom: 1rem;
+}
+
+.insta-div input {
+    border: none;
+    border-bottom: 1px solid gray;
+    outline: none;
+    width: 20rem
 }
