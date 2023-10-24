@@ -6,7 +6,7 @@ import './nav.css';
 
 const Nav = () => {
 
-
+  
   return (
     <div id="nav">
       <div id='nav-logo-div'>
