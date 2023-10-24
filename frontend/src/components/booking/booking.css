@@ -1,0 +1,73 @@
+h1{
+    display: flex;
+    justify-content: center;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+form label{
+    display: flex;
+    justify-content: center;
+}
+
+button .booking-submit{
+    display: flex;
+    justify-content: center;
+}
+
+
+.booking-submit{
+    width:150px;
+    border-radius: 20px;
+    height: 40px;
+    border-color: black;
+    cursor: pointer;
+}
+
+.booking-submit:hover{
+    background-color: black;
+    color: white;
+}
+
+.addon-div {
+    margin-bottom: 1rem;
+}
+
+.car-div{
+    margin-bottom: 1rem;
+}
+
+.date-div{
+    margin-bottom: 1rem;
+}
+
+.name-div{
+    margin-bottom: 1rem;
+
+}
+
+.email-div{
+    margin-bottom: 1rem;
+}
+
+.service-div{
+    margin-bottom: 1rem;
+}
+
+.referral-div{
+    margin-bottom: 1rem;
+}
+
+.price-div{
+    margin-bottom: 1rem;
+}
+
+.number-div{
+    margin-bottom: 1rem;
+}
+
+.insta-div{
+    margin-bottom: 1rem;
+}

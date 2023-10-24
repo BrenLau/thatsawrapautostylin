@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import Footer from './components/footer';
 import Nav from './components/nav';
 import LoginFormModal from './components/login-modal';
+import Booking from './components/booking';
 
 import './App.css';
 
@@ -29,6 +30,8 @@ function App() {
       <Nav />
       <Routes>
         <Route exact path="/login" element={<LoginFormModal />}>
+        </Route>
+        <Route exact path='/booking' element={<Booking />}>
         </Route>
       </Routes>
       <Footer/>
