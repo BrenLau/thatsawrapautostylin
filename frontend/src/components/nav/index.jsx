@@ -5,7 +5,6 @@ import './nav.css';
 
 const Nav = () => {
 
-// const history = useHistory()
 
   return (
     <div id="nav">
@@ -13,7 +12,7 @@ const Nav = () => {
         <img id='nav-logo' src={img}/>
       </div>
       <div id='nav-title-div'>
-          <h2 id='nav-title'>thatsawrapautostylin'</h2>
+          <h2 id='nav-title'>thatsawrapautostylin&apos;</h2>
       </div>
       <div id="nav-menu-div">
         <MenuButton />
