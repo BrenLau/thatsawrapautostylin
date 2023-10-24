@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+// import { Redirect } from 'react-router-dom';
 
 import "./login-modal.css";
 
@@ -19,12 +20,15 @@ const LoginFormModal = () => {
 			password,
 		  })
 	  });
-    if (data) {
-      setErrors(data);
+    if (data.errors) {
+      setErrors(data.errors);
     } else {
-        // closeModal()
+      sessionStorage.setItem("user", data)
+      return <Redirect path="/" />
     }
   };
+
+  console.log(errors)
 
   return (
     <div id="login-form-modal">
