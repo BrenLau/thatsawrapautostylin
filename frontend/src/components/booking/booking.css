@@ -23,6 +23,7 @@ button .booking-submit{
     border-radius: 20px;
     height: 40px;
     border-color: black;
+    cursor: pointer;
 }
 
 .booking-submit:hover{
