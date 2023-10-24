@@ -20,6 +20,14 @@ class User(db.Model):
     reviews = db.relationship("Review", back_populates="user")
     bookings = db.relationship("Booking", back_populates="user")
 
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "email": self.email,
+            "phone_number": self.phone_number,
+            "is_admin": self.is_admin
+        }
+
 
 class CarType(db.Model):
     __tablename__ = "car_types"

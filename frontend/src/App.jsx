@@ -28,6 +28,9 @@ function App() {
     <>
       <Nav />
       <Routes>
+        <Route exact path='/' >
+          
+        </Route>
         <Route exact path="/login" element={<LoginFormModal />}>
         </Route>
       </Routes>
