@@ -38,7 +38,7 @@ const MenuButton = ({ user }) => {
       <i id="menu-button" className="fa-solid fa-bars" onClick={toggleMenu} ></i>
       {!user ? (
         <div id={dropdownClassname}>
-          {transitioning || !showMenu ? null : <Link className="menu-dropdown-button">Book Now</Link>}
+          {transitioning || !showMenu ? null : <Link to='/booking'className="menu-dropdown-button">Book Now</Link>}
           {transitioning || !showMenu ? null : <Link to="/login" className="menu-dropdown-button" >Log In</Link> }
           {transitioning || !showMenu ? null : <Link className="menu-dropdown-button">Sign Up</Link> }
         </div>
