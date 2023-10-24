@@ -1,16 +1,17 @@
 import React, { useState } from "react";
-// import { Redirect } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import "./login-modal.css";
 
 const LoginFormModal = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = await fetch("/api/auth/login", {
+    const res = await fetch("/api/auth/login", {
       method: "POST",
 		  headers: {
 			"Content-Type": "application/json",
@@ -20,11 +21,15 @@ const LoginFormModal = () => {
 			password,
 		  })
 	  });
-    if (data.errors) {
+    if (!res.ok) {
+      let data = await res.json()
       setErrors(data.errors);
     } else {
-      sessionStorage.setItem("user", data)
-      return <Redirect path="/" />
+      let data = await res.json()
+      console.log(data)
+      sessionStorage.setItem("user", JSON.stringify(data))
+      console.log("redirecting...")
+      return navigate("/")
     }
   };
 

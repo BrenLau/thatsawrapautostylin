@@ -1,7 +1,7 @@
 
 from flask import Flask
 from flask_cors import CORS
-from backend.models import db
+from backend.models import db, User
 from flask_migrate import Migrate
 from flask_wtf.csrf import generate_csrf
 from flask_login import LoginManager
@@ -11,9 +11,12 @@ import os
 
 app = Flask(__name__)
 
-
 login = LoginManager(app)
 login.login_view = 'auth.unauthorized'
+
+@login.user_loader
+def load_user(id):
+    return User.query.get(int(id))
 
 app.cli.add_command(seed_commands)
 
@@ -23,7 +26,8 @@ app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.config.from_mapping({
     'SQLALCHEMY_DATABASE_URI': os.environ.get('DATABASE_URL'),
     'SQLALCHEMY_TRACK_MODIFICATIONS': False,
-    "SQLALCHEMY_ECHO": True
+    "SQLALCHEMY_ECHO": True,
+    "SECRET_KEY": os.environ.get('SECRET_KEY')
 })
 
 db.init_app(app)
@@ -34,6 +38,7 @@ CORS(app)
 
 @app.after_request
 def inject_csrf_token(response):
+    print("*** injecting token ***")
     response.set_cookie(
         'csrf_token',
         generate_csrf(),
