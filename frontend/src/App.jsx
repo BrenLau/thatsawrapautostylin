@@ -5,7 +5,6 @@ import Nav from './components/nav'
 import AboutMe from './components/about-me'
 
 function App() {
-
   return (
     <>
       <Nav />
