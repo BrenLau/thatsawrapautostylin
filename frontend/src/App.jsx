@@ -1,8 +1,11 @@
+
 import { useState, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Footer from './components/footer';
 import Nav from './components/nav';
+import AboutMe from './components/about-me'
 import LoginFormModal from './components/login-modal';
+import Booking from './components/booking';
 
 import './App.css';
 
@@ -27,11 +30,14 @@ function App() {
   return (
     <>
       <Nav />
+      <AboutMe />
       <Routes>
         <Route exact path='/' >
           
         </Route>
         <Route exact path="/login" element={<LoginFormModal />}>
+        </Route>
+        <Route exact path='/booking' element={<Booking />}>
         </Route>
       </Routes>
       <Footer/>
