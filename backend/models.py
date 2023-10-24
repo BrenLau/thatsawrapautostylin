@@ -1,4 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import UserMixin
+from werkzeug.security import generate_password_hash, check_password_hash
 
 import os
 environment = os.getenv("FLASK_ENV")
@@ -7,18 +9,30 @@ SCHEMA = os.environ.get("SCHEMA")
 db = SQLAlchemy()
 
 
-class User(db.Model):
+class User(db.Model, UserMixin):
     __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(255), nullable=False)
     name = db.Column(db.String(50), nullable=False)
-    password = db.Column(db.String, nullable=False)
+    hashed_password = db.Column(db.String, nullable=False)
     phone_number = db.Column(db.String(50))
     instagram = db.Column(db.String(50))
     is_admin = db.Column(db.Boolean, nullable=False)
+
     reviews = db.relationship("Review", back_populates="user")
     bookings = db.relationship("Booking", back_populates="user")
+
+    @property
+    def password(self):
+        return self.hashed_password
+
+    @password.setter
+    def password(self, password):
+        self.hashed_password = generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.password, password)
 
     def to_dict(self):
         return {
