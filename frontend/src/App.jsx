@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Footer from './components/footer';
 import Nav from './components/nav';
+import CreateReviews from './components/reviews/createReview';
 import LoginFormModal from './components/login-modal';
 
 import './App.css';
@@ -30,6 +31,10 @@ function App() {
       <Routes>
         <Route exact path="/login" element={<LoginFormModal />}>
         </Route>
+
+        <Route exact path='/new_review' element={ <CreateReviews />}>
+        </Route>
+
       </Routes>
       <Footer/>
     </>
