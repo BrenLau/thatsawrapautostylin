@@ -4,7 +4,7 @@
   top: 0px;
   display: flex;
   background-color: black;
-  z-index: 1000;
+  z-index: 100;
   border-bottom: 1px solid gray;
 }
 
@@ -16,6 +16,10 @@
 
 #nav-title {
   color: goldenrod;
+}
+
+#menu-button{
+  cursor: pointer;
 }
 
 #menu-button-div {
@@ -50,6 +54,7 @@
   margin-bottom: 0;
   margin-top: 1rem;
   z-index: -1;
+  cursor: pointer;
 }
 
 #menu-dropdown-div-hidden {
@@ -82,7 +87,7 @@
 
 /* for larger devices */
 @media screen and (min-width: 600px) and (max-width: 1200px) {
-  
+
 }
 
 @media screen and (min-width: 1200px) {
