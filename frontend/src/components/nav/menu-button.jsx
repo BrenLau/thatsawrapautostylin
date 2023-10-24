@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 
+
 const MenuButton = () => {
   const [user, setUser] = useState({});
   const [showMenu, setShowMenu] = useState(false);
