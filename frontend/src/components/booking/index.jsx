@@ -5,7 +5,7 @@ const Booking = () => {
     return (
         <form>
             <div className='top-form'>
-                <h1>Book service</h1>
+                <h1>Book Service</h1>
                 <div className='name-car'>
                     <div className='name-div'>
                         <label className='name'>
