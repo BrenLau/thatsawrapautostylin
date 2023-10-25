@@ -8,6 +8,7 @@ const LoginFormModal = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([])
+  let user;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,19 +26,19 @@ const LoginFormModal = () => {
       let data = await res.json()
       setErrors(data.errors);
     } else {
-      let data = await res.json()
-      console.log(data)
-      sessionStorage.setItem("user", JSON.stringify(data))
-      console.log("redirecting...")
+      let user = await res.json()
+      sessionStorage.setItem("user", JSON.stringify(user))
       return navigate("/")
     }
   };
 
-  console.log(errors)
+  const closeModal = () => {
+    return navigate("/");
+  };
 
   return (
     <div id="login-form-modal">
-      <div id="modal-background"></div>
+      <div id="modal-background" onClick={closeModal}></div>
       <div id="login-form">
         <h1>Log In</h1>
         <form onSubmit={handleSubmit}>

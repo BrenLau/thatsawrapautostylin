@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Footer from './components/footer';
@@ -12,7 +11,7 @@ import './App.css';
 
 function App() {
   const [isLoaded, setIsLoaded] = useState(false);
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(null)
 
   useEffect(() => {
     async function authenticate() {
@@ -26,17 +25,18 @@ function App() {
         if (data.errors) {
           return
         }
+        setUser(data);
         sessionStorage.setItem("user", JSON.stringify(data))
       }
       setIsLoaded(true)
     }
     authenticate()
-
+    
   }, [])
 
   return (
     <>
-      <Nav />
+      <Nav user={user}/>
       <AboutMe />
       <Routes>
         <Route exact path="/" element={<HomePage />}>
