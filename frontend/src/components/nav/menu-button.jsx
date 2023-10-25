@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 
 const MenuButton = ({ user }) => {
-  // const history = useHistory()
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
   const [transitioning, setTransitioning] = useState(false)
