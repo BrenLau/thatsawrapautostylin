@@ -1,14 +1,13 @@
 import './about-me.css';
 import ContactForm from './contact-form';
+import Maps from './map';
 
 const AboutMe = () => {
   return (
     <div id="about-me">
       <h3 id='about-me-title'>about me/contact</h3>
       <div id="map-contact-container">
-        <div id='google-map'>
-          Google Map Here
-        </div>
+        <Maps />
         <div id="contact-info">
           <p>address: 123 Sesame Street</p>
           <p>phone: <a href='tel:555-876-5309'>(555) 867-5309</a></p>
