@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import DeleteReview from "./deleteReview";
 
 
 export default function AllReviews(){
@@ -16,8 +17,21 @@ export default function AllReviews(){
         fetchReviews();
       }, []);
 
+      if (reviews === undefined) return null
+
     return (
         <>
+            {reviews?.map((rev)=> {
+                return (
+                    <div key={rev.id}>
+                        <div>{rev.first_name}</div>
+                        <div>{rev.rating}</div>
+                        <div>{rev.description}</div>
+                        <div>{rev.image_url}</div>
+                        <DeleteReview reviewId={rev.id} userId={rev.user_id} />
+                    </div>
+                )
+            })}
         </>
     )
 }

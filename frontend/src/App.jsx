@@ -45,7 +45,7 @@ function App() {
         <Route exact path="/login" element={<LoginFormModal />}>
         </Route>
 
-        <Route exact path='/new_review' element={ <CreateReviews />}>
+        <Route exact path='/add_review' element={ <CreateReviews />}>
         </Route>
 
         <Route exact path='/booking' element={<Booking />}>

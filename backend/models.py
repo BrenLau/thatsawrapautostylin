@@ -86,3 +86,14 @@ class Review(db.Model):
         "services.id"), nullable=False)
     image_url = db.Column(db.String, nullable=False)
     user = db.relationship("User", back_populates="reviews")
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'first_name': self.first_name,
+            'rating': self.rating,
+            'description': self.description,
+            'user_id': self.user_id,
+            'service_id': self.service_id,
+            'image_url': self.image_url,
+        }

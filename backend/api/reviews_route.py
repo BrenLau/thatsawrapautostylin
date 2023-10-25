@@ -33,3 +33,26 @@ def create_Review():
         db.session.commit()
 
         return review.to_dict()
+
+
+
+@review_routes.route('/edit/<int:review_id>', methods=['GET','POST','PUT'])
+@login_required
+def edit_order(review_id):
+    form = ReviewForm()
+    review = Review.query.get(review_id)
+    form['csrf_token'].data = request.cookies['csrf_token']
+    review.first_name = form.data['first_name']
+    review.rating = form.data['rating']
+    review.description = form.data['description']
+    db.session.commit()
+    return review.to_dict()
+
+
+@review_routes.route('/delete/<int:review_id>', methods=['GET','POST','DELETE'])
+@login_required
+def delete_review(review_id):
+    review_to_delete = Review.query.get(review_id)
+    db.session.delete(review_to_delete)
+    db.session.commit()
+    return {'message':'Review was deleted'}
