@@ -123,7 +123,8 @@ button .booking-submit {
     margin-bottom: 1rem;
     width: 20rem;
 }
-.service-div input{
+
+.service-div input {
     width: auto;
 }
 
@@ -162,4 +163,87 @@ button .booking-submit {
     border-bottom: 1px solid gray;
     outline: none;
     width: 20rem
+}
+
+
+@media screen and (min-width: 1000px) {
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        z-index: 1;
+        margin-top: 2rem;
+    }
+
+    .top-form {
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+    }
+
+    .price-submit{
+        margin-top: 3rem;
+    }
+
+    .name-div input {
+        width: 15rem;
+    }
+
+    .email-div input {
+        width: 15rem;
+    }
+
+    .number-div input {
+        width: 15rem;
+    }
+
+    .insta-div input {
+        width: 15rem;
+    }
+
+    .car-div input {
+        width: 15rem;
+    }
+
+    .date-div {
+        width: 15rem;
+    }
+
+    .name-car {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        margin-top: 6rem;
+    }
+
+    .dates {
+        display: flex;
+        flex-direction: column;
+    }
+    .date-select{
+        display: flex;
+        flex-direction: column;
+        gap:1.5rem;
+        margin-top: 5.2rem;
+    }
+
+    .top-form h1{
+        width: 10rem;
+    }
+    .service-referral {
+        display: flex;
+        flex-direction: column;
+        margin-top: 6rem;
+        gap: 1.5rem;
+    }
+    .service-div{
+        width: 16rem;
+    }
+    .addon-div{
+        width: 16rem
+    }
+    .referral-div input{
+        width: 15rem;
+    }
 }
