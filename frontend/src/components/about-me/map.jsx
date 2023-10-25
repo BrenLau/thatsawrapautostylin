@@ -10,22 +10,21 @@ const center = {
   lat: 37.78779938631616,
   lng: -122.40650688757098
 }
-const getApiKey = async() => {
-  const key = await fetch('/api/maps', {method: "GET"});
+// const getApiKey = async() => {
+//   const key = await fetch('/api/maps', {method: "GET"})
+//   .then(res => res.text());
 
-  // const key = res.json();
-  // console.log("\n\n\n\n\n\n\nkey", key, "\n\n\n\n\n\n\n");
-  // const key = process.env.MAPS_API_KEY;
-  return key;
-}
 
-const Maps = () => {
-  // const key = getApiKey();
-  // console.log("\n\n\n\n\n\n\nkey", key, "\n\n\n\n\n\n\n");
+//   console.log("\n\n\n\n\n\n\getApiKey/function", key, "\n\n\n\n\n\n\n");
+
+//   return key;
+// }
+
+const Maps = (apiKey) => {
+  console.log("\n\n\n\n\n\n\nmaps", apiKey, "\n\n\n\n\n\n\n");
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
-    googleMapsApiKey: "AIzaSyB3SZxRmxCZUU2DzAbLU53F5GNEAu0vMG4",
-  // BAD!! ^^^^^ FIX PLEASE!!
+    googleMapsApiKey: apiKey.text,
   });
   return(
 
