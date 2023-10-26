@@ -4,25 +4,23 @@ import Maps from './map';
 
 import { useEffect, useState } from 'react';
 
-
 const AboutMe = () => {
   const [apiKey, setApiKey] = useState("")
 
   useEffect(() => {
     const getKey = async () => {
       const res = await fetch("/api/maps");
-  
       
       const key = await res.json();
       console.log("res from fetch: ", key)
   
       setApiKey(key.key)
-    }
+    };
     
-    getKey()
+    getKey();
     console.log("setApiKey called: ", apiKey)
 
-  }, [])
+  }, []);
   // const [apiKey, setApiKey] = useState('');
   // useEffect(()=>{
   //   const getApiKey = async() => {
