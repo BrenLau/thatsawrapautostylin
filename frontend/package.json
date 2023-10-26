@@ -12,6 +12,7 @@
   "dependencies": {
     "@react-email/button": "0.0.10",
     "@react-google-maps/api": "^2.19.2",
+    "@syncfusion/ej2-react-calendars": "^23.1.41",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.17.0",
