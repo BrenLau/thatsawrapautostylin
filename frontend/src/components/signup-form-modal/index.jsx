@@ -20,10 +20,15 @@ const validateSignup = (name, password, confirmPassword, phoneNumber, instagram)
 
   console.log(errs)
 
-  return {"errors": errs}
+  if (Object.keys(errs).length) {
+    return {"errors": errs}
+  }
+
+  return true
 }
 
 const SignupFormModal = ({ updateUser }) => {
+  console.log(updateUser)
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
@@ -58,16 +63,18 @@ const SignupFormModal = ({ updateUser }) => {
 			email,
 			password,
       name,
-      phoneNumber
+      phone_number: phoneNumber,
+      instagram
 		  })
 	  });
     let data = await res.json()
+    console.log(data)
     if (data.errors) {
       setErrors(data.errors);
     } else {
       sessionStorage.setItem("user", JSON.stringify(data))
-      updateUser(user)
-      // closeModal();
+      updateUser(data)
+      closeModal();
     }
   };
 

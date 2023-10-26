@@ -59,7 +59,7 @@ const MenuButton = () => {
         <div id={dropdownClassname}>
           {transitioning || !showMenu ? null : <Link to='/booking'className="menu-dropdown-button">Book Now</Link>}
           {transitioning || !showMenu ? null : <OpenModalButton modalComponent={<LoginFormModal updateUser={updateUserState} />} buttonText={"Login"}/>}
-          {transitioning || !showMenu ? null : <OpenModalButton modalComponent={<SignupFormModal />} buttonText={"Sign Up"}/> }
+          {transitioning || !showMenu ? null : <OpenModalButton modalComponent={<SignupFormModal updateUser={updateUserState} />} buttonText={"Sign Up"}/> }
         </div>
       ) : (
         <div id={dropdownClassname}>

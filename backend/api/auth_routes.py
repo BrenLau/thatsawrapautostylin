@@ -56,18 +56,21 @@ def sign_up():
     print("*** fetch received ***")
     form = SignUpForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+    print("*** validating... ***", form.data)
     if form.validate_on_submit():
+        print("*** creating user ***")
         user = User(
-            name=form.data['username'],
+            name=form.data['name'],
             email=form.data['email'],
             password=form.data['password'],
-            phoneNumber = form.data['phoneNumber'],
-            instagram = form.data['instagram'] or None
+            phone_number = form.data['phone_number'],
+            instagram = form.data['instagram']
         )
         db.session.add(user)
         db.session.commit()
         login_user(user)
         return user.to_dict()
+    print("*** somethign went wrong ***")
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 @auth_routes.route('/logout')
