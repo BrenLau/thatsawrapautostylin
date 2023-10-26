@@ -1,0 +1,12 @@
+#signup-form {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  background-color: goldenrod;
+  z-index: 501;
+  height: 400px;
+  width: 200px;
+}
