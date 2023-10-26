@@ -165,8 +165,11 @@ def undo_data():
             f"TRUNCATE table {SCHEMA}.car_types RESTART IDENTITY CASCADE;")
         db.session.execute(
             f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
+        db.session.execute(
+            f"TRUNCATE table {SCHEMA}.services RESTART IDENTITY CASCADE;")
     else:
         db.session.execute(text("DELETE FROM car_types"))
         db.session.execute(text("DELETE FROM users"))
+        db.session.execute(text("DELETE FROM services"))
 
         db.session.commit()
