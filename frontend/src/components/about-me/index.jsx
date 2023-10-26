@@ -2,24 +2,31 @@ import './about-me.css';
 import ContactForm from './contact-form';
 import Maps from './map';
 
-const getApiKey = async() => {
-  const key = await fetch('/api/maps', {method: "GET"})
-  .then(res => res.text());
-
-
-  console.log("\n\n\n\n\n\n\getApiKey/function", key, "\n\n\n\n\n\n\n");
-
-  return key;
-  // return key.json();
-}
 
 const AboutMe = () => {
-  const apiKey = getApiKey();
+  // const [apiKey, setApiKey] = useState('');
+  // useEffect(()=>{
+  //   const getApiKey = async() => {
+  //   try {
+
+  //     const res = await fetch('/api/maps', {method: "GET"})
+  //     const key = await res.text();
+  //     setApiKey(key)
+
+  //   } catch (error) {
+  //     console.error("Error fetching API key:", error);
+  //     return;
+  //   }
+  // }
+  // getApiKey();
+  // },[]);
+  // // const apiKey =  getApiKey();
+  // console.log("hmm",apiKey, "KEEEYYYYY")
   return (
     <div id="about-me">
       <h3 id='about-me-title'>about me/contact</h3>
       <div id="map-contact-container">
-        <Maps apiKey={apiKey}/>
+        <Maps/>
         <div id="contact-info">
           <p>address: 123 Sesame Street</p>
           <p>phone: <a href='tel:555-876-5309'>(555) 867-5309</a></p>
