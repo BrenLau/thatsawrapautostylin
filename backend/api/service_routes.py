@@ -11,4 +11,4 @@ service_routes = Blueprint('services', __name__)
 def getServices():
     services = Service.query.all()
 
-    return {"services": [service.to_dict()] for service in services}
+    return {"services": [service.to_dict() for service in services]}
