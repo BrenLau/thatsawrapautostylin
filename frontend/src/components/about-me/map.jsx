@@ -21,6 +21,7 @@ const center = {
 // }
 
 const Maps = (apiKey) => {
+  console.log(apiKey, "!!@#@")
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
     googleMapsApiKey: apiKey.text,
