@@ -31,13 +31,12 @@ function App() {
       setIsLoaded(true)
     }
     authenticate()
-    
+
   }, [])
 
   return (
     <>
       <Nav user={user}/>
-      <AboutMe />
       <Routes>
         <Route exact path="/" element={<HomePage />}>
         </Route>
