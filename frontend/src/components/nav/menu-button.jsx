@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+import OpenModalButton from "../open-modal-button";
+import LoginFormModal from "../login-modal";
 
 const MenuButton = ({ user }) => {
   const [showMenu, setShowMenu] = useState(false);
@@ -37,8 +39,8 @@ const MenuButton = ({ user }) => {
       {!user ? (
         <div id={dropdownClassname}>
           {transitioning || !showMenu ? null : <Link to='/booking'className="menu-dropdown-button">Book Now</Link>}
-          {transitioning || !showMenu ? null : <Link to="/login" className="menu-dropdown-button" >Log In</Link> }
-          {transitioning || !showMenu ? null : <Link className="menu-dropdown-button">Sign Up</Link> }
+          {transitioning || !showMenu ? null : <OpenModalButton modalComponent={<LoginFormModal />} buttonText={"Login"}/>}
+          {transitioning || !showMenu ? null : <OpenModalButton modalComponent={<LoginFormModal />} buttonText={"Sign Up"}/> }
         </div>
       ) : (
         <div id={dropdownClassname}>

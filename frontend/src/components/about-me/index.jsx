@@ -10,7 +10,9 @@ const getApiKey = async() => {
   console.log("\n\n\n\n\n\n\getApiKey/function", key, "\n\n\n\n\n\n\n");
 
   return key;
+  // return key.json();
 }
+
 const AboutMe = () => {
   const apiKey = getApiKey();
   return (

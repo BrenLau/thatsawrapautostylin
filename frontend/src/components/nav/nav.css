@@ -44,8 +44,7 @@
   z-index: 0;
 }
 
-#menu-dropdown-div > a, 
-#menu-dropdown-div > p {
+.menu-dropdown-button {
   text-decoration: none;
   color: white;
   text-align: center;

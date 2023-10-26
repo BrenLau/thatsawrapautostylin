@@ -1,2 +1,3 @@
 FLASK_APP=backend
 FLASK_ENV=development
+MAPS_API_KEY=AIzaSyD0D9iepJY96QrbTaLjSBcu1eDU-_xDyfQ

@@ -21,31 +21,34 @@ function App() {
       });
       if (response.ok) {
         const data = await response.json();
+        console.log(data)
+        setIsLoaded(true)
         if (data.errors) {
           return
         }
         setUser(data);
         sessionStorage.setItem("user", JSON.stringify(data))
       }
-      setIsLoaded(true)
     }
     authenticate()
+    console.log(isLoaded)
 
   }, [])
+
+  console.log(isLoaded)
 
   return (
     <>
       <Nav user={user}/>
+      {isLoaded && (
       <Routes>
         <Route exact path="/" element={<HomePage />}>
         </Route>
-        <Route exact path="/login" element={<LoginFormModal />}>
+        <Route path="/login" element={<LoginFormModal />}>
         </Route>
         <Route exact path='/booking' element={<Booking />}>
         </Route>
-        <Route exact path='/booking' element={<Booking />}>
-        </Route>
-      </Routes>
+      </Routes>)}
       <Footer/>
     </>
   )
