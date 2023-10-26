@@ -11,8 +11,8 @@ def get_maps():
     """
     Returns the google maps api key
     """
-    # print("\n\n\n\n\n", maps_api_key, "!!!\n\n\n\n\n\n\n")
-    return maps_api_key
-    # return {
-    #     "key": maps_api_key
-    # }
+    print("\n\n\n\n\n", maps_api_key, "!!!\n\n\n\n\n\n\n")
+    # return maps_api_key
+    return {
+        "key": maps_api_key
+    }
