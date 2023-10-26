@@ -7,7 +7,7 @@ const getApiKey = async() => {
   .then(res => res.text());
 
 
-  console.log("\n\n\n\n\n\n\getApiKey/function", key, "\n\n\n\n\n\n\n");
+  // console.log("\n\n\n\n\n\n\getApiKey/function", key, "\n\n\n\n\n\n\n");
 
   return key;
   // return key.json();
