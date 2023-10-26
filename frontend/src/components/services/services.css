@@ -1,0 +1,7 @@
+#serviceDiv {
+    margin: 20px;
+    padding: 10px;
+    border: solid 1px black;
+    background: gold;
+    min-height: 300px;
+}

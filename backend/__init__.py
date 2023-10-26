@@ -6,6 +6,7 @@ from flask_migrate import Migrate
 from flask_wtf.csrf import generate_csrf
 from backend.seeds import seed_commands
 from backend.api.auth_routes import auth_routes
+from backend.api.service_routes import service_routes
 import os
 
 app = Flask(__name__)
@@ -13,6 +14,8 @@ app = Flask(__name__)
 app.cli.add_command(seed_commands)
 
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
+app.register_blueprint(service_routes, url_prefix='/api/services')
+
 
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///dev.db'
 app.config.from_mapping({
