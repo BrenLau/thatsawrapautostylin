@@ -22,6 +22,10 @@
                 "sha256:bca5877e9678b454706347bc10b97cb7d67f300320fa5c3a94423e8266e2823f"
             ],
             "index": "pypi",
+<<<<<<< HEAD
+=======
+            "markers": "python_version >= '3.7'",
+>>>>>>> google-maps
             "version": "==1.12.1"
         },
         "blinker": {
