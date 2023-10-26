@@ -7,7 +7,6 @@ const Services = () => {
         const response = await fetch("http://127.0.0.1:5000/api/services")
 
         if (response.ok) {
-            console.log('hello inside')
             const res = await response.json()
             if (res.services) {
                 setServices(res.services)
