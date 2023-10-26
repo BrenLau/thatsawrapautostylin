@@ -4,7 +4,7 @@
   top: 0px;
   display: flex;
   background-color: black;
-  z-index: 1000;
+  z-index: 100;
   border-bottom: 1px solid gray;
   font-family: Gabarito;
 }
@@ -45,7 +45,8 @@
   z-index: 0;
 }
 
-#menu-dropdown-div > a {
+#menu-dropdown-div > a, 
+#menu-dropdown-div > p {
   text-decoration: none;
   color: white;
   text-align: center;
