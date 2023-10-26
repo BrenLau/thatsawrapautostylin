@@ -1,5 +1,5 @@
 
-from flask import Flask
+from flask import Flask, send_from_directory
 from flask_cors import CORS
 from backend.models import db
 from flask_migrate import Migrate
@@ -15,6 +15,7 @@ app.cli.add_command(seed_commands)
 
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(service_routes, url_prefix='/api/services')
+app.secret_key = os.environ.get("SECRET_KEY")
 
 
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///dev.db'
@@ -34,7 +35,7 @@ CORS(app)
 def inject_csrf_token(response):
     response.set_cookie(
         'csrf_token',
-        generate_csrf(),
+        generate_csrf(os.environ.get('SECRET_KEY')),
         secure=True if os.environ.get('FLASK_ENV') == 'production' else False,
         samesite='Strict' if os.environ.get(
             'FLASK_ENV') == 'production' else None,
@@ -51,7 +52,7 @@ def react_root(path):
     or index.html requests
     """
     if path == 'favicon.ico':
-        return app.send_from_directory('public', 'favicon.ico')
+        return send_from_directory('public', 'favicon.ico')
     return app.send_static_file('index.html')
 
 
