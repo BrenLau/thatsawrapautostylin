@@ -18,8 +18,6 @@ const validateSignup = (name, password, confirmPassword, phoneNumber, instagram)
     errs.instagram = "Instagram username cannot be longer than 30 characters"
   }
 
-  console.log(errs)
-
   if (Object.keys(errs).length) {
     return {"errors": errs}
   }
@@ -28,7 +26,6 @@ const validateSignup = (name, password, confirmPassword, phoneNumber, instagram)
 }
 
 const SignupFormModal = ({ updateUser }) => {
-  // console.log(updateUser)
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
@@ -80,50 +77,51 @@ const SignupFormModal = ({ updateUser }) => {
 
   return (
     <div id="signup-form-modal">
-      <div id="signup-form">
+      <div id="signup-form-div">
         <h1>Sign Up</h1>
-        <form onSubmit={handleSubmit}>
+        <form id="signup-form" onSubmit={handleSubmit}>
           {errors.name && <p className="errors">{errors.name}</p>}
-          <label>
-            Name
+          <label className="signup-label">
+            Name:
+            </label>
             <input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
               />
-          </label>
-          <label>
-            Email
+          <label className="signup-label">
+            Email:
+            </label>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
               />
-          </label>
           {errors.phoneNumber && <p className="errors">{errors.phoneNumber}</p>}
-          <label>
-            Phone Number
+          <label className="signup-label">
+            Phone Number:
+            </label>
             <input
               type="text"
               value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value)}
               required
               />
-          </label>
           {errors.instagram && <p className="errors">{errors.instagram}</p>}
-          <label>
-            Instagram
+          <label className="signup-label">
+            Instagram:
+            </label>
             <input
               type="text"
               value={instagram}
               onChange={(e) => setInstagram(e.target.value)}
               />
-          </label>
           {errors.password && <p className="errors">{errors.password}</p>}
-          <label>
-            Password
+          <label className="signup-label">
+            Password:
+            </label>
             <input
               minLength={8}
               type="password"
@@ -131,9 +129,9 @@ const SignupFormModal = ({ updateUser }) => {
               onChange={(e) => setPassword(e.target.  value)}
               required
               />
-          </label>
-          <label>
-            Confirm Password
+          <label className="signup-label">
+            Confirm Password:
+            </label>
             <input
               minLength={8}
               type="password"
@@ -141,8 +139,7 @@ const SignupFormModal = ({ updateUser }) => {
               onChange={(e) => setConfirmPassword(e.target.  value)}
               required
               />
-          </label>
-          <button type="submit">Log In</button>
+          <button id="signup-button" type="submit">Log In</button>
         </form>
       </div>
     </div>
