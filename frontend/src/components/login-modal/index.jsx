@@ -1,14 +1,13 @@
 import React, { useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { Modal, useModal } from "../../context/modal";
 
 import "./login-modal.css";
 
-const LoginFormModal = () => {
-  const navigate = useNavigate();
+const LoginFormModal = ({ updateUser }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState([])
-  let user;
+  const [errors, setErrors] = useState([]);
+  const { closeModal } = useModal();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,17 +27,13 @@ const LoginFormModal = () => {
     } else {
       let user = await res.json()
       sessionStorage.setItem("user", JSON.stringify(user))
-      return navigate("/")
+      updateUser(user)
+      closeModal();
     }
-  };
-
-  const closeModal = () => {
-    return navigate("/");
   };
 
   return (
     <div id="login-form-modal">
-      <div id="modal-background" onClick={closeModal}></div>
       <div id="login-form">
         <h1>Log In</h1>
         <form onSubmit={handleSubmit}>
@@ -53,7 +48,7 @@ const LoginFormModal = () => {
               type="text"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-            required
+              required
               />
           </label>
           <label>
