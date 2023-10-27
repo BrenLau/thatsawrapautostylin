@@ -11,15 +11,62 @@
   z-index: 500;
 }
 
-#login-form {
+#login-form-div {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+  display: flex;
+  flex-direction: column;
   margin: auto;
-  background-color: goldenrod;
+  background-color: #060606;
+  color: #BA8F2F;
   z-index: 501;
-  height: 400px;
-  width: 200px;
+  box-shadow: 2px 2px 3px #BA8F2F,
+  2px -2px 3px #BA8F2F,
+  -2px 2px 3px #F0CD5F,
+  -2px -2px 3px #F0CD5F;
+}
+
+#login-form {
+  width: 60%;
+  height: 60%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+}
+
+.signup-label {
+  align-self: start;
+}
+
+#login-form > input {
+  width: 100%;
+}
+
+#login-button {
+  background-color: #060606;
+  border: 1px solid #BA8F2F;
+  padding: 0.5rem 1rem;
+  color: #BA8F2F;
+  margin-top: 1rem;
+}
+
+/* for phone screens */
+@media screen and (max-width: 600px) {
+}
+
+/* for larger devices */
+@media screen and (min-width: 600px) and (max-width: 1200px) {
+
+}
+
+/* for computer screens */
+@media screen and (min-width: 1200px) {
+  #login-form-div {
+    height: 30vh;
+    width: 20vw;
+  }
 }

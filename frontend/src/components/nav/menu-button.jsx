@@ -58,8 +58,8 @@ const MenuButton = () => {
       {!user ? (
         <div id={dropdownClassname}>
           {transitioning || !showMenu ? null : <Link to='/booking'className="menu-dropdown-button">Book Now</Link>}
-          {transitioning || !showMenu ? null : <OpenModalButton modalComponent={<LoginFormModal updateUser={updateUserState} />} buttonText={"Login"}/>}
-          {transitioning || !showMenu ? null : <OpenModalButton modalComponent={<SignupFormModal updateUser={updateUserState} />} buttonText={"Sign Up"}/> }
+          {transitioning || !showMenu ? null : <OpenModalButton modalComponent={<LoginFormModal updateUser={updateUserState} />} buttonText={"Login"} buttonClassName={"menu-dropdown-button"}/>}
+          {transitioning || !showMenu ? null : <OpenModalButton modalComponent={<SignupFormModal updateUser={updateUserState} />} buttonText={"Sign Up"} buttonClassName={"menu-dropdown-button"}/> }
         </div>
       ) : (
         <div id={dropdownClassname}>
