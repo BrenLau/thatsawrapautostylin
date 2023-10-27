@@ -1,7 +1,12 @@
 import './booking.css'
-import { DateTimePickerComponent } from '@syncfusion/ej2-react-calendars';
+// import { DateTimePickerComponent } from '@syncfusion/ej2-react-calendars';
+import "react-datetime/css/react-datetime.css"
+import DateTime from 'react-datetime'
 
 const Booking = () => {
+    let inputProps = {
+        placeholder:"Select a date and time*"
+    }
     return (
         <form>
             <div className='top-form'>
@@ -52,11 +57,11 @@ const Booking = () => {
                             {/* Instagram: */}
                             <input
                                 className='insta'
-                                placeholder='Instagram*'
+                                placeholder='Instagram'
                                 type='text'
                                 // value={instagram}
                                 // onChange={(e) => setInstagram(e.target.value)}
-                                required
+
                             />
                         </label>
                     </div>
@@ -78,9 +83,12 @@ const Booking = () => {
                     <div className='date-div'>
                         {/* <div>Select 3 dates and times</div> */}
                         <div className='date-select'>
-                            <DateTimePickerComponent id="datetimepicker" placeholder="Select a date and time*" required/>
-                            <DateTimePickerComponent id="datetimepicker" placeholder="Select a date and time*" required/>
-                            <DateTimePickerComponent id="datetimepicker" placeholder="Select a date and time*" required/>
+                            {/* <DateTimePickerComponent id="datetimepicker" placeholder="Select a date and time*" required/> */}
+                            {/* <DateTimePickerComponent id="datetimepicker" placeholder="Select a date and time*" required/> */}
+                            {/* <DateTimePickerComponent id="datetimepicker" placeholder="Select a date and time*" required/> */}
+                            {/* <input type='datetime-local' placeholder="Select a date and time*"></input> */}
+                            <DateTime inputProps={inputProps} />
+
                         </div>
                     </div>
                 </div>
