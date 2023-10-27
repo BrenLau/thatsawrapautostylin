@@ -1,7 +1,6 @@
 from flask import Blueprint, jsonify, session, request
 from backend.models import User, db
-from backend.forms import LoginForm
-# from backend.forms import SignUpForm
+from backend.forms import LoginForm, SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
 
 auth_routes = Blueprint('auth', __name__)
@@ -23,6 +22,7 @@ def authenticate():
     """
     print("*** ", current_user, " ***")
     if current_user.is_authenticated:
+        print(current_user.to_dict())
         return current_user.to_dict()
     return {'errors': ['Unauthorized']}
 
@@ -46,6 +46,31 @@ def login():
         print("*** user ***", user.to_dict())
         return user.to_dict()
     print("*** HERE ***")
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+@auth_routes.route('/signup', methods=['POST'])
+def sign_up():
+    """
+    Creates a new user and logs them in
+    """
+    print("*** fetch received ***")
+    form = SignUpForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    print("*** validating... ***", form.data)
+    if form.validate_on_submit():
+        print("*** creating user ***")
+        user = User(
+            name=form.data['name'],
+            email=form.data['email'],
+            password=form.data['password'],
+            phone_number = form.data['phone_number'],
+            instagram = form.data['instagram']
+        )
+        db.session.add(user)
+        db.session.commit()
+        login_user(user)
+        return user.to_dict()
+    print("*** somethign went wrong ***")
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 @auth_routes.route('/logout')

@@ -22,6 +22,7 @@ function App() {
       setIsLoaded(true)
       if (response.ok) {
         const data = await response.json();
+        console.log(data)
         if (data.errors) {
           return
         }
@@ -33,20 +34,21 @@ function App() {
 
   }, [])
 
+  console.log(isLoaded)
+
   return (
     <>
-      <Nav user={user}/>
-      <Routes>
-        <Route exact path="/" element={<HomePage />}>
-        </Route>
-        <Route exact path="/login" element={<LoginFormModal />}>
-        </Route>
-        <Route exact path='/booking' element={<Booking />}>
-        </Route>
-        <Route exact path='/booking' element={<Booking />}>
-        </Route>
-      </Routes>
-      <Footer/>
+      <Nav user={user} />
+      {isLoaded && (
+        <Routes>
+          <Route exact path="/" element={<HomePage />}>
+          </Route>
+          <Route path="/login" element={<LoginFormModal />}>
+          </Route>
+          <Route exact path='/booking' element={<Booking />}>
+          </Route>
+        </Routes>)}
+      <Footer />
     </>
   )
 }

@@ -18,7 +18,7 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String, nullable=False)
     phone_number = db.Column(db.String(50))
     instagram = db.Column(db.String(50))
-    is_admin = db.Column(db.Boolean, nullable=False)
+    is_admin = db.Column(db.Boolean, nullable=False, default=False)
 
     reviews = db.relationship("Review", back_populates="user")
     bookings = db.relationship("Booking", back_populates="user")
