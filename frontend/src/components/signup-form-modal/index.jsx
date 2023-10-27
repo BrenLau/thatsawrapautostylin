@@ -28,7 +28,7 @@ const validateSignup = (name, password, confirmPassword, phoneNumber, instagram)
 }
 
 const SignupFormModal = ({ updateUser }) => {
-  console.log(updateUser)
+  // console.log(updateUser)
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
