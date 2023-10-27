@@ -19,10 +19,10 @@ function App() {
           "Content-Type": "application/json",
         },
       });
+      setIsLoaded(true)
       if (response.ok) {
         const data = await response.json();
         console.log(data)
-        setIsLoaded(true)
         if (data.errors) {
           return
         }
@@ -38,17 +38,17 @@ function App() {
 
   return (
     <>
-      <Nav user={user}/>
+      <Nav user={user} />
       {isLoaded && (
-      <Routes>
-        <Route exact path="/" element={<HomePage />}>
-        </Route>
-        <Route path="/login" element={<LoginFormModal />}>
-        </Route>
-        <Route exact path='/booking' element={<Booking />}>
-        </Route>
-      </Routes>)}
-      <Footer/>
+        <Routes>
+          <Route exact path="/" element={<HomePage />}>
+          </Route>
+          <Route path="/login" element={<LoginFormModal />}>
+          </Route>
+          <Route exact path='/booking' element={<Booking />}>
+          </Route>
+        </Routes>)}
+      <Footer />
     </>
   )
 }
