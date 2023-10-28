@@ -1,17 +1,4 @@
-#modal-background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 100vh;
-  width: 100vw;
-  opacity: 0.5;
-  background-color: black;
-  z-index: 500;
-}
-
-#login-form-div {
+#signup-form-div {
   position: absolute;
   top: 0;
   left: 0;
@@ -29,10 +16,10 @@
   -2px -2px 3px #F0CD5F;
 }
 
-#login-form {
+#signup-form {
   width: 60%;
   height: 60%;
-  margin: 0 auto;
+  margin: auto;
   display: flex;
   flex-direction: column;
   justify-content: start;
@@ -42,11 +29,11 @@
   align-self: start;
 }
 
-#login-form > input {
+#signup-form > input {
   width: 100%;
 }
 
-#login-button {
+#signup-button {
   background-color: #060606;
   border: 1px solid #BA8F2F;
   padding: 0.5rem 1rem;
@@ -65,8 +52,8 @@
 
 /* for computer screens */
 @media screen and (min-width: 1200px) {
-  #login-form-div {
-    height: 30vh;
+  #signup-form-div {
+    height: 50vh;
     width: 20vw;
   }
 }
