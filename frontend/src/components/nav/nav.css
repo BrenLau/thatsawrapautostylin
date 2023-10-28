@@ -6,6 +6,7 @@
   background-color: black;
   z-index: 100;
   border-bottom: 1px solid gray;
+  font-family: Gabarito;
 }
 
 #nav-title-div {
@@ -44,7 +45,7 @@
   z-index: 0;
 }
 
-#menu-dropdown-div > a {
+.menu-dropdown-button {
   text-decoration: none;
   color: white;
   text-align: center;
@@ -87,6 +88,32 @@
 
 /* for larger devices */
 @media screen and (min-width: 600px) and (max-width: 1200px) {
+#nav {
+    height: 7rem;
+    justify-content: space-between;
+    padding: 0 3rem;
+  }
+
+  #nav-logo {
+    height: 7rem;
+  }
+
+  #menu-button:hover {
+    cursor: pointer;
+  }
+
+  #menu-dropdown-div {
+    position: absolute;
+    top: calc(7rem + 1px);
+    right: 0rem;
+    width: 15rem;
+    border-left: 2px solid gray;
+    border-bottom: 2px solid gray;
+  }
+
+  .menu-dropdown-button:hover {
+    cursor: pointer;
+  }
 
 }
 

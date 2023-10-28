@@ -4,8 +4,7 @@ import { Link } from 'react-router-dom';
 // import { useHistory } from 'react-router-dom'
 import './nav.css';
 
-const Nav = () => {
-
+const Nav = ({ user }) => {
   
   return (
     <div id="nav">
@@ -16,7 +15,7 @@ const Nav = () => {
           <h2 id='nav-title'>thatsawrapautostylin&apos;</h2>
       </div>
       <div id="nav-menu-div">
-        <MenuButton />
+        <MenuButton user={user} />
       </div>
     </div>
   )
