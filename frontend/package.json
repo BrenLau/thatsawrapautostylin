@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@react-email/button": "0.0.10",
+    "@syncfusion/ej2-react-calendars": "^23.1.41",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router": "^6.17.0",
@@ -27,5 +28,5 @@
     "eslint-plugin-react-refresh": "^0.4.3",
     "vite": "^4.4.5"
   },
-  "proxy": "http://localhost:5000"
+  "proxy": "http://localhost:5000/"
 }
