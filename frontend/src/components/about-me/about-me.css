@@ -16,10 +16,10 @@
 }
 
 #google-map {
-  border:1px solid black;
+  border: 1px solid black;
   background-color: white;
   margin: 20px;
-  padding:10px;
+  padding: 10px;
   flex-grow: 2;
 }
 
@@ -27,7 +27,7 @@
   border: 1px solid black;
   background-color: white;
   margin: 20px;
-  padding:10px;
+  padding: 10px;
   flex-grow: 2;
 }
 
@@ -35,5 +35,5 @@
   border: 1px solid black;
   background-color: white;
   margin: 20px;
-  padding:10px;
+  padding: 10px;
 }

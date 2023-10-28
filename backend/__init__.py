@@ -1,5 +1,4 @@
 
-from flask import Flask
 from backend.api.maps import maps_route
 from flask import Flask, send_from_directory
 from flask_cors import CORS
@@ -35,8 +34,8 @@ app.register_blueprint(service_routes, url_prefix='/api/services')
 app.config.from_mapping({
     'SQLALCHEMY_DATABASE_URI': os.environ.get('DATABASE_URL'),
     'SQLALCHEMY_TRACK_MODIFICATIONS': False,
-    'SECRET_KEY': os.environ.get("SECRET_KEY")
-    # "SQLALCHEMY_ECHO": True,
+    'SECRET_KEY': os.environ.get("SECRET_KEY"),
+    "SQLALCHEMY_ECHO": True
 })
 
 db.init_app(app)

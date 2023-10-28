@@ -2,7 +2,7 @@ import './services.css'
 import { useEffect, useState } from 'react'
 
 const Services = () => {
-    const [services, setServices] = useState([{ id: 1, title: 'wash', description: 'description', price: 24.32, image_url: 'na', car_type: 1, duration: 2 }])
+    const [services, setServices] = useState([])
     async function getServices() {
         const response = await fetch("http://127.0.0.1:5000/api/services")
 
@@ -21,7 +21,10 @@ const Services = () => {
         <div id='serviceDiv'>
             {services.map((service) => {
                 return (
-                    <div>{service.title}</div>
+                    <div>
+                        <div>{service.title}</div>
+                        <div>{service.description}</div>
+                    </div>
                 )
             })}
         </div>
