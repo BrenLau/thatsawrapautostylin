@@ -48,6 +48,12 @@ class CarType(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     car_type = db.Column(db.String(50), nullable=False)
 
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "car_type": self.car_type
+        }
+
 
 class Service(db.Model):
     __tablename__ = "services"
@@ -60,6 +66,18 @@ class Service(db.Model):
     car_type = db.Column(db.Integer, db.ForeignKey(
         "car_types.id"), nullable=False)
     duration = db.Column(db.Integer, nullable=False)
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "description": self.description,
+            "price": self.price,
+            "image_url": self.image_url,
+            "car_type": self.car_type,
+            "duration": self.duration
+
+        }
 
 
 class Booking(db.Model):
@@ -74,6 +92,17 @@ class Booking(db.Model):
     car = db.Column(db.String(50), nullable=False)
     user = db.relationship("User", back_populates="bookings")
 
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "total_price": self.total_price,
+            "times": self.times,
+            "service_id": self.service_id,
+            "car": self.car,
+            "user": self.user
+        }
+
 
 class Review(db.Model):
     __tablename__ = "reviews"
@@ -86,3 +115,15 @@ class Review(db.Model):
         "services.id"), nullable=False)
     image_url = db.Column(db.String, nullable=False)
     user = db.relationship("User", back_populates="reviews")
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "first_name": self.first_name,
+            "rating": self.rating,
+            "description": self.description,
+            "user_id": self.user_id,
+            "service_id": self.service_id,
+            "image_url": self.image_url,
+            "user": self.user
+        }
