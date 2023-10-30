@@ -31,3 +31,11 @@ def addServices():
     db.session.commit()
 
     return service.to_dict()
+
+
+@service_routes.route('/<int:serviceId>', methods=['DELETE'])
+def deleteService(serviceId):
+    service = Service.query.get(serviceId)
+    db.session.delete(service)
+    db.session.commit()
+    return service.to_dict()
