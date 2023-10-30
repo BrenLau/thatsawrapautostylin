@@ -23,7 +23,7 @@ def post_booking(booking_id, user_id):
     if current_user.is_authenticated:
         form = BookingForm()
         times = form.data['times']
-        booking = Booking(user_id=user_id)
+        booking = Booking(user_id=user_id, times=times)
         db.session.add(booking)
         db.session.commit()
         return booking.to_dict()
