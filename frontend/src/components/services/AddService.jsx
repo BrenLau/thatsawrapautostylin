@@ -21,8 +21,30 @@ const AddService = () => {
         }
         getCarTypes()
     }, [])
+
+    const onSubmit = async (e) => {
+        const data = {
+            car_type: carTypeSelected,
+            title,
+            description,
+            price,
+            duration: time,
+            image_url: 'fdsa'
+        }
+        e.preventDefault()
+        const response = await fetch('http://127.0.0.1:5000/api/services', {
+            method: 'POST',
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+        })
+        if (response.ok) {
+            const res = await response.json()
+            console.log(res)
+        }
+    }
+
     return (
-        <form>
+        <form onSubmit={onSubmit}>
             <label>
                 Service Title
                 <input value={title} onChange={(e) => setTitle(e.target.value)}></input>
@@ -52,8 +74,8 @@ const AddService = () => {
                     return (
                         <label key={car.id}>
                             {car.car_type}
-                            < input type="radio" value={car.car_type} checked={carTypeSelected === car.car_type ? true : false} onClick={(e) => {
-                                setCarTypeSelected(car.car_type)
+                            < input type="radio" value={car.id} checked={carTypeSelected === car.id ? true : false} onClick={(e) => {
+                                setCarTypeSelected(car.id)
                             }}></input>
 
                         </label>
@@ -66,6 +88,7 @@ const AddService = () => {
                 Duration(Hours)
                 <input type="number" value={time} onChange={(e) => setTime(e.target.value)}></input>
             </label>
+            <button>Submit</button>
 
         </form >
     )
