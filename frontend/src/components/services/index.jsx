@@ -1,4 +1,5 @@
 import './services.css'
+import AddService from './AddService'
 import { useEffect, useState } from 'react'
 
 const Services = () => {
@@ -19,11 +20,13 @@ const Services = () => {
     }, [])
     return (
         <div id='serviceDiv'>
+            <AddService />
             {services.map((service) => {
                 return (
                     <div>
                         <div>{service.title}</div>
                         <div>{service.description}</div>
+                        <div>{service.price}</div>
                     </div>
                 )
             })}
