@@ -1,0 +1,27 @@
+To create virtual environment: python -m venv venv
+
+To start backend:
+  from root directory run:
+  pipenv shell
+  flask run
+
+creating db instance:
+  flask db upgrade  
+  flask db migrate
+  flask seed all
+
+
+
+to start frontend: npm run dev
+
+CREATE USER thatsawrapautostylin WITH PASSWORD 'password' CREATEDB;
+CREATE DATABASE thatsawrapautostylin_db WITH OWNER thatsawrapautostylin;
+
+
+Styling:
+
+  black: #060606
+  red: #c00000
+  light-gold: #F0CD5F
+  dark-gold: #BA8F2F
+  whiteL #ffffff
