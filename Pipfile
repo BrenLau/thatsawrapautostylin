@@ -1,0 +1,25 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+psycopg2-binary = "*"
+alembic = "*"
+flask-migrate = "*"
+python-dotenv = "*"
+flask = "*"
+flask-cors = "*"
+flask-sqlalchemy = "*"
+flask-wtf = "*"
+sqlalchemy = "*"
+flask-login = "*"
+wtforms = "*"
+flask-googlemaps = "*"
+werkzeug = "==2.3.0"
+email-validator = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.11"

@@ -1,0 +1,19 @@
+#root {
+  margin: 0;
+}
+
+body {
+  margin: 0;
+}
+
+.errors {
+  color: #c00000;
+}
+
+
+
+@media screen and (max-width: 600px) {
+  body {
+    max-width: 600px;
+  }
+}
