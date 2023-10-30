@@ -1,0 +1,9 @@
+To create virtual environment: python -m venv venv
+
+To start backend: 
+  from root directory run:
+  pipenv shell
+  flask run
+
+
+to start frontend: npm run dev
