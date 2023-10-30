@@ -3,7 +3,13 @@ import { useState, useEffect } from "react"
 const AddService = () => {
     const [carTypes, setCarTypes] = useState([])
     const [carTypeSelected, setCarTypeSelected] = useState('')
-
+    const [title, setTitle] = useState('')
+    const [description, setDescription] = useState('')
+    const [price, setPrice] = useState(0)
+    const [time, setTime] = useState(2)
+    useEffect(() => {
+        // console.log(price)
+    }, [price])
     useEffect(() => {
         const getCarTypes = async () => {
             const response = await fetch('http://127.0.0.1:5000/api/cartypes')
@@ -19,17 +25,20 @@ const AddService = () => {
         <form>
             <label>
                 Service Title
-                <input></input>
-            </label>
+                <input value={title} onChange={(e) => setTitle(e.target.value)}></input>
+            </label >
 
             <label>
                 Description
-                <input type="textarea"></input>
+                <input type="textarea" value={description} onChange={(e) => setDescription(e.target.value)}></input>
             </label>
 
             <label>
                 Price
-                <input type="int"></input>
+                <input type="number" value={price} onChange={(e) => {
+                    setPrice(e.target.value)
+                }}></input>
+                $
             </label>
 
             <label>
@@ -55,7 +64,7 @@ const AddService = () => {
 
             <label>
                 Duration(Hours)
-                <input></input>
+                <input type="number" value={time} onChange={(e) => setTime(e.target.value)}></input>
             </label>
 
         </form >
