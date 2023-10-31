@@ -2,6 +2,7 @@ import './services.css'
 import AddService from './AddService'
 import { useEffect, useState } from 'react'
 import DeleteService from './DeleteService'
+import EditService from './EditService'
 
 const Services = () => {
     const [services, setServices] = useState([])
@@ -29,6 +30,7 @@ const Services = () => {
                         <div>{service.description}</div>
                         <div>{service.price}</div>
                         <DeleteService id={service.id} />
+                        <EditService service={service} />
                     </div>
                 )
             })}

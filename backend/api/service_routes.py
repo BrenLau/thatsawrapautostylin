@@ -39,3 +39,18 @@ def deleteService(serviceId):
     db.session.delete(service)
     db.session.commit()
     return service.to_dict()
+
+
+@service_routes.route('/<int:serviceId>', methods=['PUT'])
+def editService(serviceId):
+    data = request.json
+    service = Service.query.get(serviceId)
+    print(data)
+    service.title = data['title']
+    service.description = data['description']
+    service.price = data['price']
+    service.image_url = data['image_url']
+    service.car_type = data['car_type']
+    service.duration = data['duration']
+    db.session.commit()
+    return service.to_dict()
