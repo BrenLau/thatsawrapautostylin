@@ -12,7 +12,7 @@
     justify-content: space-evenly;
     align-items: center;
     font-family: Gabarito;
-    z-index: 0;
+    z-index: 100;
 }
 
 .footer a{
