@@ -1,4 +1,5 @@
 venv
 .env
-dev.db
-credentials.json
+.venv
+instance
+credentials.jsoncredentials.json
