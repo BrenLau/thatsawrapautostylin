@@ -8,6 +8,25 @@ import HomePage from './components/home-page';
 
 import './App.css';
 
+function Calendar() {
+  const getEvents = async () => {
+    let res = await fetch("/api/calendar", {
+      method: "GET"
+    })
+    let events = await res.json()
+    console.log(events)
+    return events;
+  }
+  let eventsRes = getEvents();
+    return (
+    <div id='calendar'>
+      {eventsRes.map(event => {
+        <p>{event.id}</p>
+      })}
+    </div>
+  )
+}
+
 function App() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [user, setUser] = useState(null)
@@ -34,8 +53,6 @@ function App() {
 
   }, [])
 
-  console.log(isLoaded)
-
   return (
     <>
       <Nav user={user} />
@@ -46,6 +63,8 @@ function App() {
           <Route path="/login" element={<LoginFormModal />}>
           </Route>
           <Route exact path='/booking' element={<Booking />}>
+          </Route>
+          <Route exact path='/calendar' element={<Calendar />}>
           </Route>
         </Routes>)}
       <Footer />
