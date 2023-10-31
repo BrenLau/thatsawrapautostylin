@@ -45,7 +45,6 @@ def deleteService(serviceId):
 def editService(serviceId):
     data = request.json
     service = Service.query.get(serviceId)
-    print(data)
     service.title = data['title']
     service.description = data['description']
     service.price = data['price']
