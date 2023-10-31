@@ -18,7 +18,7 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String, nullable=False)
     phone_number = db.Column(db.String(50))
     instagram = db.Column(db.String(50))
-    is_admin = db.Column(db.Boolean, nullable=False)
+    is_admin = db.Column(db.Boolean, nullable=False, default=False)
 
     reviews = db.relationship("Review", back_populates="user")
     bookings = db.relationship("Booking", back_populates="user")
@@ -48,6 +48,12 @@ class CarType(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     car_type = db.Column(db.String(50), nullable=False)
 
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "car_type": self.car_type
+        }
+
 
 class Service(db.Model):
     __tablename__ = "services"
@@ -61,6 +67,18 @@ class Service(db.Model):
         "car_types.id"), nullable=False)
     duration = db.Column(db.Integer, nullable=False)
 
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "description": self.description,
+            "price": self.price,
+            "image_url": self.image_url,
+            "car_type": self.car_type,
+            "duration": self.duration
+
+        }
+
 
 class Booking(db.Model):
     __tablename__ = "bookings"
@@ -73,6 +91,17 @@ class Booking(db.Model):
         "services.id"), nullable=False)
     car = db.Column(db.String(50), nullable=False)
     user = db.relationship("User", back_populates="bookings")
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "total_price": self.total_price,
+            "times": self.times,
+            "service_id": self.service_id,
+            "car": self.car,
+            "user": self.user
+        }
 
 
 class Review(db.Model):
@@ -89,11 +118,12 @@ class Review(db.Model):
 
     def to_dict(self):
         return {
-            'id': self.id,
-            'first_name': self.first_name,
-            'rating': self.rating,
-            'description': self.description,
-            'user_id': self.user_id,
-            'service_id': self.service_id,
-            'image_url': self.image_url,
+            "id": self.id,
+            "first_name": self.first_name,
+            "rating": self.rating,
+            "description": self.description,
+            "user_id": self.user_id,
+            "service_id": self.service_id,
+            "image_url": self.image_url,
+            "user": self.user
         }

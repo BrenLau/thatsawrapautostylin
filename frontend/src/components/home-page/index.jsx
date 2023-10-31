@@ -2,6 +2,7 @@ import AboutMe from '../about-me';
 import { useNavigate } from "react-router-dom";
 
 import './home-page.css';
+import Services from '../services';
 import AllReviews from '../reviews/allReviews';
 import { useState, useEffect } from 'react';
 
@@ -30,8 +31,6 @@ const HomePage = () => {
       < AllReviews />
       <AboutMe />
     </>
-
-
   )
 }
 
