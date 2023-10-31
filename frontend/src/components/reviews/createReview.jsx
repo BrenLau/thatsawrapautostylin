@@ -38,7 +38,6 @@ export default function CreateReviews() {
     fetchReviews();
   }, []);
 
-  console.log(user)
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -63,6 +62,7 @@ export default function CreateReviews() {
 
       <form onSubmit={handleSubmit}>
         <input
+          required
           placeholder="First Name"
           type='text'
           value={firstName}
@@ -89,6 +89,7 @@ export default function CreateReviews() {
         </div>
 
         <textarea
+          required
           placeholder="Tell us how we did..."
           type='text'
           value={description}
