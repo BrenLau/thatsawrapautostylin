@@ -1,18 +1,17 @@
 import './booking.css'
-// import { DateTimePickerComponent } from '@syncfusion/ej2-react-calendars';
-
 import { useEffect, useState } from 'react';
 import "react-datetime/css/react-datetime.css"
 import DateTime from 'react-datetime'
+
 
 const Booking = () => {
     const [name, setName] = useState("")
     const [email, setEmail] = useState("");
     const [number, setNumber] = useState("");
     const [instagram, setInstagram] = useState("");
+    const [car, setCar] = useState("")
     const [referral, setReferral] = useState("")
-    const [times, setTimes] = useState(new Date().toJSON().slice(0, 10) + ' ' + new Date().toJSON().slice(11, 16))
-    const [car, setCar] = useState("");
+    const [times, setTimes] = useState("")
     const [errors, setErrors] = useState({})
 
     useEffect(() => {
@@ -24,14 +23,13 @@ const Booking = () => {
             setName(name)
             setEmail(email)
             setNumber(number)
-            setInsta(instagram)
+            setInstagram(instagram)
         }
     }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         setErrors({})
-
         const res = await fetch('/api/booking', {
             method: "POST",
             headers: {
@@ -42,10 +40,12 @@ const Booking = () => {
                 email,
                 number,
                 instagram,
+                car,
+                times,
                 referral
             })
-
         })
+
         if (times < new Date().toJSON().slice(0, 10)) {
             errors.times = "Date must be in future"
         }
@@ -112,33 +112,24 @@ const Booking = () => {
                         </label>
                     </div>
                     <div className='car-div'>
-                        <label>
-                            {/* Car Model/Type: */}
-                            <input
-                                className='car-type'
-                                placeholder='Car Type*'
-                                type='text'
-                                // value={car}
-                                // onChange={(e) = setCar(e.target.value)}
-                                required
-                            />
-                        </label>
+                        <select name="cars" id="car-select" value={car} onChange={(e) => setCar(e.target.value)} required>
+                            <option value="">--Please choose a car type--</option>
+                            <option value="sedan">Sedan</option>
+                            <option value="coupe">Coupe</option>
+                            <option value="truck">Truck</option>
+                            <option value="suv">SUV</option>
+                        </select>
                     </div>
                 </div>
                 <div className='dates'>
                     <div className='date-div'>
-                        {/* <div>Select 3 dates and times</div> */}
                         <div className='date-select'>
-                            {/* <DateTimePickerComponent id="datetimepicker" placeholder="Select a date and time*" required/> */}
-                            {/* <DateTimePickerComponent id="datetimepicker" placeholder="Select a date and time*" required/> */}
-                            {/* <DateTimePickerComponent id="datetimepicker" placeholder="Select a date and time*" required/> */}
-                            {/* <input type='datetime-local' placeholder="Select a date and time*"></input> */}
                             <DateTime
                                 inputProps={inputProps}
                                 value={times}
                                 onChange={(e) => setTimes(e.target.value)}
                             />
-
+                            {errors.times && <p className="errors">{errors.times}</p>}
                         </div>
                     </div>
                 </div>
