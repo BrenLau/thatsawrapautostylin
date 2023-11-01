@@ -9,15 +9,18 @@ const Booking = () => {
     const [name, setName] = useState("")
     const [email, setEmail] = useState("");
     const [number, setNumber] = useState("");
-    const [insta, setInsta] = useState("");
+    const [instagram, setInstagram] = useState("");
+    const [referral, setReferral] = useState("")
+    const [times, setTimes] = useState(new Date().toJSON().slice(0, 10) + ' ' + new Date().toJSON().slice(11, 16))
     const [car, setCar] = useState("");
+    const [errors, setErrors] = useState({})
 
     useEffect(() => {
         const user = sessionStorage.getItem("user");
         console.log(user)
 
         if (user) {
-            const { name, email, number, instagram} = JSON.parse(user);
+            const { name, email, number, instagram } = JSON.parse(user);
             setName(name)
             setEmail(email)
             setNumber(number)
@@ -25,8 +28,31 @@ const Booking = () => {
         }
     }, []);
 
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        setErrors({})
+
+        const res = await fetch('/api/booking', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                name,
+                email,
+                number,
+                instagram,
+                referral
+            })
+
+        })
+        if (times < new Date().toJSON().slice(0, 10)) {
+            errors.times = "Date must be in future"
+        }
+    }
+
     let inputProps = {
-        placeholder:"Select a date and time*"
+        placeholder: "Select a date and time*"
     }
     return (
         <form>
@@ -52,8 +78,8 @@ const Booking = () => {
                                 className="email"
                                 type="email"
                                 placeholder="Email Address*"
-                                // value={email}
-                                // onChange={(e) => setEmail(e.target.value)}
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                                 required
                             />
                         </label>
@@ -65,8 +91,8 @@ const Booking = () => {
                                 className='phone'
                                 type='number'
                                 placeholder='Phone Number*'
-                                // value={number}
-                                // onChamge={(e) => setNumber(e.target.value)}
+                                value={number}
+                                onChange={(e) => setNumber(e.target.value)}
                                 minLength={10}
                                 maxLength={10}
                                 required
@@ -80,9 +106,8 @@ const Booking = () => {
                                 className='insta'
                                 placeholder='Instagram'
                                 type='text'
-                                // value={instagram}
-                                // onChange={(e) => setInstagram(e.target.value)}
-
+                                value={instagram}
+                                onChange={(e) => setInstagram(e.target.value)}
                             />
                         </label>
                     </div>
@@ -108,7 +133,11 @@ const Booking = () => {
                             {/* <DateTimePickerComponent id="datetimepicker" placeholder="Select a date and time*" required/> */}
                             {/* <DateTimePickerComponent id="datetimepicker" placeholder="Select a date and time*" required/> */}
                             {/* <input type='datetime-local' placeholder="Select a date and time*"></input> */}
-                            <DateTime inputProps={inputProps} />
+                            <DateTime
+                                inputProps={inputProps}
+                                value={times}
+                                onChange={(e) => setTimes(e.target.value)}
+                            />
 
                         </div>
                     </div>
@@ -152,6 +181,8 @@ const Booking = () => {
                             <input
                                 type='text'
                                 placeholder='Referral Code'
+                                value={referral}
+                                onChange={(e) => setReferral(e.target.value)}
                             />
                         </label>
                     </div>
@@ -162,7 +193,7 @@ const Booking = () => {
                     Total Price: $$
                 </div>
 
-                <button className='booking-submit'>Submit</button>
+                <button className='booking-submit' onSubmit={handleSubmit}>Submit</button>
             </div>
         </form>
     )

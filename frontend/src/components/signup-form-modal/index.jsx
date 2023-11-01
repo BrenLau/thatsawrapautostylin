@@ -19,7 +19,7 @@ const validateSignup = (name, password, confirmPassword, phoneNumber, instagram)
   }
 
   if (Object.keys(errs).length) {
-    return {"errors": errs}
+    return { "errors": errs }
   }
 
   return true
@@ -53,17 +53,17 @@ const SignupFormModal = ({ updateUser }) => {
     console.log("fetching...")
     const res = await fetch("/api/auth/signup", {
       method: "POST",
-		  headers: {
-			"Content-Type": "application/json",
-		  },
-		  body: JSON.stringify({
-			email,
-			password,
-      name,
-      phone_number: phoneNumber,
-      instagram
-		  })
-	  });
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email,
+        password,
+        name,
+        phone_number: phoneNumber,
+        instagram
+      })
+    });
     let data = await res.json()
     console.log(data)
     if (data.errors) {
@@ -83,62 +83,62 @@ const SignupFormModal = ({ updateUser }) => {
           {errors.name && <p className="errors">{errors.name}</p>}
           <label className="signup-label">
             Name:
-            </label>
-            <input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-              />
+          </label>
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
           <label className="signup-label">
             Email:
-            </label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              />
+          </label>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
           {errors.phoneNumber && <p className="errors">{errors.phoneNumber}</p>}
           <label className="signup-label">
             Phone Number:
-            </label>
-            <input
-              type="text"
-              value={phoneNumber}
-              onChange={(e) => setPhoneNumber(e.target.value)}
-              required
-              />
+          </label>
+          <input
+            type="text"
+            value={phoneNumber}
+            onChange={(e) => setPhoneNumber(e.target.value)}
+            required
+          />
           {errors.instagram && <p className="errors">{errors.instagram}</p>}
           <label className="signup-label">
             Instagram:
-            </label>
-            <input
-              type="text"
-              value={instagram}
-              onChange={(e) => setInstagram(e.target.value)}
-              />
+          </label>
+          <input
+            type="text"
+            value={instagram}
+            onChange={(e) => setInstagram(e.target.value)}
+          />
           {errors.password && <p className="errors">{errors.password}</p>}
           <label className="signup-label">
             Password:
-            </label>
-            <input
-              minLength={8}
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.  value)}
-              required
-              />
+          </label>
+          <input
+            minLength={8}
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
           <label className="signup-label">
             Confirm Password:
-            </label>
-            <input
-              minLength={8}
-              type="password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.  value)}
-              required
-              />
+          </label>
+          <input
+            minLength={8}
+            type="password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            required
+          />
           <button id="signup-button" type="submit">Log In</button>
         </form>
       </div>
