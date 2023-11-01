@@ -1,9 +1,30 @@
 import './booking.css'
 // import { DateTimePickerComponent } from '@syncfusion/ej2-react-calendars';
+
+import { useEffect, useState } from 'react';
 import "react-datetime/css/react-datetime.css"
 import DateTime from 'react-datetime'
 
 const Booking = () => {
+    const [name, setName] = useState("")
+    const [email, setEmail] = useState("");
+    const [number, setNumber] = useState("");
+    const [insta, setInsta] = useState("");
+    const [car, setCar] = useState("");
+
+    useEffect(() => {
+        const user = sessionStorage.getItem("user");
+        console.log(user)
+
+        if (user) {
+            const { name, email, number, instagram} = JSON.parse(user);
+            setName(name)
+            setEmail(email)
+            setNumber(number)
+            setInsta(instagram)
+        }
+    }, []);
+
     let inputProps = {
         placeholder:"Select a date and time*"
     }
@@ -18,8 +39,8 @@ const Booking = () => {
                             <input
                                 type="text"
                                 placeholder="Name*"
-                                // value={name}
-                                // onChange={(e) => setName(e.target.value)}
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
                                 required
                             />
                         </label>

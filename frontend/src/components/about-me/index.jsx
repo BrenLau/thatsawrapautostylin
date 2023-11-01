@@ -34,8 +34,8 @@ const AboutMe = () => {
           <p>socials: FB,whatever</p>
 
         </div>
-      </div>
       <ContactForm />
+      </div>
     </div>
   )
 }

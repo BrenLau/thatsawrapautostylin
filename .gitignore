@@ -2,3 +2,6 @@ venv
 .env
 .venv
 instance
+dev.db
+.venv
+credentials.json
