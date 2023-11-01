@@ -13,6 +13,31 @@ const Booking = () => {
     const [referral, setReferral] = useState("")
     const [times, setTimes] = useState("")
     const [errors, setErrors] = useState({})
+    const [services, setServices] = useState([])
+    async function getServices() {
+        const response = await fetch("http://127.0.0.1:5000/api/services")
+
+        if (response.ok) {
+            const res = await response.json()
+            if (res.services) {
+                setServices(res.services)
+            }
+        }
+    }
+    useEffect(() => {
+        getServices()
+        // setServices()
+    }, [car])
+
+    // if(car === 'sedan' || car === 'coupe'){
+    //      services.filter( service => service.car_type === 2)
+    // } else if(car === 'truck' || car === 'suv'){
+    //     services.filter(service => service.car_type === 3)
+    // } else {
+    //     services.filter(service => service.car_type === 1)
+    // }
+
+    console.log('services', services)
 
     useEffect(() => {
         const user = sessionStorage.getItem("user");
@@ -42,18 +67,23 @@ const Booking = () => {
                 instagram,
                 car,
                 times,
+                service_id: services.id,
                 referral
             })
         })
 
-        if (times < new Date().toJSON().slice(0, 10)) {
-            errors.times = "Date must be in future"
-        }
+        // if (times < new Date().toJSON().slice(0, 10)) {
+        //     errors.times = "Date must be in future"
+        // }
     }
 
     let inputProps = {
         placeholder: "Select a date and time*"
     }
+
+    const serviceList = services.filter(service => service.car_type !== Number(car))
+    console.log('car', Number(car))
+    console.log('service list', serviceList)
     return (
         <form>
             <div className='top-form'>
@@ -114,10 +144,8 @@ const Booking = () => {
                     <div className='car-div'>
                         <select name="cars" id="car-select" value={car} onChange={(e) => setCar(e.target.value)} required>
                             <option value="">--Please choose a car type--</option>
-                            <option value="sedan">Sedan</option>
-                            <option value="coupe">Coupe</option>
-                            <option value="truck">Truck</option>
-                            <option value="suv">SUV</option>
+                            <option value={Number(3)}>Coupe/Sedan</option>
+                            <option value={Number(2)}>SUV/Truck</option>
                         </select>
                     </div>
                 </div>
@@ -126,6 +154,9 @@ const Booking = () => {
                         <div className='date-select'>
                             <DateTime
                                 inputProps={inputProps}
+                                minLength=''
+                                minDetail='hour'
+                                maxDetail='hour'
                                 value={times}
                                 onChange={(e) => setTimes(e.target.value)}
                             />
@@ -135,36 +166,16 @@ const Booking = () => {
                 </div>
                 <div className='service-referral'>
                     <div className='service-div'>
-                        <label>
-                            <input
-                                type='checkbox'
-                            />
-                            <label>Service 1</label>
-                            <input
-                                type='checkbox'
-                            />
-                            <label>Service 2</label>
-                            <input
-                                type='checkbox'
-                            />
-                            <label>Service 3</label>
-                        </label>
-                    </div>
-                    <div className='addon-div'>
-                        <label>
-                            <input
-                                type='checkbox'
-                            />
-                            <label>Add-on 1</label>
-                            <input
-                                type='checkbox'
-                            />
-                            <label>Add-on 2</label>
-                            <input
-                                type='checkbox'
-                            />
-                            <label>Add-on 3</label>
-                        </label>
+                        {serviceList.map((service) => {
+                            return (
+                                <div key={service.id}>
+                                    <input type="radio" />
+                                    <div>{service.title}</div>
+                                    <div>{service.description}</div>
+                                    <div>${service.price}</div>
+                                </div>
+                            )
+                        })}
                     </div>
                     <div className='referral-div'>
                         <label>
@@ -181,7 +192,7 @@ const Booking = () => {
             </div>
             <div className='price-submit'>
                 <div className='price-div'>
-                    Total Price: $$
+                    Total Price: ${services.price}
                 </div>
 
                 <button className='booking-submit' onSubmit={handleSubmit}>Submit</button>
