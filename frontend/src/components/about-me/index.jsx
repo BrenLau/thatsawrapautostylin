@@ -20,7 +20,7 @@ const AboutMe = () => {
     getKey();
     console.log("setApiKey called: ", apiKey)
 
-  }, [apiKey]);
+  }, []);
 
   return (
     <div id="about-me">
