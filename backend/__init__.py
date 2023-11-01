@@ -13,6 +13,7 @@ from .seeds import seed_commands
 from .api.auth_routes import auth_routes
 from .api.service_routes import service_routes
 from .api.car_type_routes import car_type_routes
+from .api.booking_routes import booking_routes
 import os
 
 app = Flask(__name__)

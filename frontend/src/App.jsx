@@ -23,7 +23,6 @@ function App() {
       setIsLoaded(true)
       if (response.ok) {
         const data = await response.json();
-        console.log(data)
         if (data.errors) {
           return
         }
@@ -35,7 +34,6 @@ function App() {
 
   }, [])
 
-  console.log(isLoaded)
 
   return (
     <>

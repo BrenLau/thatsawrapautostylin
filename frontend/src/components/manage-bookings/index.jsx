@@ -2,6 +2,7 @@ import './manage-bookings.css'
 import { useEffect, useState} from 'react';
 const ManageBookings = () => {
   const [isAdmin, setIsAdmin] = useState(false);
+  const [bookings, setBookings] = useState({});
 
   useEffect(() => {
     const user = JSON.parse(sessionStorage.getItem("user"));
@@ -11,14 +12,25 @@ const ManageBookings = () => {
 
   useEffect(()=>{
     const getAllBookings = async () => {
+      try{
+        const res = await fetch("/api/booking");
+        const allBookings = await res.json()
+        // console.log(allBookings.bookings, "all the bookings")
+        setBookings(allBookings.bookings);
 
-      const bookings = await fetch("/api/booking");
+      } catch (error) {
+        console.error("Error fetching bookings: ", error)
 
+      }
     }
 
     getAllBookings();
-  })
+  }, []);
 
+  console.log(bookings, "!!@#")
+  // for(let booking of bookings){
+  //   console.log(booking, "HAHA")
+  // }
   return (
     <div id="manage-bookings">
       { !isAdmin? (

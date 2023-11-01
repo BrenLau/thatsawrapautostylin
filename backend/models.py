@@ -101,8 +101,7 @@ class Booking(db.Model):
             "times": self.times,
             "service_id": self.service_id,
             "car": self.car,
-            "is_approved": self.is_approved,
-            "user": self.user
+            "is_approved": self.is_approved
         }
 
 
