@@ -1,15 +1,20 @@
 import './manage-bookings.css'
 import { useEffect, useState } from 'react';
 const ManageBookings = () => {
+  const [isAdmin, setIsAdmin] = useState(false)
   useEffect(() => {
-    const user = sessionStorage.getItem("user");
-    console.log(user, "!!!")
+    const user = JSON.parse(sessionStorage.getItem("user"));
+    if(user && user.is_admin) setIsAdmin(true);
 
-  }, [])
+  }, [isAdmin])
 
   return (
     <div id="manage-bookings">
-      <h1>testing123</h1>
+      { !isAdmin? (
+          <h1>unauthorized</h1>
+      ) : (
+          <h1> authorized</h1>
+      )}
 
     </div>
   )
