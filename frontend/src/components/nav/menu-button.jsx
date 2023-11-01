@@ -3,12 +3,15 @@ import { Link } from "react-router-dom";
 import OpenModalButton from "../open-modal-button";
 import LoginFormModal from "../login-modal";
 import SignupFormModal from "../signup-form-modal";
+import { UserContext } from '../../main';
+import { useContext } from 'react';
 
 const MenuButton = () => {
+  const { user, setUser } = useContext(UserContext)
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
   const [transitioning, setTransitioning] = useState(false)
-  const [user, setUser] = useState(JSON.parse(sessionStorage.getItem("user")) || null)
+  const [userState, setUserState] = useState(user || null)
 
   const updateUserState = (user) => {
     setUser(user)
@@ -58,8 +61,8 @@ const MenuButton = () => {
       {!user ? (
         <div id={dropdownClassname}>
           {transitioning || !showMenu ? null : <Link to='/booking'className="menu-dropdown-button">Book Now</Link>}
-          {transitioning || !showMenu ? null : <OpenModalButton modalComponent={<LoginFormModal updateUser={updateUserState} />} buttonText={"Login"} buttonClassName={"menu-dropdown-button"}/>}
-          {transitioning || !showMenu ? null : <OpenModalButton modalComponent={<SignupFormModal updateUser={updateUserState} />} buttonText={"Sign Up"} buttonClassName={"menu-dropdown-button"}/> }
+          {transitioning || !showMenu ? null : <OpenModalButton modalComponent={<LoginFormModal />} buttonText={"Login"} buttonClassName={"menu-dropdown-button"}/>}
+          {transitioning || !showMenu ? null : <OpenModalButton modalComponent={<SignupFormModal />} buttonText={"Sign Up"} buttonClassName={"menu-dropdown-button"}/> }
         </div>
       ) : (
         <div id={dropdownClassname}>

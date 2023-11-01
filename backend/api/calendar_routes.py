@@ -10,6 +10,8 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
+import webbrowser
+
 calendar_routes = Blueprint("calendar", __name__)
 
 # If modifying these scopes, delete the file token.json.
@@ -20,6 +22,7 @@ def get_events():
     """Shows basic usage of the Google Calendar API.
     Prints the start and name of the next 10 events on the user's calendar.
     """
+    print(webbrowser._browsers)
     print("*** route hit ***")
     creds = None
     # The file token.json stores the user's access and refresh tokens, and is

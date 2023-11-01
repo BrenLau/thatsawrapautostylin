@@ -2,9 +2,11 @@ import MenuButton from './menu-button';
 import img from '../../assets/TAW-logo.jpg';
 import { Link } from 'react-router-dom';
 // import { useHistory } from 'react-router-dom'
+import { UserContext } from '../../main';
+import { useContext } from 'react';
 import './nav.css';
 
-const Nav = ({ user }) => {
+const Nav = () => {
   
   return (
     <div id="nav">
@@ -15,7 +17,7 @@ const Nav = ({ user }) => {
           <h2 id='nav-title'>thatsawrapautostylin&apos;</h2>
       </div>
       <div id="nav-menu-div">
-        <MenuButton user={user} />
+        <MenuButton />
       </div>
     </div>
   )

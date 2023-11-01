@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Modal, useModal } from "../../context/modal";
+import { UserContext } from "../../main";
 
 import "./login-modal.css";
 
-const LoginFormModal = ({ updateUser }) => {
+const LoginFormModal = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
   const { closeModal } = useModal();
+  const { setUser } = useContext(UserContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,9 +27,9 @@ const LoginFormModal = ({ updateUser }) => {
       let data = await res.json()
       setErrors(data.errors);
     } else {
-      let user = await res.json()
-      sessionStorage.setItem("user", JSON.stringify(user))
-      updateUser(user)
+      let data = await res.json()
+      sessionStorage.setItem("user", JSON.stringify(data))
+      setUser(data)
       closeModal();
     }
   };
