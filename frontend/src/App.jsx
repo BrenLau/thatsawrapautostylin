@@ -7,6 +7,7 @@ import Booking from './components/booking';
 import HomePage from './components/home-page';
 
 import './App.css';
+import ManageBookings from './components/manage-bookings';
 
 function App() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -46,6 +47,8 @@ function App() {
           <Route path="/login" element={<LoginFormModal />}>
           </Route>
           <Route exact path='/booking' element={<Booking />}>
+          </Route>
+          <Route exact path='/manage_bookings' element={<ManageBookings />}>
           </Route>
         </Routes>)}
       <Footer />
