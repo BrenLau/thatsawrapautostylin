@@ -9,7 +9,7 @@ const LoginFormModal = () => {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
   const { closeModal } = useModal();
-  const { setUser } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
