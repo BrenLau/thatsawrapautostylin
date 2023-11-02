@@ -12,10 +12,12 @@ flask = "*"
 flask-cors = "*"
 flask-sqlalchemy = "*"
 flask-wtf = "*"
-werkzeug = "*"
 sqlalchemy = "*"
 flask-login = "*"
 wtforms = "*"
+flask-googlemaps = "*"
+werkzeug = "==2.3.0"
+email-validator = "*"
 
 [dev-packages]
 
