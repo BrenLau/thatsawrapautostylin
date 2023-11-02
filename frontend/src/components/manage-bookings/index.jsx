@@ -2,7 +2,7 @@ import './manage-bookings.css'
 import { useEffect, useState} from 'react';
 const ManageBookings = () => {
   const [isAdmin, setIsAdmin] = useState(false);
-  const [bookings, setBookings] = useState({});
+  const [bookings, setBookings] = useState([]);
 
   useEffect(() => {
     const user = JSON.parse(sessionStorage.getItem("user"));
@@ -15,9 +15,7 @@ const ManageBookings = () => {
       try{
         const res = await fetch("/api/booking");
         const allBookings = await res.json()
-        // console.log(allBookings.bookings, "all the bookings")
         setBookings(allBookings.bookings);
-
       } catch (error) {
         console.error("Error fetching bookings: ", error)
 
@@ -27,16 +25,48 @@ const ManageBookings = () => {
     getAllBookings();
   }, []);
 
-  console.log(bookings, "!!@#")
-  // for(let booking of bookings){
-  //   console.log(booking, "HAHA")
-  // }
+  const populateTable = (isApproved) => {
+    return bookings?.map((booking)=>{
+      return(isApproved === booking.is_approved ? (
+        <table id="bookings-table" key={booking.id}>
+          <tbody>
+
+
+          <tr id="headings">
+            <th>car</th>
+            <th>service</th>
+            <th>time</th>
+            <th>total price</th>
+            <th>user</th>
+          </tr>
+          <tr id="data">
+            <td>{booking.car}</td>
+            <td>{booking.service_id}</td>
+            <td>{booking.times}</td>
+            <td>{booking.total_price}</td>
+            <td>{booking.user_id}</td>
+          </tr>
+          </tbody>
+
+        </table>
+        ) : <></>)
+
+      })
+  }
   return (
     <div id="manage-bookings">
       { !isAdmin? (
           <h1>unauthorized</h1>
-      ) : (
+      ) : (<>
           <h1>authorized</h1>
+          <div id="bookings-div" >
+            <h2>Pending Approval</h2>
+              {populateTable(false)}
+            <h2>Approved Bookings</h2>
+              {populateTable(true)}
+
+            </div>
+          </>
       )}
 
     </div>
