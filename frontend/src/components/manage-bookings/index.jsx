@@ -22,8 +22,19 @@ const ManageBookings = () => {
       }
     }
 
+
     getAllBookings();
   }, []);
+
+  // const acceptBooking = async (bookingId) =>{
+  //   const res = await fetch(`/api/booking/${bookingId}`, {
+  //     method: "POST",
+
+
+  //   })
+
+  //   }
+
 
   const populateTable = (isApproved) => {
     return bookings?.map((booking)=>{
