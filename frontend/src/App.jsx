@@ -6,6 +6,7 @@ import CreateReviews from './components/reviews/createReview';
 import AboutMe from './components/about-me'
 import LoginFormModal from './components/login-modal';
 // import Booking from './components/booking';
+import EditReview from './components/reviews/editReview';
 import HomePage from './components/home-page';
 
 import './App.css';
@@ -60,6 +61,9 @@ function App() {
         </Route> */}
 
         <Route exact path='/add_review' element={ <CreateReviews />}>
+        </Route>
+
+        <Route exact path='/editReview' element={ <EditReview />}>
         </Route>
 
         {/* <Route exact path='/booking' element={<Booking />}>

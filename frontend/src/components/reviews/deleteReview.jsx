@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 
 
 
 export default function DeleteReview({reviewId, userId}){
     const [user, setUser] = useState()
+    const navigate = useNavigate();
+
 
     useEffect(() => {
         async function fetchReviews() {

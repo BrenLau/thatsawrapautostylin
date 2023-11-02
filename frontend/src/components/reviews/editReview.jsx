@@ -1,30 +1,32 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 
 
-export default function EditReview({ reviewId, descript, firstname, ratings, userid, serviceid, image }) {
+export default function EditReview() {
+    const location = useLocation();
+    const review = location.state
 
-    const [firstName, setFirstName] = useState(firstname)
-    const [rating, setRating] = useState(ratings)
+    const [firstName, setFirstName] = useState(review.firstname)
+    const [rating, setRating] = useState(review.ratings)
     const [fillStars, setFillStars] = useState(rating);
-    const [description, setDescription] = useState(descript)
-    const [userId, setUserId] = useState(userid)
-    const [serviceId, setServiceId] = useState(serviceid)
-    const [imageUrl, setImageUrl] = useState(image)
+    const [description, setDescription] = useState(review.descript)
+    const [userId, setUserId] = useState(review.userid)
+    const [serviceId, setServiceId] = useState(review.serviceid)
+    const [imageUrl, setImageUrl] = useState(review.image)
 
     const data = {
-        first_name: firstName,
-        rating,
-        description,
-        user_id: userId,
-        service_id: serviceId,
-        image_url: imageUrl
+        first_name: review.firstname,
+        rating: review.rating,
+        description: review.description,
+        user_id: review.userId,
+        service_id: review.serviceId,
+        image_url: review.imageUrl
     }
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        fetch(`/api/reviews/edit/${reviewId}`, {
+        fetch(`/api/reviews/edit/${review.reviewId}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -46,7 +48,7 @@ export default function EditReview({ reviewId, descript, firstname, ratings, use
                     required
                     placeholder="First Name"
                     type='text'
-                    value={firstName}
+                    value={review.firstname}
                     onChange={(e) => setFirstName(e.target.value)}
                 />
 
@@ -73,7 +75,7 @@ export default function EditReview({ reviewId, descript, firstname, ratings, use
                     required
                     placeholder="Tell us how we did..."
                     type='text'
-                    value={description}
+                    value={review.description}
                     onChange={(e) => setDescription(e.target.value)}
                 />
 
