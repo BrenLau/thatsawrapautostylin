@@ -9,6 +9,25 @@ import { UserContext } from './main';
 
 import './App.css';
 
+function Calendar() {
+  const getEvents = async () => {
+    let res = await fetch("/api/calendar", {
+      method: "GET"
+    })
+    let events = await res.json()
+    console.log(events)
+    return events;
+  }
+  let eventsRes = getEvents();
+    return (
+    <div id='calendar'>
+      {eventsRes.map(event => {
+        <p>{event.id}</p>
+      })}
+    </div>
+  )
+}
+
 function App() {
   const [isLoaded, setIsLoaded] = useState(false);
   // const [user, setUser] = useState(null)
@@ -47,8 +66,8 @@ function App() {
           </Route> */}
           <Route exact path='/booking' element={<Booking />}>
           </Route>
-          {/* <Route exact path='/calendar' element={<Calendar />}>
-          </Route> */}
+          <Route exact path='/calendar' element={<Calendar />}>
+          </Route>
         </Routes>)}
       <Footer />
     </>

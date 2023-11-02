@@ -1,8 +1,6 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { Modal, useModal } from "../../context/modal";
 import { UserContext } from "../../main";
-import { CalendarContext } from "../../main";
-import { gapiLoaded, initializeGapiClient, gisLoaded, handleAuthClick, listUpcomingEvents } from "./google_auth";
 
 import "./signup-modal.css";
 
@@ -28,17 +26,6 @@ const validateSignup = (name, password, confirmPassword, phoneNumber, instagram)
   return true
 }
 
-const CLIENT_ID = "762633836570-vpbro17viheb27tl43n2v7qq76aljd8b.apps.googleusercontent.com";
-const API_KEY = "AIzaSyC1UIZ4AhrqAxk_7mc3R2RUjlwoJvZaKbI";
-
-const DISCOVERY_DOC = 'https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest';
-
-const SCOPES = 'https://www.googleapis.com/auth/calendar';
-
-let tokenClient;
-let gapiInited = false;
-let gisInited = false;
-
 const SignupFormModal = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
@@ -49,8 +36,6 @@ const SignupFormModal = () => {
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
   const { setUser } = useContext(UserContext);
-  const apiCalendar = useContext(CalendarContext)
-  console.log("*** signup calendar ***", apiCalendar)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -86,17 +71,11 @@ const SignupFormModal = () => {
     if (data.errors) {
       setErrors(data.errors);
     } else {
-      await apiCalendar.handleAuthClick()
       sessionStorage.setItem("user", JSON.stringify(data))
       setUser(data);
       closeModal();
     }
   };
-
-  useEffect(() => {
-    gapiLoaded();
-    gisLoaded();
-  })
 
   return (
     <div id="signup-form-modal">
