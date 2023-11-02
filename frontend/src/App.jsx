@@ -5,7 +5,7 @@ import Nav from './components/nav';
 import CreateReviews from './components/reviews/createReview';
 import AboutMe from './components/about-me'
 import LoginFormModal from './components/login-modal';
-import Booking from './components/booking';
+// import Booking from './components/booking';
 import HomePage from './components/home-page';
 
 import './App.css';
@@ -47,25 +47,25 @@ function App() {
           </Route>
           <Route path="/login" element={<LoginFormModal />}>
           </Route>
-          <Route exact path='/booking' element={<Booking />}>
-          </Route>
+          {/* <Route exact path='/booking' element={<Booking />}>
+          </Route> */}
         </Routes>)}
-      <Footer />
-      <Nav />
+      {/* <Footer /> */}
+      {/* <Nav /> */}
       <AboutMe />
       <Routes>
-        <Route exact path="/" element={<HomePage />}>
-        </Route>
-        <Route exact path="/login" element={<LoginFormModal />}>
-        </Route>
+        {/* <Route exact path="/" element={<HomePage />}>
+        </Route> */}
+        {/* <Route exact path="/login" element={<LoginFormModal />}>
+        </Route> */}
 
         <Route exact path='/add_review' element={ <CreateReviews />}>
         </Route>
 
-        <Route exact path='/booking' element={<Booking />}>
+        {/* <Route exact path='/booking' element={<Booking />}>
         </Route>
         <Route exact path='/booking' element={<Booking />}>
-        </Route>
+        </Route> */}
       </Routes>
       <Footer/>
     </>

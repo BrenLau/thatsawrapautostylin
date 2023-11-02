@@ -1,4 +1,6 @@
-#!/home/brenl/thatsawrapautostylin/.venv/bin/python
+#!/bin/sh
+'''exec' "/Users/Michael/App Academy/thatsawrapautostylin/.venv/bin/python" "$0" "$@"
+' '''
 # -*- coding: utf-8 -*-
 import re
 import sys

@@ -125,5 +125,5 @@ class Review(db.Model):
             "user_id": self.user_id,
             "service_id": self.service_id,
             "image_url": self.image_url,
-            "user": self.user
+            "user": self.user.to_dict()
         }

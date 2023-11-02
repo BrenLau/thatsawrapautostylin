@@ -31,6 +31,7 @@ app.cli.add_command(seed_commands)
 
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(service_routes, url_prefix='/api/services')
+app.register_blueprint(review_routes, url_prefix='/api/reviews')
 
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///dev.db'
 app.config.from_mapping({

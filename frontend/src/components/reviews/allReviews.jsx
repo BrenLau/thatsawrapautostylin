@@ -10,6 +10,7 @@ export default function AllReviews(){
     useEffect(() => {
         async function fetchReviews() {
           const response = await fetch("/api/reviews/get_reviews");
+          console.log(response)
           if (response.ok) {
             const data = await response.json();
             setReviews(data);
@@ -30,7 +31,7 @@ export default function AllReviews(){
                         <div>{rev.description}</div>
                         <div>{rev.image_url}</div>
                         <DeleteReview reviewId={rev.id} userId={rev.user_id} />
-                        <EditReview reviewId={rev.id} descript={rev.description} firstname={rev.first_name} rating={rev.rating} userid={rev.user_id} serviceid={rev.service_id} image={rev.image_url} />
+                        {/* <EditReview reviewId={rev.id} descript={rev.description} firstname={rev.first_name} rating={rev.rating} userid={rev.user_id} serviceid={rev.service_id} image={rev.image_url} /> */}
                     </div>
                 )
             })}
