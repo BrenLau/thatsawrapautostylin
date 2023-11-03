@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext} from 'react';
 import { Route, Routes } from 'react-router';
 import Footer from './components/footer';
 import Nav from './components/nav';
@@ -29,9 +29,10 @@ function Calendar() {
   )
 }
 
+
 function App() {
   const [isLoaded, setIsLoaded] = useState(false);
-  // const [user, setUser] = useState(null)
+  // // const [user, setUser] = useState(null)
   const { user, setUser } = useContext(UserContext);
 
   useEffect(() => {
@@ -55,26 +56,22 @@ function App() {
 
   }, [])
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 49a0dc9cfa33952cdd6eeece8e1b627411a8944d
   return (
     <>
-      <Nav />
+      <Nav user={user} />
       {isLoaded && (
         <Routes>
           <Route exact path="/" element={<HomePage />}>
           </Route>
-          {/* <Route path="/login" element={<LoginFormModal />}>
-          </Route> */}
+          <Route path="/login" element={<LoginFormModal />}>
+          </Route>
           <Route exact path='/booking' element={<Booking />}>
           </Route>
-<<<<<<< HEAD
+
           <Route exact path='/manage_bookings' element={<ManageBookings />}>
-=======
+          </Route>
           <Route exact path='/calendar' element={<Calendar />}>
->>>>>>> 49a0dc9cfa33952cdd6eeece8e1b627411a8944d
           </Route>
         </Routes>)}
       <Footer />
