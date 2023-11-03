@@ -1,10 +1,14 @@
-from backend.models import db, User, CarType, Service, environment, SCHEMA
+from backend.models import Booking, db, User, CarType, Service, environment, SCHEMA
 from sqlalchemy.sql import text
 
 
 def seed_data():
     admin = User(
         email='thatsawrapautostylin@gmail.com', name='Admin', password='Adminpassword', is_admin=True,
+    )
+
+    non_admin = User(
+        email='john@doe.com', name='John Doe', password='password',is_admin=False,
     )
 
     sedanSideWindowTint = Service(
@@ -136,8 +140,27 @@ def seed_data():
         car_type='ALL'
     )
 
-    # Car Types
+    Booking1 = Booking(
+        user_id = 1,
+        total_price = 9999,
+        times = "1 AM",
+        service_id= 1,
+        car="Car 1",
+        is_approved=True
+        )
+    Booking2 = Booking(
+        user_id = 2,
+        total_price = 1,
+        times = "12 PM",
+        service_id= 2,
+        car="Car 2",
+        is_approved=False
+    )
+
+    # Users
     db.session.add(admin)
+    db.session.add(non_admin)
+    # Car Types
     db.session.add(AllTypes)
     db.session.add(Sedan)
     db.session.add(Suv)
@@ -155,6 +178,10 @@ def seed_data():
     db.session.add(interiorDetailing)
     db.session.add(bothDetailing)
     db.session.add(fullCarSteaming)
+
+    # Bookings
+    db.session.add(Booking1)
+    db.session.add(Booking2)
 
     db.session.commit()
 

@@ -8,7 +8,6 @@ const AddService = () => {
     const [price, setPrice] = useState(0)
     const [time, setTime] = useState(2)
     useEffect(() => {
-        // console.log(price)
     }, [price])
     useEffect(() => {
         const getCarTypes = async () => {
