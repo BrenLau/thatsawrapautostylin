@@ -1,0 +1,6 @@
+#bookings-table {
+  border: 1px solid black;
+}
+#bookings-table > tr > td {
+  border: 1px solid black;
+}
