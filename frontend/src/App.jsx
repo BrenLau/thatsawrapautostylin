@@ -19,7 +19,7 @@ function Calendar() {
     return events;
   }
   let eventsRes = getEvents();
-    return (
+  return (
     <div id='calendar'>
       {eventsRes.map(event => {
         <p>{event.id}</p>
@@ -67,6 +67,11 @@ function App() {
           <Route exact path='/booking' element={<Booking />}>
           </Route>
           <Route exact path='/calendar' element={<Calendar />}>
+          </Route>
+          <Route exact path='/add_review' element={<CreateReviews />}>
+          </Route>
+
+          <Route exact path='/editReview' element={<EditReview />}>
           </Route>
         </Routes>)}
       <Footer />
