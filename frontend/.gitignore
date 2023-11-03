@@ -14,8 +14,6 @@ dist-ssr
 
 .env
 dev.db
-.venv
-venv
 
 # Editor directories and files
 .vscode/*
