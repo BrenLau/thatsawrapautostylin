@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Modal, useModal } from "../../context/modal";
+import { UserContext } from "../../main";
 
 import "./signup-modal.css";
 
@@ -25,7 +26,7 @@ const validateSignup = (name, password, confirmPassword, phoneNumber, instagram)
   return true
 }
 
-const SignupFormModal = ({ updateUser }) => {
+const SignupFormModal = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
@@ -34,6 +35,7 @@ const SignupFormModal = ({ updateUser }) => {
   const [instagram, setInstagram] = useState("")
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
+  const { setUser } = useContext(UserContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -70,7 +72,7 @@ const SignupFormModal = ({ updateUser }) => {
       setErrors(data.errors);
     } else {
       sessionStorage.setItem("user", JSON.stringify(data))
-      updateUser(data)
+      setUser(data);
       closeModal();
     }
   };

@@ -13,6 +13,7 @@ from .seeds import seed_commands
 from .api.auth_routes import auth_routes
 from .api.service_routes import service_routes
 from .api.car_type_routes import car_type_routes
+from .api.calendar_routes import calendar_routes
 import os
 
 app = Flask(__name__)
@@ -32,6 +33,7 @@ app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(maps_route, url_prefix='/api/maps')
 app.register_blueprint(service_routes, url_prefix='/api/services')
 app.register_blueprint(car_type_routes, url_prefix='/api/cartypes')
+app.register_blueprint(calendar_routes, url_prefix="/api/calendar")
 
 
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///dev.db'
