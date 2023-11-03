@@ -3,11 +3,12 @@ import { Link } from "react-router-dom";
 import OpenModalButton from "../open-modal-button";
 import LoginFormModal from "../login-modal";
 import SignupFormModal from "../signup-form-modal";
-import { UserContext } from '../../main';
+import { UserContext, CalendarContext } from '../../main';
 import { useContext } from 'react';
 
 const MenuButton = () => {
   const { user, setUser } = useContext(UserContext)
+  const apiCalendar = useContext(CalendarContext);
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
   const [transitioning, setTransitioning] = useState(false)
@@ -49,6 +50,7 @@ const MenuButton = () => {
   
     if (response.ok) {
       sessionStorage.removeItem("user")
+      // await apiCalendar.handleSignOutClick();
       setUser(null)
     }
   }

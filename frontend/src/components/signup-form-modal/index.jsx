@@ -1,8 +1,8 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, SyntheticEvent } from "react";
 import { Modal, useModal } from "../../context/modal";
 import { UserContext } from "../../main";
 import { CalendarContext } from "../../main";
-import { gapiLoaded, initializeGapiClient, gisLoaded, handleAuthClick, listUpcomingEvents } from "./google_auth";
+// import { gapiLoaded, initializeGapiClient, gisLoaded, handleAuthClick, listUpcomingEvents } from "./google_auth";
 
 import "./signup-modal.css";
 
@@ -10,10 +10,10 @@ const validateSignup = (name, password, confirmPassword, phoneNumber, instagram)
   let errs = {}
   if (password !== confirmPassword) {
     errs.password = "Passwords must match"
-  }
+  };
   if (name.length < 2 || name.length >= 20) {
     errs.name = (name.length < 2 ? "Name must be at least 2 characters long" : "Name must be less than 20 characters")
-  }
+  };
   if (isNaN(Number(phoneNumber)) || phoneNumber.length !== 10) {
     errs.phoneNumber = "Phone number must be a 10 character number"
   }
@@ -28,12 +28,12 @@ const validateSignup = (name, password, confirmPassword, phoneNumber, instagram)
   return true
 }
 
-const CLIENT_ID = "762633836570-vpbro17viheb27tl43n2v7qq76aljd8b.apps.googleusercontent.com";
-const API_KEY = "AIzaSyC1UIZ4AhrqAxk_7mc3R2RUjlwoJvZaKbI";
+// const CLIENT_ID = "762633836570-vpbro17viheb27tl43n2v7qq76aljd8b.apps.googleusercontent.com";
+// const API_KEY = "AIzaSyC1UIZ4AhrqAxk_7mc3R2RUjlwoJvZaKbI";
 
-const DISCOVERY_DOC = 'https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest';
+// const DISCOVERY_DOC = 'https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest';
 
-const SCOPES = 'https://www.googleapis.com/auth/calendar';
+// const SCOPES = 'https://www.googleapis.com/auth/calendar';
 
 let tokenClient;
 let gapiInited = false;
@@ -49,8 +49,8 @@ const SignupFormModal = () => {
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
   const { setUser } = useContext(UserContext);
-  const apiCalendar = useContext(CalendarContext)
-  console.log("*** signup calendar ***", apiCalendar)
+  const {apiCalendar} = useContext(CalendarContext)
+  // console.log("*** signup calendar ***", apiCalendar.handleAuthClick)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -87,15 +87,19 @@ const SignupFormModal = () => {
       setErrors(data.errors);
     } else {
       await apiCalendar.handleAuthClick()
+
       sessionStorage.setItem("user", JSON.stringify(data))
+      apiCalendar.listUpcomingEvents(10).then(({ result }) => {
+        console.log(result.items)
+      });
       setUser(data);
       closeModal();
     }
   };
 
   useEffect(() => {
-    gapiLoaded();
-    gisLoaded();
+    // gapiLoaded();
+    // gisLoaded();
   })
 
   return (
