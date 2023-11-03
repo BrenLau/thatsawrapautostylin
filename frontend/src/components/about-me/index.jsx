@@ -12,13 +12,11 @@ const AboutMe = () => {
       const res = await fetch("/api/maps");
 
       const key = await res.json();
-      console.log("res from fetch: ", key)
 
       setApiKey(key)
     };
 
     getKey();
-    console.log("setApiKey called: ", apiKey)
 
   }, []);
 

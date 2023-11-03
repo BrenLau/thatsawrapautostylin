@@ -90,6 +90,7 @@ class Booking(db.Model):
     service_id = db.Column(db.Integer, db.ForeignKey(
         "services.id"), nullable=False)
     car = db.Column(db.String(50), nullable=False)
+    is_approved = db.Column(db.Boolean, nullable=False)
     user = db.relationship("User", back_populates="bookings")
 
     def to_dict(self):
@@ -100,7 +101,7 @@ class Booking(db.Model):
             "times": self.times,
             "service_id": self.service_id,
             "car": self.car,
-            "user": self.user
+            "is_approved": self.is_approved
         }
 
 
