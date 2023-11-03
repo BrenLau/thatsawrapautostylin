@@ -4,27 +4,32 @@ import "react-datetime/css/react-datetime.css"
 import DateTime from 'react-datetime'
 import { useContext } from 'react';
 import { UserContext } from '../../main';
-import { useNavigate } from 'react-router-dom';
+import SignupFormModal from '../signup-form-modal';
 
 const Booking = () => {
-    const [name, setName] = useState("")
-    const [email, setEmail] = useState("");
-    const [number, setNumber] = useState("");
-    const [instagram, setInstagram] = useState("");
+    const { user } = useContext(UserContext)
+    const [name, setName] = useState(user?.name)
+    const [email, setEmail] = useState(user?.email);
+    const [number, setNumber] = useState(user?.phone_number);
+    const [instagram, setInstagram] = useState(user?.instagram);
     const [car, setCar] = useState("")
     const [referral, setReferral] = useState("")
     const [times, setTimes] = useState("")
     const [servic, setService] = useState("")
     const [errors, setErrors] = useState({})
     const [services, setServices] = useState([])
-    const [user] = useContext(UserContext)
-    let navigate = useNavigate();
+
 
     console.log('user in the booking', user)
 
-    // if(!user){
-    //     navigate("/")
-    // }
+    if (!user) {
+        return (
+            <div>
+                <div>Sign Up</div>
+                <SignupFormModal />
+            </div>
+        )
+    }
     async function getServices() {
         const response = await fetch("http://127.0.0.1:5000/api/services")
 
@@ -179,7 +184,7 @@ const Booking = () => {
                         {serviceList.map((service) => {
                             return (
                                 <div key={service.id}>
-                                    <input type="radio" value={servic} onChange={(e) => setService(e.target.value)}/>
+                                    <input type="radio" value={servic} onChange={(e) => setService(e.target.value)} />
                                     <div>{service.title}</div>
                                     <div>{service.description}</div>
                                     <div>${service.price}</div>

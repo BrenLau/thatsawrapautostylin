@@ -6,6 +6,9 @@ def seed_data():
     admin = User(
         email='thatsawrapautostylin@gmail.com', name='Admin', password='Adminpassword', is_admin=True,
     )
+    john = User(
+        email='john@aa.io', name='John', password='password'
+    )
 
     sedanSideWindowTint = Service(
         title="Side Window Tint",
@@ -138,6 +141,7 @@ def seed_data():
 
     # Car Types
     db.session.add(admin)
+    db.session.add(john)
     db.session.add(AllTypes)
     db.session.add(Sedan)
     db.session.add(Suv)
