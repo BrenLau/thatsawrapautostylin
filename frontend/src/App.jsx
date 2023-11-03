@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext} from 'react';
 import { Route, Routes } from 'react-router';
 import Footer from './components/footer';
 import Nav from './components/nav';
@@ -10,13 +10,32 @@ import * as google_auth_functions from './components/signup-form-modal/google_au
 import ApiCalendar from 'react-google-calendar-api';
 
 import './App.css';
+import ManageBookings from './components/manage-bookings';
 
 function Calendar() {
-  return (
-    <>
-    <iframe src="https://calendar.google.com/calendar/embed?src=1d07a72c3bb566bc44352f0dae44059355094ad3449898aa8b5771ec220ae862%40group.calendar.google.com&ctz=America%2FNew_York" style={{"border": "0"}} width="800" height="600" frameBorder="0" scrolling="no"></iframe></>
+  const getEvents = async () => {
+    let res = await fetch("/api/calendar", {
+      method: "GET"
+    })
+    let events = await res.json()
+    console.log(events)
+    return events;
+  }
+  let eventsRes = getEvents();
+    return (
+    <div id='calendar'>
+      {eventsRes.map(event => {
+        <p>{event.id}</p>
+      })}
+    </div>
   )
 }
+
+  // return (
+  //   <>
+  //   <iframe src="https://calendar.google.com/calendar/embed?src=1d07a72c3bb566bc44352f0dae44059355094ad3449898aa8b5771ec220ae862%40group.calendar.google.com&ctz=America%2FNew_York" style={{"border": "0"}} width="800" height="600" frameBorder="0" scrolling="no"></iframe></>
+  // )
+
 
 const config = {
 	clientId: "762633836570-vpbro17viheb27tl43n2v7qq76aljd8b.apps.googleusercontent.com",
@@ -29,7 +48,7 @@ const config = {
 
 function App() {
   const [isLoaded, setIsLoaded] = useState(false);
-  // const [user, setUser] = useState(null)
+  // // const [user, setUser] = useState(null)
   const { user, setUser } = useContext(UserContext);
   const { apiCalendar, setApiCalendar } = useContext(CalendarContext)
 
@@ -44,7 +63,6 @@ function App() {
       setIsLoaded(true)
       if (response.ok) {
         const data = await response.json();
-        console.log(data)
         if (data.errors) {
           return
         }
@@ -96,12 +114,17 @@ function App() {
 
   return (
     <>
-      <Nav />
+      <Nav user={user} />
       {isLoaded && (
         <Routes>
           <Route exact path="/" element={<HomePage />}>
           </Route>
+          {/* <Route path="/login" element={<LoginFormModal />}>
+          </Route> */}
           <Route exact path='/booking' element={<Booking />}>
+          </Route>
+
+          <Route exact path='/manage_bookings' element={<ManageBookings />}>
           </Route>
           <Route exact path='/calendar' element={<Calendar />}>
           </Route>

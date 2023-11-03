@@ -7,6 +7,7 @@
   z-index: 100;
   border-bottom: 1px solid gray;
   font-family: Gabarito;
+  box-shadow: 0 2px 8px #F0CD5f;
 }
 
 #nav-title-div {
