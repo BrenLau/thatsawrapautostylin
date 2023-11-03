@@ -2,7 +2,9 @@ import './booking.css'
 import { useEffect, useState } from 'react';
 import "react-datetime/css/react-datetime.css"
 import DateTime from 'react-datetime'
-
+import { useContext } from 'react';
+import { UserContext } from '../../main';
+import { useNavigate } from 'react-router-dom';
 
 const Booking = () => {
     const [name, setName] = useState("")
@@ -12,8 +14,17 @@ const Booking = () => {
     const [car, setCar] = useState("")
     const [referral, setReferral] = useState("")
     const [times, setTimes] = useState("")
+    const [servic, setService] = useState("")
     const [errors, setErrors] = useState({})
     const [services, setServices] = useState([])
+    const [user] = useContext(UserContext)
+    let navigate = useNavigate();
+
+    console.log('user in the booking', user)
+
+    // if(!user){
+    //     navigate("/")
+    // }
     async function getServices() {
         const response = await fetch("http://127.0.0.1:5000/api/services")
 
@@ -28,14 +39,6 @@ const Booking = () => {
         getServices()
         // setServices()
     }, [car])
-
-    // if(car === 'sedan' || car === 'coupe'){
-    //      services.filter( service => service.car_type === 2)
-    // } else if(car === 'truck' || car === 'suv'){
-    //     services.filter(service => service.car_type === 3)
-    // } else {
-    //     services.filter(service => service.car_type === 1)
-    // }
 
     console.log('services', services)
 
@@ -84,7 +87,13 @@ const Booking = () => {
     const serviceList = services.filter(service => service.car_type !== Number(car))
     console.log('car', Number(car))
     console.log('service list', serviceList)
-    
+
+    // if(car === 2){
+    //      const serviceList = services.filter( service => service.car_type !== 3)
+    // } else if(car === 3){
+    //     services.filter(service => service.car_type == 2)
+    // }
+
     return (
         <form>
             <div className='top-form'>
@@ -170,7 +179,7 @@ const Booking = () => {
                         {serviceList.map((service) => {
                             return (
                                 <div key={service.id}>
-                                    <input type="radio" />
+                                    <input type="radio" value={servic} onChange={(e) => setService(e.target.value)}/>
                                     <div>{service.title}</div>
                                     <div>{service.description}</div>
                                     <div>${service.price}</div>

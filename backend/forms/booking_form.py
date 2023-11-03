@@ -24,6 +24,5 @@ class BookingForm(FlaskForm):
     car = StringField('car', validators=[DataRequired()])
     times = DateTimeField('times', validators=[DataRequired(), date_and_time_is_taken])
     service = StringField('service')
-    addon = StringField('add-ons')
     referral = StringField('referral code')
     submit = SubmitField('submit')
