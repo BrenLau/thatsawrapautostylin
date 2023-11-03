@@ -84,6 +84,7 @@ const Booking = () => {
     const serviceList = services.filter(service => service.car_type !== Number(car))
     console.log('car', Number(car))
     console.log('service list', serviceList)
+    
     return (
         <form>
             <div className='top-form'>
