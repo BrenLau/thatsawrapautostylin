@@ -1,21 +1,32 @@
 import './manage-bookings.css'
 import { useEffect, useState} from 'react';
+import { UserContext } from '../../main';
+import { useContext } from 'react';
+
 const ManageBookings = () => {
-  const [isAdmin, setIsAdmin] = useState(false);
+  const { user, setUser} = useContext(UserContext)
+  const isAdmin = user?.is_admin;
   const [bookings, setBookings] = useState([]);
 
-  useEffect(() => {
-    const user = JSON.parse(sessionStorage.getItem("user"));
-    if(user && user.is_admin) setIsAdmin(true);
-
-  }, [])
-
   useEffect(()=>{
-    const getAllBookings = async () => {
+
+    const getBookings = async () => {
       try{
-        const res = await fetch("/api/booking");
-        const allBookings = await res.json()
-        setBookings(allBookings.bookings);
+        if(!user) return;
+        let res;
+        console.log(user, "user??")
+        console.log(isAdmin, "admin??")
+        if(user && isAdmin){//fetch all as admin, fetch current user as current user
+          res = await fetch("/api/booking");
+          console.log("admin?")
+        } else if(user && !isAdmin) {
+          res = await fetch("/api/booking/current")
+          console.log("not admin?")
+        }
+        const userBookings = await res.json()
+        console.log(userBookings, 'USER BOOKINGS')
+        setBookings(userBookings.bookings);
+
       } catch (error) {
         console.error("Error fetching bookings: ", error)
 
@@ -23,8 +34,8 @@ const ManageBookings = () => {
     }
 
 
-    getAllBookings();
-  }, []);
+    getBookings();
+  }, [isAdmin,user]);
 
   // const acceptBooking = async (bookingId) =>{
   //   const res = await fetch(`/api/booking/${bookingId}`, {
@@ -38,6 +49,7 @@ const ManageBookings = () => {
 
   const populateTable = (isApproved) => {
     return bookings?.map((booking)=>{
+      // console.log(booking.is_approved, "approved??", booking.id)
       return(isApproved === booking.is_approved ? (
         <table id="bookings-table" key={booking.id}>
           <tbody>
@@ -66,10 +78,9 @@ const ManageBookings = () => {
   }
   return (
     <div id="manage-bookings">
-      { !isAdmin? (
-          <h1>unauthorized</h1>
-      ) : (<>
-          <h1>authorized</h1>
+      { !user? (
+          <h1>Not logged in</h1>
+      ) : (
           <div id="bookings-div" >
             <h2>Pending Approval</h2>
               {populateTable(false)}
@@ -77,7 +88,7 @@ const ManageBookings = () => {
               {populateTable(true)}
 
             </div>
-          </>
+
       )}
 
     </div>

@@ -46,7 +46,7 @@ const MenuButton = () => {
         "Content-Type": "application/json",
       },
     });
-  
+
     if (response.ok) {
       sessionStorage.removeItem("user")
       setUser(null)
@@ -67,6 +67,7 @@ const MenuButton = () => {
       ) : (
         <div id={dropdownClassname}>
           {transitioning || !showMenu ? null : <p className="menu-dropdown-button">{user.email}</p>}
+          {transitioning || !showMenu ? null: <Link to='/manage-bookings' className="menu-dropdown-button"> Manage Bookings</Link>}
           {transitioning || !showMenu ? null : <Link to='/booking'className="menu-dropdown-button">Book Now</Link>}
           {transitioning || !showMenu ? null : <p className="menu-dropdown-button" onClick={logout}>Log Out</p>}
         </div>

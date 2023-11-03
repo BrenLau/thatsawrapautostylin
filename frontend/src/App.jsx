@@ -69,7 +69,7 @@ function App() {
           <Route exact path='/booking' element={<Booking />}>
           </Route>
 
-          <Route exact path='/manage_bookings' element={<ManageBookings />}>
+          <Route exact path='/manage-bookings' element={<ManageBookings />}>
           </Route>
           <Route exact path='/calendar' element={<Calendar />}>
           </Route>
