@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from 'react'
+import React, { createContext, useEffect, useState, useContext } from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import App from './App.jsx'
@@ -20,6 +20,7 @@ import ApiCalendar from "react-google-calendar-api";
 
 // const apiCalendar = new ApiCalendar(config);
 export const CalendarContext = createContext();
+
 
 function Root() {
 	const [user, setUser] = useState(null);

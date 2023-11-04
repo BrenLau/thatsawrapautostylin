@@ -46,15 +46,29 @@ const config = {
   ],
 };
 
+async function initCalendar() {
+	const res = await fetch("api/calendar", {
+		method: "GET"
+	});
+	const config = await res.json();
+	console.log("initiating... ", config)
+
+	const cal = new ApiCalendar(config)
+  // cal.handleClientLoad()
+	// cal.handleAuthClick()
+	console.log("first cal instance",cal)
+
+	return cal;
+};
+
 function App() {
   const [isLoaded, setIsLoaded] = useState(false);
-  // // const [user, setUser] = useState(null)
   const { user, setUser } = useContext(UserContext);
   const { apiCalendar, setApiCalendar } = useContext(CalendarContext)
 
   useEffect(() => {
     async function authenticate() {
-      console.log("authenticating...", apiCalendar)
+      // console.log("authenticating...", apiCalendar)
       const response = await fetch("/api/auth", {
         headers: {
           "Content-Type": "application/json",
@@ -68,35 +82,12 @@ function App() {
         }
         setUser(data);
         sessionStorage.setItem("user", JSON.stringify(data))
-        if (data.is_admin && !apiCalendar) {
-          const calFetch = await fetch("/api/calendar", {
-            method: "GET"
-          });
-          authorize.then(listEvents).catch(console.error)
-          // const calData = await calFetch.json()
-          // .then((configuration) => {
-          //   console.log("configuration", configuration)
-          //   // setApiCalendar(new ApiCalendar(configuration))
-          //   let calendar = new ApiCalendar(configuration);
-          //   calendar.handleAuthClick();
-          //   console.log("calendar: ", calendar)
-            // setApiCalendar(calendar)
-          // })
-          // .then(() => {
-          //   console.log(apiCalendar)
-          //   apiCalendar.listUpcomingEvents(10).then(({ result }) => {
-          //   console.log("items: ", result.items)
-          // });
-        // })
-          // console.log("fetch data", calData)
-          console.log("config object", config)
-          // await setApiCalendar(new ApiCalendar(calData))
-          // setApiCalendar(new ApiCalendar(config))
-
-          console.log(apiCalendar)
-
-          // await apiCalendar.handleAuthClick()
-            
+        
+        if (data && data.is_admin) {
+          initCalendar()
+          .then((result) => {
+            setApiCalendar(result)	
+          })	
         }
       }
     }
@@ -104,13 +95,13 @@ function App() {
 
   }, [])
 
-  if (apiCalendar) {
-    console.log("apiCalendar is truthy: ", apiCalendar)
-    apiCalendar.handleAuthClick();
-    apiCalendar.listUpcomingEvents(10).then(({ result }) => {
-      console.log("items: ", result.items)
-    })
-  }
+  // if (apiCalendar) {
+  //   console.log("apiCalendar is truthy: ", apiCalendar)
+  //   apiCalendar.handleAuthClick();
+  //   apiCalendar.listUpcomingEvents(10).then(({ result }) => {
+  //     console.log("items: ", result.items)
+  //   })
+  // }
 
   return (
     <>
