@@ -20,7 +20,6 @@ const ManageBookings = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [bookings, setBookings] = useState({});
   const {apiCalendar, setApiCalendar} = useContext(CalendarContext)
-  console.log("calendar in manage bookines:",apiCalendar)
 
   useEffect(() => {
     const user = JSON.parse(sessionStorage.getItem("user"));
@@ -33,7 +32,6 @@ const ManageBookings = () => {
       try{
         const res = await fetch("/api/bookings");
         const allBookings = await res.json()
-        console.log(allBookings)
         setBookings(allBookings);
       } catch (error) {
         console.error("Error fetching bookings: ", error)
@@ -57,8 +55,6 @@ const ManageBookings = () => {
   //   }
 
   const handleApprove = async (booking) => {
-    console.log(booking, bookings.pending)
-    console.log(apiCalendar)
     const startTime = new Date(booking.times)
     const endTime = new Date()
     endTime.setTime(startTime.getTime())
@@ -75,11 +71,9 @@ const ManageBookings = () => {
         {"email": booking.user.email}
       ]
     }
-    console.log(resource)
     apiCalendar.handleAuthClick()
     .then(() => {
     const bookedEvent = Object.values(bookings.approved).filter(current_booking => {
-      console.log(current_booking)
       const start = new Date(current_booking.times)
       const end = new Date(current_booking.times + 3600000)
       // booking
@@ -87,14 +81,11 @@ const ManageBookings = () => {
         return true
       }
     })
-    console.log(bookedEvent)
-    console.log(resource)
     if (bookedEvent.length) return
   })
   .then(() => {
     const approvedBookings = approveBooking(booking.id)
     if (approvedBookings.unauthorized) {
-      console.log(unauthorized)
       return
     } 
     setBookings(approvedBookings)
@@ -102,7 +93,6 @@ const ManageBookings = () => {
   })
   .then(() => {
     const calEvent = apiCalendar.createEvent(resource)
-    .then((result) => console.log(result))
 
   })
 
@@ -112,7 +102,6 @@ const ManageBookings = () => {
 
 
   const populateTable = (filteredBookings, isApproved) => {
-    console.log(filteredBookings)
     return Object.values(filteredBookings)?.map((booking)=>
        (
         <table id="bookings-table" key={booking.id}>

@@ -50,24 +50,17 @@ const SignupFormModal = () => {
   const { closeModal } = useModal();
   const { setUser } = useContext(UserContext);
   const {apiCalendar} = useContext(CalendarContext)
-  // console.log("*** signup calendar ***", apiCalendar.handleAuthClick)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors({})
-    console.log("validating")
 
     const isValidated = validateSignup(name, password, confirmPassword, phoneNumber, instagram)
 
-    console.log("validated", isValidated)
-
     if (isValidated.errors) {
-      console.log('hello')
       setErrors(isValidated.errors)
       return
     }
-
-    console.log("fetching...")
     const res = await fetch("/api/auth/signup", {
       method: "POST",
 		  headers: {
@@ -82,16 +75,11 @@ const SignupFormModal = () => {
 		  })
 	  });
     let data = await res.json()
-    console.log(data)
     if (data.errors) {
       setErrors(data.errors);
     } else {
       await apiCalendar.handleAuthClick()
-
       sessionStorage.setItem("user", JSON.stringify(data))
-      apiCalendar.listUpcomingEvents(10).then(({ result }) => {
-        console.log(result.items)
-      });
       setUser(data);
       closeModal();
     }

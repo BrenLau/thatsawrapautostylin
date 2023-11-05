@@ -18,7 +18,6 @@ function Calendar() {
       method: "GET"
     })
     let events = await res.json()
-    console.log(events)
     return events;
   }
   let eventsRes = getEvents();
@@ -51,12 +50,9 @@ async function initCalendar() {
 		method: "GET"
 	});
 	const envVar = await res.json();
-	console.log("initiating... ", config)
+	("initiating... ", config)
 
-	const cal = new ApiCalendar(envVar.config, envVar.calendar)
-  // cal.handleClientLoad()
-	// cal.handleAuthClick()
-	console.log("first cal instance",cal)
+	const cal = new ApiCalendar(envVar.config, envVar.calendar) 
 
 	return cal;
 };
@@ -68,7 +64,6 @@ function App() {
 
   useEffect(() => {
     async function authenticate() {
-      // console.log("authenticating...", apiCalendar)
       const response = await fetch("/api/auth", {
         headers: {
           "Content-Type": "application/json",
@@ -94,14 +89,6 @@ function App() {
     authenticate()
 
   }, [])
-
-  // if (apiCalendar) {
-  //   console.log("apiCalendar is truthy: ", apiCalendar)
-  //   apiCalendar.handleAuthClick();
-  //   apiCalendar.listUpcomingEvents(10).then(({ result }) => {
-  //     console.log("items: ", result.items)
-  //   })
-  // }
 
   return (
     <>
