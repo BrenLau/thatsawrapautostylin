@@ -6,9 +6,11 @@ import LoginFormModal from './components/login-modal';
 import Booking from './components/booking';
 import HomePage from './components/home-page';
 import { UserContext } from './main';
+import ManageBookings from './components/manage-bookings';
+import CreateReviews from './components/reviews/createReview';
+import EditReview from './components/reviews/editReview';
 
 import './App.css';
-import ManageBookings from './components/manage-bookings';
 
 function Calendar() {
   const getEvents = async () => {

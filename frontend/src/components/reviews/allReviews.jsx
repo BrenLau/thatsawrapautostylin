@@ -3,7 +3,6 @@ import { useNavigate, Link } from "react-router-dom";
 import DeleteReview from "./deleteReview";
 import EditReview from "./editReview";
 
-
 export default function AllReviews(){
 
     const navigate = useNavigate();
