@@ -11,6 +11,7 @@ import CreateReviews from './components/reviews/createReview';
 import EditReview from './components/reviews/editReview';
 
 import './App.css';
+import SignupFormModal from './components/signup-form-modal';
 
 function Calendar() {
   const getEvents = async () => {
@@ -68,6 +69,8 @@ function App() {
           </Route>
           <Route path="/login" element={<LoginFormModal />}>
           </Route>
+          <Route path='/signup' element={<SignupFormModal />}>
+          </Route> 
           <Route exact path='/booking' element={<Booking />}>
           </Route>
 

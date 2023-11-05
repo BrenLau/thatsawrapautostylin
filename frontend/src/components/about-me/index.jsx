@@ -22,17 +22,32 @@ const AboutMe = () => {
 
   return (
     <div id="about-me">
-      <h3 id='about-me-title'>about me/contact</h3>
+      <h2 id='section-title'>About me/Contact</h2>
       <div id="map-contact-container">
-        {apiKey && <Maps keyProp={apiKey} />}
         <div id="contact-info">
-          <p>address: 123 Sesame Street</p>
-          <p>phone: <a href='tel:555-876-5309'>(555) 867-5309</a></p>
-          <p> email: <a href='mailto:thatsawrapautostylin@gmail.com'>thatsawrapautostylin@gmail.com</a></p>
-          <p>socials: FB,whatever</p>
+          <span>
+            <p className='contact-header'>Address: </p>
+            <p>123 Sesame Street,
+            Los Angeles, CA 90210
+            </p>
+          </span>
+          <span>
+            <p className='contact-header'>Phone: </p>
+            <p><a href='tel:555-876-5309'>(555) 867-5309</a></p>
+          </span>
+          <span>
+            <p className='contact-header'>Email:</p>
+            <p><a href='mailto:thatsawrapautostylin@gmail.com'>thatsawrapautostylin@gmail.com</a></p>
+          </span>
+          <span>
+            <p>
+            <i className="fa-brands fa-instagram"></i>
+          </p>
+          </span>
 
         </div>
-      <ContactForm />
+        {apiKey && <Maps keyProp={apiKey} />}
+      {/* <ContactForm /> */}
       </div>
     </div>
   )
