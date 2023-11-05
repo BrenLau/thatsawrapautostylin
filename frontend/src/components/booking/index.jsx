@@ -11,15 +11,18 @@ const Booking = () => {
     const [number, setNumber] = useState("");
     const [insta, setInsta] = useState("");
     const [car, setCar] = useState("");
+    const services = JSON.parse(sessionStorage.getItem("services"))
+    console.log(services)
 
     useEffect(() => {
         const user = sessionStorage.getItem("user");
+        console.log(user)
 
         if (user) {
-            const { name, email, number, instagram} = JSON.parse(user);
+            const { name, email, phone_number, instagram} = JSON.parse(user);
             setName(name)
             setEmail(email)
-            setNumber(number)
+            setNumber(phone_number)
             setInsta(instagram)
         }
     }, []);
@@ -51,8 +54,8 @@ const Booking = () => {
                                 className="email"
                                 type="email"
                                 placeholder="Email Address*"
-                                // value={email}
-                                // onChange={(e) => setEmail(e.target.value)}
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                                 required
                             />
                         </label>
@@ -64,8 +67,8 @@ const Booking = () => {
                                 className='phone'
                                 type='number'
                                 placeholder='Phone Number*'
-                                // value={number}
-                                // onChamge={(e) => setNumber(e.target.value)}
+                                value={number}
+                                onChamge={(e) => setNumber(e.target.value)}
                                 minLength={10}
                                 maxLength={10}
                                 required
@@ -79,8 +82,8 @@ const Booking = () => {
                                 className='insta'
                                 placeholder='Instagram'
                                 type='text'
-                                // value={instagram}
-                                // onChange={(e) => setInstagram(e.target.value)}
+                                value={insta || ""}
+                                onChange={(e) => setInsta(e.target.value)}
 
                             />
                         </label>

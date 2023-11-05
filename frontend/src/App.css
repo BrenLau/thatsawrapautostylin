@@ -25,6 +25,12 @@ a {
   color: #BA8F2F;
 }
 
+input {
+  background-color: #060606;
+  color: #BA8F2F;
+  font-size: 24px;
+}
+
 
 @media screen and (max-width: 600px) {
   body {

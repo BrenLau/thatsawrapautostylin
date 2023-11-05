@@ -91,6 +91,7 @@ const Services = () => {
             const res = await response.json()
             if (res.services) {
                 setServices(res.services)
+                sessionStorage.setItem("services", JSON.stringify(res.services))
             }
         }
     }

@@ -39,7 +39,8 @@ class User(db.Model, UserMixin):
             "id": self.id,
             "email": self.email,
             "phone_number": self.phone_number,
-            "is_admin": self.is_admin
+            "is_admin": self.is_admin,
+            "name": self.name
         }
 
 
