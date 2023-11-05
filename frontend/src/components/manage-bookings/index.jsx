@@ -64,13 +64,16 @@ const ManageBookings = () => {
     endTime.setTime(startTime.getTime())
     endTime.setTime(endTime.getTime() + 7200000)
     const resource = {
-      summary: "New service",
+      summary: `${booking.service.description} with ${booking.user.name}`,
       start: {
         "dateTime": startTime
       }, 
       end: {
         "dateTime": endTime
-      }
+      },
+      attendees: [
+        {"email": booking.user.email}
+      ]
     }
     console.log(resource)
     apiCalendar.handleAuthClick()
@@ -98,7 +101,7 @@ const ManageBookings = () => {
 
   })
   .then(() => {
-    const calEvent = apiCalendar.createEvent(resource, "1d07a72c3bb566bc44352f0dae44059355094ad3449898aa8b5771ec220ae862@group.calendar.google.com")
+    const calEvent = apiCalendar.createEvent(resource)
     .then((result) => console.log(result))
 
   })

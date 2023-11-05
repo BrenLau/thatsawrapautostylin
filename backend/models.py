@@ -40,6 +40,8 @@ class User(db.Model, UserMixin):
             "email": self.email,
             "phone_number": self.phone_number,
             "is_admin": self.is_admin,
+            "name": self.name,
+            "instagram": self.instagram
         }
 
 
@@ -66,6 +68,7 @@ class Service(db.Model):
     car_type = db.Column(db.Integer, db.ForeignKey(
         "car_types.id"), nullable=False)
     duration = db.Column(db.Integer, nullable=False)
+    bookings = db.relationship("Booking", back_populates="service")
 
     def to_dict(self):
         return {
@@ -92,16 +95,18 @@ class Booking(db.Model):
     car = db.Column(db.String(50), nullable=False)
     is_approved = db.Column(db.Boolean, nullable=False)
     user = db.relationship("User", back_populates="bookings")
+    service = db.relationship("Service", back_populates="bookings")
 
     def to_dict(self):
         return {
             "id": self.id,
-            "user_id": self.user_id,
             "total_price": self.total_price,
             "times": self.times,
             "service_id": self.service_id,
             "car": self.car,
-            "is_approved": self.is_approved
+            "is_approved": self.is_approved,
+            "user": self.user.to_dict(),
+            "service": self.service.to_dict()
         }
 
 

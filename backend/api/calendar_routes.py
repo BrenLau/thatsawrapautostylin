@@ -22,10 +22,14 @@ def get_calendar_keys():
         ***""")
   print(clientId, discoveryDocs, scopes, apiKey)
   return {
-    "clientId": os.environ.get("CLIENT_ID"),
-    "apiKey": os.environ.get("MAPS_API_KEY"),
-    "discoveryDocs": [os.environ.get("DISCOVERY_DOC")],
-    "scope": os.environ.get("SCOPES")
+    "config": {
+      "clientId": os.environ.get("CLIENT_ID"),
+      "apiKey": os.environ.get("MAPS_API_KEY"),
+      "discoveryDocs": [os.environ.get("DISCOVERY_DOC")],
+      "scope": os.environ.get("SCOPES")
+    },
+    "calendar": os.environ.get("CALENDAR_ID")
+    
   }
 
 

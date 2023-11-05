@@ -50,10 +50,10 @@ async function initCalendar() {
 	const res = await fetch("api/calendar", {
 		method: "GET"
 	});
-	const config = await res.json();
+	const envVar = await res.json();
 	console.log("initiating... ", config)
 
-	const cal = new ApiCalendar(config)
+	const cal = new ApiCalendar(envVar.config, envVar.calendar)
   // cal.handleClientLoad()
 	// cal.handleAuthClick()
 	console.log("first cal instance",cal)
