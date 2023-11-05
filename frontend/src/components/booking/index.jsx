@@ -69,14 +69,11 @@ const Booking = () => {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                name,
-                email,
-                number,
-                instagram,
+                user_id: user.id,
                 car,
                 times,
-                service_id: services.id,
-                referral
+                service_id: servic.id,
+                total_price: servic.price
             })
         })
 
@@ -184,7 +181,7 @@ const Booking = () => {
                         {serviceList.map((service) => {
                             return (
                                 <div key={service.id}>
-                                    <input type="radio" value={servic} onChange={(e) => setService(e.target.value)} />
+                                    <input type="radio" name='service' value={servic} onChange={(e) => setService(e.target.value)} />
                                     <div>{service.title}</div>
                                     <div>{service.description}</div>
                                     <div>${service.price}</div>
