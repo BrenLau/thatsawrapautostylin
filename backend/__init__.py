@@ -10,6 +10,7 @@ from backend.seeds import seed_commands
 from backend.api.auth_routes import auth_routes
 from .seeds import seed_commands
 from .api.auth_routes import auth_routes
+from .api.booking_routes import booking_routes
 from .api.service_routes import service_routes
 from .api.car_type_routes import car_type_routes
 from .api.calendar_routes import calendar_routes
@@ -30,6 +31,7 @@ def load_user(id):
 app.cli.add_command(seed_commands)
 
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
+app.register_blueprint(booking_routes, url_prefix='/api/booking')
 app.register_blueprint(maps_route, url_prefix='/api/maps')
 app.register_blueprint(service_routes, url_prefix='/api/services')
 app.register_blueprint(car_type_routes, url_prefix='/api/cartypes')

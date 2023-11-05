@@ -47,7 +47,7 @@ const MenuButton = () => {
         "Content-Type": "application/json",
       },
     });
-  
+
     if (response.ok) {
       sessionStorage.removeItem("user")
       // await apiCalendar.handleSignOutClick();

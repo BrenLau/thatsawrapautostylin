@@ -1,6 +1,6 @@
 import './manage-bookings.css'
 import { useEffect, useState, useContext} from 'react';
-import { CalendarContext } from '../../main';
+import { CalendarContext, UserContext } from '../../main';
 
 async function approveBooking(bookingId, isAdmin){
   const res = await fetch(`/api/bookings/${bookingId}/approve`, {
@@ -28,11 +28,24 @@ const ManageBookings = () => {
   }, [])
 
   useEffect(()=>{
-    const getAllBookings = async () => {
+
+    const getBookings = async () => {
       try{
-        const res = await fetch("/api/bookings");
-        const allBookings = await res.json()
-        setBookings(allBookings);
+        if(!user) return;
+        let res;
+        console.log(user, "user??")
+        console.log(isAdmin, "admin??")
+        if(user && isAdmin){//fetch all as admin, fetch current user as current user
+          res = await fetch("/api/booking");
+          console.log("admin?")
+        } else if(user && !isAdmin) {
+          res = await fetch("/api/booking/current")
+          console.log("not admin?")
+        }
+        const userBookings = await res.json()
+        console.log(userBookings, 'USER BOOKINGS')
+        setBookings(userBookings.bookings);
+
       } catch (error) {
         console.error("Error fetching bookings: ", error)
 
@@ -40,8 +53,8 @@ const ManageBookings = () => {
     }
 
 
-    getAllBookings();
-  }, []);
+    getBookings();
+  }, [isAdmin,user]);
 
   if (!Object.values(bookings).length) return
 
@@ -123,10 +136,9 @@ const ManageBookings = () => {
   }
   return (
     <div id="manage-bookings">
-      { !isAdmin? (
-          <h1>unauthorized</h1>
-      ) : (<>
-          <h1>authorized</h1>
+      { !user? (
+          <h1>Not logged in</h1>
+      ) : (
           <div id="bookings-div" >
             <h2>Pending Approval</h2>
               {populateTable(bookings.pending, false)}
@@ -134,7 +146,7 @@ const ManageBookings = () => {
               {populateTable(bookings.approved, true)}
 
             </div>
-          </>
+
       )}
 
     </div>
