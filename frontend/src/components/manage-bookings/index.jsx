@@ -45,15 +45,6 @@ const ManageBookings = () => {
 
   if (!Object.values(bookings).length) return
 
-  // const acceptBooking = async (bookingId) =>{
-  //   const res = await fetch(`/api/booking/${bookingId}`, {
-  //     method: "POST",
-
-
-  //   })
-
-  //   }
-
   const handleApprove = async (booking) => {
     const startTime = new Date(booking.times)
     const endTime = new Date()
@@ -95,11 +86,7 @@ const ManageBookings = () => {
     const calEvent = apiCalendar.createEvent(resource)
 
   })
-
   }
-
-  
-
 
   const populateTable = (filteredBookings, isApproved) => {
     return Object.values(filteredBookings)?.map((booking)=>
