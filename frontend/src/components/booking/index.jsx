@@ -11,8 +11,9 @@ const Booking = () => {
     const [number, setNumber] = useState("");
     const [insta, setInsta] = useState("");
     const [car, setCar] = useState("");
+    const [price, setPrice] = useState(0)
+    const [selected, setSelected] = useState(null)
     const services = JSON.parse(sessionStorage.getItem("services"))
-    console.log(services)
 
     useEffect(() => {
         const user = sessionStorage.getItem("user");
@@ -29,6 +30,13 @@ const Booking = () => {
 
     let inputProps = {
         placeholder:"Select a date and time*"
+    }
+
+    function selectService(e){
+        console.log(e.target)
+        setSelected(e.target.name)
+        setPrice(e.target.value.value)
+
     }
     return (
         <form>
@@ -116,8 +124,15 @@ const Booking = () => {
                     </div>
                 </div>
                 <div className='service-referral'>
-                    <div className='service-div'>
-                        <label>
+                    <div className='service-div' onChange={selectService}>
+                        {services.map(service => (
+                            <label className='service-label'>
+                                {console.log(service)}
+                                <span><input type='checkbox' value={service.price} name={service.title} checked={selected === service.title}/>{service.title}</span>
+                                <label>${service.price}</label>
+                            </label>
+                        ))}
+                        {/* <label>
                             <input
                                 type='checkbox'
                             />
@@ -130,9 +145,9 @@ const Booking = () => {
                                 type='checkbox'
                             />
                             <label>Service 3</label>
-                        </label>
+                        </label> */}
                     </div>
-                    <div className='addon-div'>
+                    {/* <div className='addon-div'>
                         <label>
                             <input
                                 type='checkbox'
@@ -147,7 +162,7 @@ const Booking = () => {
                             />
                             <label>Add-on 3</label>
                         </label>
-                    </div>
+                    </div> */}
                     <div className='referral-div'>
                         <label>
                             {/* Referral Code: */}
@@ -161,7 +176,7 @@ const Booking = () => {
             </div>
             <div className='price-submit'>
                 <div className='price-div'>
-                    Total Price: $$
+                    Total Price: ${price}
                 </div>
 
                 <button className='booking-submit'>Submit</button>

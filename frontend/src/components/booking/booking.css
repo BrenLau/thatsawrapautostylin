@@ -294,4 +294,9 @@ button .booking-submit {
     .referral-div input{
         width: 15rem;
     }
+
+    .service-label{
+        display: flex;
+        justify-content: space-between;
+    }
 }
