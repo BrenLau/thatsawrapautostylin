@@ -31,7 +31,6 @@ def load_user(id):
 app.cli.add_command(seed_commands)
 
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
-app.register_blueprint(booking_routes, url_prefix='/api/booking')
 app.register_blueprint(maps_route, url_prefix='/api/maps')
 app.register_blueprint(service_routes, url_prefix='/api/services')
 app.register_blueprint(car_type_routes, url_prefix='/api/cartypes')

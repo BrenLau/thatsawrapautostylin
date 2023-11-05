@@ -17,15 +17,11 @@ async function approveBooking(bookingId, isAdmin){
 }
 
 const ManageBookings = () => {
+  const { user, setUser } = useContext(UserContext);
   const [isAdmin, setIsAdmin] = useState(false);
   const [bookings, setBookings] = useState({});
+
   const {apiCalendar, setApiCalendar} = useContext(CalendarContext)
-
-  useEffect(() => {
-    const user = JSON.parse(sessionStorage.getItem("user"));
-    if(user && user.is_admin) setIsAdmin(true);
-
-  }, [])
 
   useEffect(()=>{
 
@@ -54,7 +50,7 @@ const ManageBookings = () => {
 
 
     getBookings();
-  }, [isAdmin,user]);
+  }, [isAdmin, user]);
 
   if (!Object.values(bookings).length) return
 
