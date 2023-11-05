@@ -90,7 +90,7 @@ const Booking = () => {
             })
         })
         let data = await res.json()
-        console.log(data)
+        console.log('data', data)
         if (data.errors) {
             setErrors(data.errors);
         } else {
@@ -106,6 +106,8 @@ const Booking = () => {
         // }
     }
     console.log('times', times)
+
+    console.log('serice price', servic)
 
     let inputProps = {
         placeholder: "Select a date and time*"
@@ -191,30 +193,16 @@ const Booking = () => {
                     <div className='date-div'>
                         <div className='date-select'>
                             <DateTime
+                                required
                                 inputProps={inputProps}
-                                minLength=''
-                                minDetail='hour'
-                                maxDetail='hour'
+                                // minLength=''
+                                stepMinute={60}
+                                // minDetail='hour'
+                                // maxDetail='hour'
                                 value={times}
                                 onChange={(e) => setTimes(e.target.value)}
                             />
                             {errors.times && <p className="errors">{errors.times}</p>}
-                        </div>
-                    </div>
-                </div>
-                <div className='service-referral'>
-                    <div className='service-div'>
-                        {serviceList.map((service) => {
-                            return (
-                                <div key={service.id}>
-                                    <input type="radio" name='service' value={servic} onChange={(e) => setService(e.target.value)} />
-                                    <div>{service.title}</div>
-                                    <div>{service.description}</div>
-                                    <div>${service.price}</div>
-                                </div>
-                            )
-                        })}
-                    </div>
                     <div className='referral-div'>
                         <label>
                             {/* Referral Code: */}
@@ -226,11 +214,27 @@ const Booking = () => {
                             />
                         </label>
                     </div>
+                        </div>
+                    </div>
+                </div>
+                <div className='service-referral'>
+                    <div className='service-div'>
+                        {serviceList.map((service) => {
+                            return (
+                                <div key={service.id}>
+                                    <input type="radio" name='service' required value={servic} onChange={(e) => setService(e.target.value)} />
+                                    <div>{service.title}</div>
+                                    <div>{service.description}</div>
+                                    <div>${service.price}</div>
+                                </div>
+                            )
+                        })}
+                    </div>
                 </div>
             </div>
             <div className='price-submit'>
                 <div className='price-div'>
-                    Total Price: ${services.price}
+                    Total Price: ${servic.price}
                 </div>
 
                 <button className='booking-submit' onSubmit={handleSubmit} >Submit</button>

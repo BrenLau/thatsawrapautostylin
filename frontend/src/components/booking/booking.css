@@ -14,6 +14,9 @@ form {
     font-family: Gabarito;
     position: relative;
 }
+.referral-div{
+    margin-top: 1rem;
+}
 
 form label {
     display: flex;
@@ -24,7 +27,10 @@ button .booking-submit {
     display: flex;
     justify-content: center;
 }
-
+.service-div{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
 .booking-submit {
     appearance: none;
     background-color: transparent;
