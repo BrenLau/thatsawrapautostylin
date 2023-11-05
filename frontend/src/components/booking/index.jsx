@@ -200,7 +200,10 @@ const Booking = () => {
                                 // minDetail='hour'
                                 // maxDetail='hour'
                                 value={times}
-                                onChange={(e) => setTimes(e.target.value)}
+                                onChange={(e) => {
+                                    console.log(e._d)
+                                    setTimes(e._d)
+                                }}
                             />
                             {errors.times && <p className="errors">{errors.times}</p>}
                     <div className='referral-div'>
@@ -222,7 +225,7 @@ const Booking = () => {
                         {serviceList.map((service) => {
                             return (
                                 <div key={service.id}>
-                                    <input type="radio" name='service' required value={servic} onChange={(e) => setService(e.target.value)} />
+                                    <input type="radio" name='service' required value={service} onChange={(e) => setService(e.target.value)} />
                                     <div>{service.title}</div>
                                     <div>{service.description}</div>
                                     <div>${service.price}</div>
