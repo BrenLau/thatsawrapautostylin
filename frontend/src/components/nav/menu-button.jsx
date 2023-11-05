@@ -67,13 +67,8 @@ const MenuButton = () => {
       ) : (
         <div id={dropdownClassname}>
           {transitioning || !showMenu ? null : <p className="menu-dropdown-button">{user.email}</p>}
-<<<<<<< HEAD
-          {transitioning || !showMenu ? null: <Link to='/manage-bookings' className="menu-dropdown-button"> Manage Bookings</Link>}
-          {transitioning || !showMenu ? null : <Link to='/booking'className="menu-dropdown-button">Book Now</Link>}
-=======
           {/* {transitioning || !showMenu ? null : <Link to='/booking'className="menu-dropdown-button">Book Now</Link>} */}
           {transitioning || !showMenu ? null : <Link to="manage-bookings" className="menu-dropdown-button">Manage Bookings</Link>}
->>>>>>> 1a57bd7dbf4ea5a9d15b044692ec6022029f5cac
           {transitioning || !showMenu ? null : <p className="menu-dropdown-button" onClick={logout}>Log Out</p>}
         </div>
       )}
