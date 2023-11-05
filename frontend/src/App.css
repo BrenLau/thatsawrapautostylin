@@ -1,7 +1,10 @@
 #root {
   margin: 0;
-  padding-bottom: 60px;
+  /* padding-bottom: 60px; */
   overflow: hidden;
+  font-family: Gabarito;
+  background-color: #060606;
+  color: #BA8F2F;
 }
 
 body {
@@ -12,6 +15,21 @@ body {
   color: #c00000;
 }
 
+#section-title {
+  color: #BA8F2F;
+  font-size: 48px;
+  margin-left: 5rem;
+}
+
+a {
+  color: #BA8F2F;
+}
+
+input {
+  background-color: #060606;
+  color: #BA8F2F;
+  font-size: 24px;
+}
 
 
 @media screen and (max-width: 600px) {

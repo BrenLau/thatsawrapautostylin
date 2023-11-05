@@ -12,7 +12,7 @@ def seed_data():
     )
 
     sedanSideWindowTint = Service(
-        title="Side Window Tint",
+        title="Sedan Side Window Tint",
         description="Side window tinting",
         price=50.00,
         image_url='na',
@@ -21,7 +21,7 @@ def seed_data():
     )
 
     SUVSideWindowTint = Service(
-        title="Side Window Tint",
+        title="SUV Side Window Tint",
         description="Side window tinting",
         price=60.00,
         image_url='na',
@@ -30,7 +30,7 @@ def seed_data():
     )
 
     SUVRearWindowTint = Service(
-        title="Rear Window Tint",
+        title="SUV Rear Window Tint",
         description="Rear window tinting",
         price=55.00,
         image_url='na',
@@ -39,7 +39,7 @@ def seed_data():
     )
 
     sedanRearWindowTint = Service(
-        title="Rear Window Tint",
+        title="Sedan Rear Window Tint",
         description="Rear window tinting",
         price=55.00,
         image_url='na',

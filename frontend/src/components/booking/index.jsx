@@ -4,58 +4,68 @@ import "react-datetime/css/react-datetime.css"
 import DateTime from 'react-datetime'
 import { useContext } from 'react';
 import { UserContext } from '../../main';
-import SignupFormModal from '../signup-form-modal';
+import { useNavigate } from 'react-router-dom';
+// import SignupFormModal from '../signup-form-modal';
 
 const Booking = () => {
     const { user } = useContext(UserContext)
-    const [name, setName] = useState(user?.name)
-    const [email, setEmail] = useState(user?.email);
-    const [number, setNumber] = useState(user?.phone_number);
-    const [instagram, setInstagram] = useState(user?.instagram);
-    const [car, setCar] = useState("")
+    // const [name, setName] = useState(user?.name)
+    // const [email, setEmail] = useState(user?.email);
+    // const [phone_number, setNumber] = useState(user?.phone_number);
+    // const [instagram, setInstagram] = useState(user?.instagram);
+    // const [car, setCar] = useState("")
     const [referral, setReferral] = useState("")
     const [times, setTimes] = useState("")
     const [servic, setService] = useState("")
     const [errors, setErrors] = useState({})
-    const [services, setServices] = useState([])
+    const navigate = useNavigate()
+    // const [services, setServices] = useState([])
 
 
-    console.log('user in the booking', user)
+    // console.log('user in the booking', user)
 
-    if (!user) {
-        return (
-            <div>
-                <div>Sign Up</div>
-                <SignupFormModal />
-            </div>
-        )
-    }
-    async function getServices() {
-        const response = await fetch("http://127.0.0.1:5000/api/services")
+    // if (!user) {
+    //     return (
+    //         <div>
+    //             <div>Sign Up</div>
+    //             <SignupFormModal />
+    //         </div>
+    //     )
+    // }
+    // async function getServices() {
+    //     const response = await fetch("http://127.0.0.1:5000/api/services")
 
-        if (response.ok) {
-            const res = await response.json()
-            if (res.services) {
-                setServices(res.services)
-            }
-        }
-    }
-    useEffect(() => {
-        getServices()
-        // setServices()
-    }, [car])
+    //     if (response.ok) {
+    //         const res = await response.json()
+    //         if (res.services) {
+    //             setServices(res.services)
+    //         }
+    //     }
+    // }
+    // useEffect(() => {
+    //     getServices()
+    //     // setServices()
+    // }, [car])
 
-    console.log('services', services)
+    // console.log('services', services)
+    const [name, setName] = useState("")
+    const [email, setEmail] = useState("");
+    const [number, setNumber] = useState("");
+    const [insta, setInsta] = useState("");
+    const [car, setCar] = useState("");
+    const services = JSON.parse(sessionStorage.getItem("services"))
+    console.log(services)
 
     useEffect(() => {
         const user = sessionStorage.getItem("user");
+        console.log(user)
 
         if (user) {
-            const { name, email, number, instagram } = JSON.parse(user);
+            const { name, email, phone_number, instagram} = JSON.parse(user);
             setName(name)
             setEmail(email)
-            setNumber(number)
-            setInstagram(instagram)
+            setNumber(phone_number)
+            setInsta(instagram)
         }
     }, []);
 
@@ -79,6 +89,17 @@ const Booking = () => {
                 total_price: servic.price
             })
         })
+        let data = await res.json()
+        console.log(data)
+        if (data.errors) {
+            setErrors(data.errors);
+        } else {
+            sessionStorage.setItem("booking", JSON.stringify(data))
+            navigate.push('/')
+            return booked()
+            // setUser(data);
+
+        }
 
         // if (times < new Date().toJSON().slice(0, 10)) {
         //     errors.times = "Date must be in future"
@@ -152,8 +173,9 @@ const Booking = () => {
                                 className='insta'
                                 placeholder='Instagram'
                                 type='text'
-                                value={instagram}
-                                onChange={(e) => setInstagram(e.target.value)}
+                                value={insta || ""}
+                                onChange={(e) => setInsta(e.target.value)}
+
                             />
                         </label>
                     </div>
@@ -211,7 +233,7 @@ const Booking = () => {
                     Total Price: ${services.price}
                 </div>
 
-                <button className='booking-submit' onSubmit={[handleSubmit, booked]} >Submit</button>
+                <button className='booking-submit' onSubmit={handleSubmit} >Submit</button>
             </div>
         </form>
     )

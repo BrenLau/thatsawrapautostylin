@@ -40,8 +40,13 @@ class User(db.Model, UserMixin):
             "name": self.name,
             "email": self.email,
             "phone_number": self.phone_number,
+<<<<<<< HEAD
             "instagram": self.instagram,
             "is_admin": self.is_admin
+=======
+            "is_admin": self.is_admin,
+            "name": self.name
+>>>>>>> dev
         }
 
 
