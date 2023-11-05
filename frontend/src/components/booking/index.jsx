@@ -198,7 +198,8 @@ const Booking = () => {
                                 // minLength=''
                                 stepMinute={60}
                                 // minDetail='hour'
-                                // maxDetail='hour'
+                                maxDetail='hour'
+                                minDate={new Date()}
                                 value={times}
                                 onChange={(e) => setTimes(e.target.value)}
                             />
