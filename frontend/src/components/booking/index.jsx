@@ -49,7 +49,6 @@ const Booking = () => {
 
     useEffect(() => {
         const user = sessionStorage.getItem("user");
-        console.log(user)
 
         if (user) {
             const { name, email, number, instagram } = JSON.parse(user);

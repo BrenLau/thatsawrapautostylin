@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext} from 'react';
 import { Route, Routes } from 'react-router';
 import Footer from './components/footer';
 import Nav from './components/nav';
@@ -6,6 +6,9 @@ import LoginFormModal from './components/login-modal';
 import Booking from './components/booking';
 import HomePage from './components/home-page';
 import { UserContext } from './main';
+import ManageBookings from './components/manage-bookings';
+import CreateReviews from './components/reviews/createReview';
+import EditReview from './components/reviews/editReview';
 
 import './App.css';
 
@@ -19,7 +22,7 @@ function Calendar() {
     return events;
   }
   let eventsRes = getEvents();
-    return (
+  return (
     <div id='calendar'>
       {eventsRes.map(event => {
         <p>{event.id}</p>
@@ -28,9 +31,10 @@ function Calendar() {
   )
 }
 
+
 function App() {
   const [isLoaded, setIsLoaded] = useState(false);
-  // const [user, setUser] = useState(null)
+  // // const [user, setUser] = useState(null)
   const { user, setUser } = useContext(UserContext);
 
   useEffect(() => {
@@ -43,7 +47,6 @@ function App() {
       setIsLoaded(true)
       if (response.ok) {
         const data = await response.json();
-        console.log(data)
         if (data.errors) {
           return
         }
@@ -55,18 +58,27 @@ function App() {
 
   }, [])
 
+
   return (
     <>
-      <Nav />
+      <Nav user={user} />
       {isLoaded && (
         <Routes>
           <Route exact path="/" element={<HomePage />}>
           </Route>
-          {/* <Route path="/login" element={<LoginFormModal />}>
-          </Route> */}
+          <Route path="/login" element={<LoginFormModal />}>
+          </Route>
           <Route exact path='/booking' element={<Booking />}>
           </Route>
+
+          <Route exact path='/manage_bookings' element={<ManageBookings />}>
+          </Route>
           <Route exact path='/calendar' element={<Calendar />}>
+          </Route>
+          <Route exact path='/add_review' element={<CreateReviews />}>
+          </Route>
+
+          <Route exact path='/editReview' element={<EditReview />}>
           </Route>
         </Routes>)}
       <Footer />
