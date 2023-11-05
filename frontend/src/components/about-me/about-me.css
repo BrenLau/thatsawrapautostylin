@@ -65,8 +65,12 @@
   }
 
   .contact-header {
-    font-size: 24px;
+    font-size: 36px;
     margin-bottom: 0;
+  }
+
+  .contact-body {
+    font-size: 24px;
   }
 
   .fa-instagram {

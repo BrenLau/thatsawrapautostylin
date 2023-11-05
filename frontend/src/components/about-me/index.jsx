@@ -27,17 +27,15 @@ const AboutMe = () => {
         <div id="contact-info">
           <span>
             <p className='contact-header'>Address: </p>
-            <p>123 Sesame Street,
-            Los Angeles, CA 90210
-            </p>
+            <p className='contact-body'>123 Sesame Street, Los Angeles, CA 90210</p>
           </span>
           <span>
             <p className='contact-header'>Phone: </p>
-            <p><a href='tel:555-876-5309'>(555) 867-5309</a></p>
+            <p className='contact-body'><a href='tel:555-876-5309'>(555) 867-5309</a></p>
           </span>
           <span>
             <p className='contact-header'>Email:</p>
-            <p><a href='mailto:thatsawrapautostylin@gmail.com'>thatsawrapautostylin@gmail.com</a></p>
+            <p className='contact-body'><a href='mailto:thatsawrapautostylin@gmail.com'>thatsawrapautostylin@gmail.com</a></p>
           </span>
           <span>
             <p>
