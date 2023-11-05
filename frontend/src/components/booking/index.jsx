@@ -33,7 +33,6 @@ const Booking = () => {
     }
 
     function selectService(e){
-        console.log(e.target)
         setSelected(e.target.name)
         setPrice(e.target.value.value)
 
