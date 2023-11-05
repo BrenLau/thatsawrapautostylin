@@ -18,6 +18,7 @@ wtforms = "*"
 flask-googlemaps = "*"
 werkzeug = "==2.3.0"
 email-validator = "*"
+google = "*"
 
 [dev-packages]
 
