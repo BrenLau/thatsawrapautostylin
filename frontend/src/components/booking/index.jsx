@@ -34,8 +34,7 @@ const Booking = () => {
 
     function selectService(e){
         setSelected(e.target.name)
-        setPrice(e.target.value.value)
-
+        setPrice(e.target.value)
     }
     return (
         <form>

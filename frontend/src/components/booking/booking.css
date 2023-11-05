@@ -28,10 +28,10 @@ button .booking-submit {
 .booking-submit {
     appearance: none;
     background-color: transparent;
-    border: 2px solid #1A1A1A;
+    border: 2px solid #BA8F2F;
     border-radius: 15px;
     box-sizing: border-box;
-    color: #3B3B3B;
+    color: #BA8F2F;
     cursor: pointer;
     display: inline-block;
     font-family: Gabarito;
@@ -73,7 +73,7 @@ button .booking-submit {
     width: 150px;
     border-radius: 20px;
     height: 40px;
-    border-color: black;
+    /* border-color: black; */
     cursor: pointer;
     margin-bottom: 6rem;
 }
