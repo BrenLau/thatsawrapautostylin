@@ -59,6 +59,10 @@ const Booking = () => {
         }
     }, []);
 
+    const booked = () => {
+        window.alert('Your service has been booked')
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault()
         setErrors({})
@@ -80,6 +84,7 @@ const Booking = () => {
         //     errors.times = "Date must be in future"
         // }
     }
+    console.log('times', times)
 
     let inputProps = {
         placeholder: "Select a date and time*"
@@ -206,7 +211,7 @@ const Booking = () => {
                     Total Price: ${services.price}
                 </div>
 
-                <button className='booking-submit' onSubmit={handleSubmit}>Submit</button>
+                <button className='booking-submit' onSubmit={[handleSubmit, booked]} >Submit</button>
             </div>
         </form>
     )
