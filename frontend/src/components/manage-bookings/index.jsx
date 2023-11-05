@@ -1,8 +1,25 @@
 import './manage-bookings.css'
-import { useEffect, useState} from 'react';
+import { useEffect, useState, useContext} from 'react';
+import { CalendarContext } from '../../main';
+
+async function approveBooking(bookingId, isAdmin){
+  const res = await fetch(`/api/bookings/${bookingId}/approve`, {
+    method: "PUT",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: bookingId
+  })
+
+  const data = await res.json();
+
+  return data
+}
+
 const ManageBookings = () => {
   const [isAdmin, setIsAdmin] = useState(false);
-  const [bookings, setBookings] = useState([]);
+  const [bookings, setBookings] = useState({});
+  const {apiCalendar, setApiCalendar} = useContext(CalendarContext)
 
   useEffect(() => {
     const user = JSON.parse(sessionStorage.getItem("user"));
@@ -13,9 +30,9 @@ const ManageBookings = () => {
   useEffect(()=>{
     const getAllBookings = async () => {
       try{
-        const res = await fetch("/api/booking");
+        const res = await fetch("/api/bookings");
         const allBookings = await res.json()
-        setBookings(allBookings.bookings);
+        setBookings(allBookings);
       } catch (error) {
         console.error("Error fetching bookings: ", error)
 
@@ -26,6 +43,8 @@ const ManageBookings = () => {
     getAllBookings();
   }, []);
 
+  if (!Object.values(bookings).length) return
+
   // const acceptBooking = async (bookingId) =>{
   //   const res = await fetch(`/api/booking/${bookingId}`, {
   //     method: "POST",
@@ -35,10 +54,56 @@ const ManageBookings = () => {
 
   //   }
 
+  const handleApprove = async (booking) => {
+    const startTime = new Date(booking.times)
+    const endTime = new Date()
+    endTime.setTime(startTime.getTime())
+    endTime.setTime(endTime.getTime() + 7200000)
+    const resource = {
+      summary: `${booking.service.description} with ${booking.user.name}`,
+      start: {
+        "dateTime": startTime
+      }, 
+      end: {
+        "dateTime": endTime
+      },
+      attendees: [
+        {"email": booking.user.email}
+      ]
+    }
+    apiCalendar.handleAuthClick()
+    .then(() => {
+    const bookedEvent = Object.values(bookings.approved).filter(current_booking => {
+      const start = new Date(current_booking.times)
+      const end = new Date(current_booking.times + 3600000)
+      // booking
+      if (start > resource.end.dateTime || end < resource.start.dateTime) {
+        return true
+      }
+    })
+    if (bookedEvent.length) return
+  })
+  .then(() => {
+    const approvedBookings = approveBooking(booking.id)
+    if (approvedBookings.unauthorized) {
+      return
+    } 
+    setBookings(approvedBookings)
 
-  const populateTable = (isApproved) => {
-    return bookings?.map((booking)=>{
-      return(isApproved === booking.is_approved ? (
+  })
+  .then(() => {
+    const calEvent = apiCalendar.createEvent(resource)
+
+  })
+
+  }
+
+  
+
+
+  const populateTable = (filteredBookings, isApproved) => {
+    return Object.values(filteredBookings)?.map((booking)=>
+       (
         <table id="bookings-table" key={booking.id}>
           <tbody>
 
@@ -56,13 +121,18 @@ const ManageBookings = () => {
             <td>{booking.times}</td>
             <td>{booking.total_price}</td>
             <td>{booking.user_id}</td>
+            {!isApproved ? (
+              <td onClick={() => handleApprove(booking)}>
+                approve
+              </td>
+            ) : null}
           </tr>
           </tbody>
 
         </table>
-        ) : <></>)
+        )
 
-      })
+      )
   }
   return (
     <div id="manage-bookings">
@@ -72,9 +142,9 @@ const ManageBookings = () => {
           <h1>authorized</h1>
           <div id="bookings-div" >
             <h2>Pending Approval</h2>
-              {populateTable(false)}
+              {populateTable(bookings.pending, false)}
             <h2>Approved Bookings</h2>
-              {populateTable(true)}
+              {populateTable(bookings.approved, true)}
 
             </div>
           </>
