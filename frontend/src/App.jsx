@@ -6,9 +6,12 @@ import LoginFormModal from './components/login-modal';
 import Booking from './components/booking';
 import HomePage from './components/home-page';
 import { UserContext } from './main';
+import ManageBookings from './components/manage-bookings';
+import CreateReviews from './components/reviews/createReview';
+import EditReview from './components/reviews/editReview';
 
 import './App.css';
-import ManageBookings from './components/manage-bookings';
+import SignupFormModal from './components/signup-form-modal';
 
 function Calendar() {
   const getEvents = async () => {
@@ -20,7 +23,7 @@ function Calendar() {
     return events;
   }
   let eventsRes = getEvents();
-    return (
+  return (
     <div id='calendar'>
       {eventsRes.map(event => {
         <p>{event.id}</p>
@@ -66,12 +69,19 @@ function App() {
           </Route>
           <Route path="/login" element={<LoginFormModal />}>
           </Route>
+          <Route path='/signup' element={<SignupFormModal />}>
+          </Route> 
           <Route exact path='/booking' element={<Booking />}>
           </Route>
 
           <Route exact path='/manage-bookings' element={<ManageBookings />}>
           </Route>
           <Route exact path='/calendar' element={<Calendar />}>
+          </Route>
+          <Route exact path='/add_review' element={<CreateReviews />}>
+          </Route>
+
+          <Route exact path='/editReview' element={<EditReview />}>
           </Route>
         </Routes>)}
       <Footer />

@@ -11,21 +11,31 @@ const Booking = () => {
     const [number, setNumber] = useState("");
     const [insta, setInsta] = useState("");
     const [car, setCar] = useState("");
+    const [price, setPrice] = useState(0)
+    const [selected, setSelected] = useState(null)
+    const services = JSON.parse(sessionStorage.getItem("services"))
 
     useEffect(() => {
         const user = sessionStorage.getItem("user");
+        console.log(user)
 
         if (user) {
-            const { name, email, number, instagram} = JSON.parse(user);
+            const { name, email, phone_number, instagram} = JSON.parse(user);
             setName(name)
             setEmail(email)
-            setNumber(number)
+            setNumber(phone_number)
             setInsta(instagram)
         }
     }, []);
 
     let inputProps = {
         placeholder:"Select a date and time*"
+    }
+
+    function selectService(e){
+        setSelected(e.target.name)
+        setPrice(e.target.value.value)
+
     }
     return (
         <form>
@@ -51,8 +61,8 @@ const Booking = () => {
                                 className="email"
                                 type="email"
                                 placeholder="Email Address*"
-                                // value={email}
-                                // onChange={(e) => setEmail(e.target.value)}
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                                 required
                             />
                         </label>
@@ -64,8 +74,8 @@ const Booking = () => {
                                 className='phone'
                                 type='number'
                                 placeholder='Phone Number*'
-                                // value={number}
-                                // onChamge={(e) => setNumber(e.target.value)}
+                                value={number}
+                                onChamge={(e) => setNumber(e.target.value)}
                                 minLength={10}
                                 maxLength={10}
                                 required
@@ -79,8 +89,8 @@ const Booking = () => {
                                 className='insta'
                                 placeholder='Instagram'
                                 type='text'
-                                // value={instagram}
-                                // onChange={(e) => setInstagram(e.target.value)}
+                                value={insta || ""}
+                                onChange={(e) => setInsta(e.target.value)}
 
                             />
                         </label>
@@ -113,8 +123,15 @@ const Booking = () => {
                     </div>
                 </div>
                 <div className='service-referral'>
-                    <div className='service-div'>
-                        <label>
+                    <div className='service-div' onChange={selectService}>
+                        {services.map(service => (
+                            <label className='service-label'>
+                                {console.log(service)}
+                                <span><input type='checkbox' value={service.price} name={service.title} checked={selected === service.title}/>{service.title}</span>
+                                <label>${service.price}</label>
+                            </label>
+                        ))}
+                        {/* <label>
                             <input
                                 type='checkbox'
                             />
@@ -127,9 +144,9 @@ const Booking = () => {
                                 type='checkbox'
                             />
                             <label>Service 3</label>
-                        </label>
+                        </label> */}
                     </div>
-                    <div className='addon-div'>
+                    {/* <div className='addon-div'>
                         <label>
                             <input
                                 type='checkbox'
@@ -144,7 +161,7 @@ const Booking = () => {
                             />
                             <label>Add-on 3</label>
                         </label>
-                    </div>
+                    </div> */}
                     <div className='referral-div'>
                         <label>
                             {/* Referral Code: */}
@@ -158,7 +175,7 @@ const Booking = () => {
             </div>
             <div className='price-submit'>
                 <div className='price-div'>
-                    Total Price: $$
+                    Total Price: ${price}
                 </div>
 
                 <button className='booking-submit'>Submit</button>
