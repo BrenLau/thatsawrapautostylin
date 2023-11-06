@@ -19,7 +19,6 @@ function Calendar() {
       method: "GET"
     })
     let events = await res.json()
-    console.log(events)
     return events;
   }
   let eventsRes = getEvents();

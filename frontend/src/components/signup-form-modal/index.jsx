@@ -40,19 +40,19 @@ const SignupFormModal = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors({})
-    console.log("validating")
+    // console.log("validating")
 
     const isValidated = validateSignup(name, password, confirmPassword, phoneNumber, instagram)
 
-    console.log("validated", isValidated)
+    // console.log("validated", isValidated)
 
     if (isValidated.errors) {
-      console.log('hello')
+      // console.log('hello')
       setErrors(isValidated.errors)
       return
     }
 
-    console.log("fetching...")
+    // console.log("fetching...")
     const res = await fetch("/api/auth/signup", {
       method: "POST",
       headers: {
@@ -67,7 +67,7 @@ const SignupFormModal = () => {
       })
     });
     let data = await res.json()
-    console.log(data)
+    // console.log(data)
     if (data.errors) {
       setErrors(data.errors);
     } else {
