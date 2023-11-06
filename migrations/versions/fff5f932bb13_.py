@@ -1,4 +1,12 @@
 
+<<<<<<< HEAD
+=======
+Revision ID: fff5f932bb13
+Revises: 
+Create Date: 2023-11-05 18:07:30.408318
+
+"""
+>>>>>>> e299684ded24bba7c6b2331cbedb9591a3c04ee5
 from alembic import op
 import sqlalchemy as sa
 
@@ -7,9 +15,13 @@ environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
 # revision identifiers, used by Alembic.
+<<<<<<< HEAD
 
 revision = 'fff5f932bb13'
 
+=======
+revision = 'fff5f932bb13'
+>>>>>>> e299684ded24bba7c6b2331cbedb9591a3c04ee5
 down_revision = None
 branch_labels = None
 depends_on = None
