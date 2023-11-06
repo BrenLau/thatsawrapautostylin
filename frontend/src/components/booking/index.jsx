@@ -71,7 +71,7 @@ const Booking = () => {
             setErrors(data.errors);
         } else {
             sessionStorage.setItem("booking", JSON.stringify(data))
-            // navigate('/')
+            navigate('/')
             return booked()
 
         }
@@ -200,14 +200,13 @@ console.log('service price', servic.split("$"))
                 </div>
                 <div className='service-referral'>
                     <div className='service-div'>
-                        <select onChange={(e) => console.log('e', e.target.value)} value={servic}>
+                        <select onChange={(e) => console.log('e, ', e.target.value)}>
                             {serviceList.map((service) => {
-                                console.log('service,', service)
                                 return (
-                                    <option key={service.id}>
-                                        <div>{service.title}</div>
-                                        <div>{service.description}</div>
-                                        <div>${service.price}</div>
+                                    <option key={service.id} onChange={(e) => console.log('eeee', e)} value={service.id}>
+                                        {service.title}
+                                        {service.description}
+                                        ${service.price}
                                     </option>
                                 )
                             })}
