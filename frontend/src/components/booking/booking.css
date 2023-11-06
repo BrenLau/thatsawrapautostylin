@@ -14,7 +14,8 @@ form {
     font-family: Gabarito;
     position: relative;
 }
-.referral-div{
+
+.referral-div {
     margin-top: 1rem;
 }
 
@@ -27,10 +28,12 @@ button .booking-submit {
     display: flex;
     justify-content: center;
 }
-.service-div{
+
+.service-div {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
 }
+
 .booking-submit {
     appearance: none;
     background-color: transparent;
@@ -148,24 +151,25 @@ button .booking-submit {
     width: 20rem;
 }
 
-.top-form{
+.top-form {
     margin-top: 1rem;
 }
 
-.name-car{
+.name-car {
     margin-top: 3rem;
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
-.date-select{
+
+.date-select {
     margin-top: 1rem;
     display: flex;
     flex-direction: column;
     gap: 1rem
 }
 
-.service-div select{
+.service-div select {
     width: 320px
 }
 
@@ -195,20 +199,21 @@ button .booking-submit {
     width: 20rem
 }
 
-.service-referral{
+.service-referral {
     margin-top: 1rem;
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
-.price-submit{
+
+.price-submit {
     margin-top: 1rem;
     display: flex;
     flex-direction: column;
     gap: 1rem
 }
 
-.car-div select{
+.car-div select {
     width: 320px
 }
 
@@ -221,8 +226,8 @@ button .booking-submit {
 }
 
 .form-control {
-    border:0;
-    width:100%
+    border: 0;
+    width: 100%
 }
 
 
@@ -243,7 +248,7 @@ button .booking-submit {
         gap: 1rem;
     }
 
-    .price-submit{
+    .price-submit {
         margin-top: 3rem;
     }
 
@@ -279,33 +284,48 @@ button .booking-submit {
     }
 
     .dates {
-        margin-top:0.75rem;
+        margin-top: 0.75rem;
         display: flex;
         flex-direction: column;
     }
-    .date-select{
+
+    .date-select {
         display: flex;
         flex-direction: column;
-        gap:1.5rem;
+        gap: 1.5rem;
         margin-top: 5.2rem;
     }
 
-    .top-form h1{
+    .top-form h1 {
         width: 10rem;
     }
+
     .service-referral {
         display: flex;
         flex-direction: column;
         margin-top: 6rem;
         gap: 1.5rem;
     }
-    .service-div{
+
+    .service-div {
         width: 16rem;
     }
-    .addon-div{
+
+    .addon-div {
         width: 16rem
     }
-    .referral-div input{
+
+    .referral-div input {
         width: 15rem;
     }
+
+    .car-div select {
+        width: 250px
+    }
+
+    .service-div select {
+        width: 250px
+    }
+
+
 }
