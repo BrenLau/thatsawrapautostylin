@@ -15,6 +15,18 @@ import EditReview from './components/reviews/editReview';
 import './App.css';
 import SignupFormModal from './components/signup-form-modal';
 
+async function initCalendar() {
+	const res = await fetch("api/calendar", {
+		method: "GET"
+	});
+	const envVar = await res.json();
+	console.log("initiating... ", envVar)
+
+	const cal = new ApiCalendar(envVar.config, envVar.calendar) 
+
+	return cal;
+};
+
 function App() {
   const [isLoaded, setIsLoaded] = useState(false);
   const { user, setUser } = useContext(UserContext);

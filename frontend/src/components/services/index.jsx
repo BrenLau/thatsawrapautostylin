@@ -88,10 +88,9 @@ function ServiceTile({ service, user }) {
 const Services = () => {
     const [services, setServices] = useState([])
     const { user, setUser } = useContext(UserContext);
-    // console.log(user)
 
     async function getServices() {
-        const response = await fetch("http://127.0.0.1:5000/api/services")
+        const response = await fetch("/api/services")
 
         if (response.ok) {
             const res = await response.json()
@@ -103,7 +102,6 @@ const Services = () => {
     }
     useEffect(() => {
         getServices()
-        // setServices()
     }, [])
     return (
         <>
