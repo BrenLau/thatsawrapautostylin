@@ -35,11 +35,7 @@ app.register_blueprint(maps_route, url_prefix='/api/maps')
 app.register_blueprint(service_routes, url_prefix='/api/services')
 app.register_blueprint(car_type_routes, url_prefix='/api/cartypes')
 app.register_blueprint(calendar_routes, url_prefix="/api/calendar")
-<<<<<<< HEAD
-app.register_blueprint(booking_routes, url_prefix="/api/booking")
-=======
 app.register_blueprint(booking_routes, url_prefix="/api/bookings")
->>>>>>> dev
 
 
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///dev.db'

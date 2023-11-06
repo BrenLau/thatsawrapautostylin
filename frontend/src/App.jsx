@@ -15,26 +15,6 @@ import EditReview from './components/reviews/editReview';
 import './App.css';
 import SignupFormModal from './components/signup-form-modal';
 
-<<<<<<< HEAD
-function Calendar() {
-  const getEvents = async () => {
-    let res = await fetch("/api/calendar", {
-      method: "GET"
-    })
-    let events = await res.json()
-    return events;
-  }
-  let eventsRes = getEvents();
-  return (
-    <div id='calendar'>
-      {eventsRes.map(event => {
-        <p>{event.id}</p>
-      })}
-    </div>
-  )
-}
-=======
->>>>>>> dev
 
   // return (
   //   <>
@@ -42,14 +22,14 @@ function Calendar() {
   // )
 
 
-const config = {
-	clientId: "762633836570-vpbro17viheb27tl43n2v7qq76aljd8b.apps.googleusercontent.com",
-  apiKey: "AIzaSyC1UIZ4AhrqAxk_7mc3R2RUjlwoJvZaKbI",
-  scope: "https://www.googleapis.com/auth/calendar",
-  discoveryDocs: [
-		"https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest",
-  ],
-};
+// const config = {
+// 	clientId: "762633836570-vpbro17viheb27tl43n2v7qq76aljd8b.apps.googleusercontent.com",
+//   apiKey: "AIzaSyC1UIZ4AhrqAxk_7mc3R2RUjlwoJvZaKbI",
+//   scope: "https://www.googleapis.com/auth/calendar",
+//   discoveryDocs: [
+// 		"https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest",
+//   ],
+// };
 
 async function initCalendar() {
 	const res = await fetch("api/calendar", {
@@ -58,7 +38,7 @@ async function initCalendar() {
 	const envVar = await res.json();
 	console.log("initiating... ", envVar)
 
-	const cal = new ApiCalendar(envVar.config, envVar.calendar) 
+	const cal = new ApiCalendar(envVar.config, envVar.calendar)
   console.log(cal)
 
 	return cal
@@ -84,12 +64,12 @@ function App() {
         }
         setUser(data);
         sessionStorage.setItem("user", JSON.stringify(data))
-        
+
         if (data && data.is_admin) {
           initCalendar()
           .then((result) => {
-            setApiCalendar(result)	
-          })	
+            setApiCalendar(result)
+          })
         }
       }
     }
@@ -107,7 +87,7 @@ function App() {
           <Route path="/login" element={<LoginFormModal />}>
           </Route>
           <Route path='/signup' element={<SignupFormModal />}>
-          </Route> 
+          </Route>
           <Route exact path='/booking' element={<Booking />}>
           </Route>
           <Route exact path='/manage-bookings' element={<ManageBookings />}>

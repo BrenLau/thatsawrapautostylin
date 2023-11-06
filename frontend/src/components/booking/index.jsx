@@ -54,7 +54,7 @@ const Booking = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         setErrors({})
-        const res = await fetch('http://127.0.0.1:5000/api/booking', {
+        const res = await fetch('/api/bookings', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
