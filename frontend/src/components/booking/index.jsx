@@ -100,7 +100,7 @@ const Booking = () => {
     const serviceList = services.filter(service => service.car_type !== Number(car))
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form id='booking-form-wrapper' onSubmit={handleSubmit}>
             <div className='top-form'>
                 <h1>Book Service</h1>
                 <div className='name-car'>

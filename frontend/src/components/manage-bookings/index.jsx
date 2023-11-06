@@ -47,7 +47,6 @@ const ManageBookings = () => {
       }
     }
 
-
     getBookings();
   }, [isAdmin]);
 

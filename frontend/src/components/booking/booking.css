@@ -1,6 +1,8 @@
 /* @import url("https://cdn.syncfusion.com/ej2/material.css"); */
 
-
+#booking-form-wrapper {
+    min-height: 100vh;
+}
 
 h1 {
     display: flex;
