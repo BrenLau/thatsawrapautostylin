@@ -15,6 +15,26 @@ import EditReview from './components/reviews/editReview';
 import './App.css';
 import SignupFormModal from './components/signup-form-modal';
 
+<<<<<<< HEAD
+function Calendar() {
+  const getEvents = async () => {
+    let res = await fetch("/api/calendar", {
+      method: "GET"
+    })
+    let events = await res.json()
+    return events;
+  }
+  let eventsRes = getEvents();
+  return (
+    <div id='calendar'>
+      {eventsRes.map(event => {
+        <p>{event.id}</p>
+      })}
+    </div>
+  )
+}
+=======
+>>>>>>> dev
 
   // return (
   //   <>

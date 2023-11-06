@@ -15,6 +15,10 @@ const AddService = () => {
             if (response.ok) {
                 const res = await response.json()
                 setCarTypes(res.cars)
+<<<<<<< HEAD
+                // console.log(carTypes)
+=======
+>>>>>>> dev
             }
         }
         getCarTypes()
@@ -37,6 +41,10 @@ const AddService = () => {
         })
         if (response.ok) {
             const res = await response.json()
+<<<<<<< HEAD
+            // console.log(res)
+=======
+>>>>>>> dev
         }
     }
 

@@ -37,11 +37,17 @@ class User(db.Model, UserMixin):
     def to_dict(self):
         return {
             "id": self.id,
+            "name": self.name,
             "email": self.email,
             "phone_number": self.phone_number,
+<<<<<<< HEAD
+            "instagram": self.instagram,
+            "is_admin": self.is_admin
+=======
             "is_admin": self.is_admin,
             "name": self.name,
             "instagram": self.instagram
+>>>>>>> dev
         }
 
 
@@ -79,7 +85,6 @@ class Service(db.Model):
             "image_url": self.image_url,
             "car_type": self.car_type,
             "duration": self.duration
-
         }
 
 
@@ -88,11 +93,11 @@ class Booking(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
-    total_price = db.Column(db.Float(2), nullable=False)
+    # total_price = db.Column(db.Float(2), nullable=False)
     times = db.Column(db.String(50), nullable=False)
     service_id = db.Column(db.Integer, db.ForeignKey(
         "services.id"), nullable=False)
-    car = db.Column(db.String(50), nullable=False)
+    # car = db.Column(db.String(50), nullable=False)
     is_approved = db.Column(db.Boolean, nullable=False)
     user = db.relationship("User", back_populates="bookings")
     service = db.relationship("Service", back_populates="bookings")
@@ -100,6 +105,14 @@ class Booking(db.Model):
     def to_dict(self):
         return {
             "id": self.id,
+<<<<<<< HEAD
+            "user_id": self.user.to_dict(),
+            # "total_price": self.total_price,
+            "times": self.times,
+            "service_id": self.service.to_dict(),
+            # "car": self.car,
+            "is_approved": self.is_approved
+=======
             "total_price": self.total_price,
             "times": self.times,
             "service_id": self.service_id,
@@ -107,6 +120,7 @@ class Booking(db.Model):
             "is_approved": self.is_approved,
             "user": self.user.to_dict(),
             "service": self.service.to_dict()
+>>>>>>> dev
         }
 
 
