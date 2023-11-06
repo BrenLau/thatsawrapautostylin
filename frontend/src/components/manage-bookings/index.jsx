@@ -22,16 +22,16 @@ const ManageBookings = () => {
   const [bookings, setBookings] = useState({});
   const [errors, setErrors] = useState({})
   const {apiCalendar, setApiCalendar} = useContext(CalendarContext)
+
   useEffect(() => {
     if (!user) return
     setIsAdmin(user.is_admin)
   }, [user])
 
   useEffect(()=>{
-
     const getBookings = async () => {
       try{
-        if(!user) return;
+        if(!user || !isAdmin) return;
         let res;
         if(user && isAdmin){//fetch all as admin, fetch current user as current user
           res = await fetch("/api/bookings");
@@ -74,7 +74,7 @@ const ManageBookings = () => {
         {"email": booking.user.email}
       ]
     }
-    apiCalendar.apiCalendar.handleAuthClick()
+    apiCalendar.handleAuthClick()
     .then(() => {
     const bookedEvent = Object.values(bookings.approved).filter(current_booking => {
       const start = new Date(current_booking.times)
@@ -91,17 +91,20 @@ const ManageBookings = () => {
   .then(() => {
     if (errors.error) return
     const approvedBookings = approveBooking(booking.id)
-    if (approvedBookings.unauthorized) {
-      return
-    } 
-    setBookings(approvedBookings)
-    
-    })
     .then(() => {
+      if (approvedBookings.unauthorized) {
+      return
+      } 
+      setBookings(approvedBookings)
+    })
+  
+    
+  })
+  .then(() => {
     if (errors.error) return
-    console.log(resource)
-    const calEvent = apiCalendar.apiCalendar.createEvent(resource, apiCalendar.calId)
-    console.log(calEvent)
+    console.log(bookings)
+    const calEvent = apiCalendar.createEvent(resource).execute()
+    // console.log(calEvent)
 
   })
   }
@@ -109,6 +112,13 @@ const ManageBookings = () => {
 
 
   const populateTable = (filteredBookings, isApproved) => {
+    if (Object.values(filteredBookings).length === 0) {
+      return (
+        <>
+        {isApproved ?( <h4>No approved bookings</h4>) : (<h4>No Pending bookings</h4>)}
+        </>
+      )
+    }
     return Object.values(filteredBookings)?.map((booking)=>
        (
         <table id="bookings-table" key={booking.id}>
@@ -125,10 +135,10 @@ const ManageBookings = () => {
             <td>{booking.car}</td>
             <td>{booking.service_id}</td>
             <td>{booking.times}</td>
-            <td>{booking.total_price}</td>
-            <td>{booking.user_id}</td>
+            <td>${booking.total_price}</td>
+            <td>{booking.user.name}</td>
             {!isApproved ? (
-              <td onClick={() => handleApprove(booking)}>
+              <td id='approve-button' onClick={() => handleApprove(booking)}>
                 approve
               </td>
             ) : null}
@@ -140,18 +150,15 @@ const ManageBookings = () => {
 
       )
   }
-
-  if (!Object.values(bookings)) return
-
   return (
     <div id="manage-bookings">
       { !user? (
           <h1>Not logged in</h1>
       ) : (
           <div id="bookings-div" >
-            <h2>Pending Approval</h2>
+            <h2 id='section-title'>Pending Approval</h2>
               {populateTable(bookings.pending, false)}
-            <h2>Approved Bookings</h2>
+            <h2 id='section-title'>Approved Bookings</h2>
               {populateTable(bookings.approved, true)}
 
             </div>

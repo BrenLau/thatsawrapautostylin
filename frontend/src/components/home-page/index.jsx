@@ -13,7 +13,7 @@ const HomePage = () => {
     <>
       <Splash />
       {/* {!user?.errors?<button onClick={() => navigate('/add_review')}>Create A Review</button> : null} */}
-      <AllReviews />
+      {/* <AllReviews /> */}
       <Services />
       <AboutMe />
 

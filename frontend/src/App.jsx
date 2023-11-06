@@ -15,23 +15,6 @@ import EditReview from './components/reviews/editReview';
 import './App.css';
 import SignupFormModal from './components/signup-form-modal';
 
-function Calendar() {
-  const getEvents = async () => {
-    let res = await fetch("/api/calendar", {
-      method: "GET"
-    })
-    let events = await res.json()
-    return events;
-  }
-  let eventsRes = getEvents();
-  return (
-    <div id='calendar'>
-      {eventsRes.map(event => {
-        <p>{event.id}</p>
-      })}
-    </div>
-  )
-}
 
   // return (
   //   <>
@@ -58,10 +41,7 @@ async function initCalendar() {
 	const cal = new ApiCalendar(envVar.config, envVar.calendar) 
   console.log(cal)
 
-	return {
-    apiCalendar: cal,
-    calId: envVar.calendar
-  };
+	return cal
 };
 
 function App() {
@@ -112,11 +92,8 @@ function App() {
           </Route>
           <Route exact path='/manage-bookings' element={<ManageBookings />}>
           </Route>
-          <Route exact path='/calendar' element={<Calendar />}>
-          </Route>
           <Route exact path='/add_review' element={<CreateReviews />}>
           </Route>
-
           <Route exact path='/editReview' element={<EditReview />}>
           </Route>
         </Routes>)}
