@@ -47,7 +47,7 @@ const Booking = () => {
     //     // setServices()
     // }, [car])
 
-    // console.log('services', services)
+    console.log('services', servic)
     const [name, setName] = useState("")
     const [email, setEmail] = useState("");
     const [number, setNumber] = useState("");
@@ -61,7 +61,7 @@ const Booking = () => {
         console.log(user)
 
         if (user) {
-            const { name, email, phone_number, instagram} = JSON.parse(user);
+            const { name, email, phone_number, instagram } = JSON.parse(user);
             setName(name)
             setEmail(email)
             setNumber(phone_number)
@@ -89,21 +89,21 @@ const Booking = () => {
                 total_price: servic.price
             })
         })
+        console.log('ressss', res)
         let data = await res.json()
         console.log('data', data)
         if (data.errors) {
             setErrors(data.errors);
         } else {
             sessionStorage.setItem("booking", JSON.stringify(data))
-            navigate.push('/')
+            navigate('/')
             return booked()
-            // setUser(data);
 
         }
 
-        // if (times < new Date().toJSON().slice(0, 10)) {
-        //     errors.times = "Date must be in future"
-        // }
+        if (times < new Date()) {
+            errors.times = "Date must be in future"
+        }
     }
     console.log('times', times)
 
@@ -175,7 +175,7 @@ const Booking = () => {
                                 className='insta'
                                 placeholder='Instagram'
                                 type='text'
-                                value={insta || ""}
+                                value={insta}
                                 onChange={(e) => setInsta(e.target.value)}
 
                             />
@@ -183,7 +183,7 @@ const Booking = () => {
                     </div>
                     <div className='car-div'>
                         <select name="cars" id="car-select" value={car} onChange={(e) => setCar(e.target.value)} required>
-                            <option value="">--Please choose a car type--</option>
+                            <option value="hi">--Please choose a car type--</option>
                             <option value={Number(3)}>Coupe/Sedan</option>
                             <option value={Number(2)}>SUV/Truck</option>
                         </select>
@@ -207,32 +207,38 @@ const Booking = () => {
                                 }}
                             />
                             {errors.times && <p className="errors">{errors.times}</p>}
-                    <div className='referral-div'>
-                        <label>
-                            {/* Referral Code: */}
-                            <input
-                                type='text'
-                                placeholder='Referral Code'
-                                value={referral}
-                                onChange={(e) => setReferral(e.target.value)}
-                            />
-                        </label>
-                    </div>
+                            <div className='referral-div'>
+                                <label>
+                                    {/* Referral Code: */}
+                                    <input
+                                        type='text'
+                                        placeholder='Referral Code'
+                                        value={referral}
+                                        onChange={(e) => setReferral(e.target.value)}
+                                    />
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div className='service-referral'>
                     <div className='service-div'>
+                        <select onChange={(e) => setService(e.target.value)} value={servic}>
+                         
                         {serviceList.map((service) => {
                             return (
-                                <div key={service.id}>
-                                    <input type="radio" name='service' required value={service} onChange={(e) => setService(e.target.value)} />
+                                <option key={service.id}>
+                                    {/* <input type="radio"
+                                        name='service'
+                                        value={servic}
+                                        onChange={(e) => console.log(e.target)} /> */}
                                     <div>{service.title}</div>
                                     <div>{service.description}</div>
                                     <div>${service.price}</div>
-                                </div>
+                                </option>
                             )
                         })}
+                        </select>
                     </div>
                 </div>
             </div>
