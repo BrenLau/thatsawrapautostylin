@@ -100,14 +100,14 @@ const Booking = () => {
             return booked()
 
         }
-
+console.log('service price', servic.split("$"))
         if (times < new Date()) {
             errors.times = "Date must be in future"
         }
     }
     console.log('times', times)
 
-    console.log('serice price', servic)
+
 
     let inputProps = {
         placeholder: "Select a date and time*"
@@ -223,21 +223,17 @@ const Booking = () => {
                 </div>
                 <div className='service-referral'>
                     <div className='service-div'>
-                        <select onChange={(e) => setService(e.target.value)} value={servic}>
-                         
-                        {serviceList.map((service) => {
-                            return (
-                                <option key={service.id}>
-                                    {/* <input type="radio"
-                                        name='service'
-                                        value={servic}
-                                        onChange={(e) => console.log(e.target)} /> */}
-                                    <div>{service.title}</div>
-                                    <div>{service.description}</div>
-                                    <div>${service.price}</div>
-                                </option>
-                            )
-                        })}
+                        <select onChange={(e) => console.log('e', e.target.value)} value={servic}>
+                            {serviceList.map((service) => {
+                                console.log('service,', service)
+                                return (
+                                    <option key={service.id}>
+                                        <div>{service.title}</div>
+                                        <div>{service.description}</div>
+                                        <div>${service.price}</div>
+                                    </option>
+                                )
+                            })}
                         </select>
                     </div>
                 </div>
