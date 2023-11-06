@@ -3,12 +3,16 @@ import { Link } from "react-router-dom";
 import OpenModalButton from "../open-modal-button";
 import LoginFormModal from "../login-modal";
 import SignupFormModal from "../signup-form-modal";
+import { UserContext, CalendarContext } from '../../main';
+import { useContext } from 'react';
 
 const MenuButton = () => {
+  const { user, setUser } = useContext(UserContext)
+  const apiCalendar = useContext(CalendarContext);
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
   const [transitioning, setTransitioning] = useState(false)
-  const [user, setUser] = useState(JSON.parse(sessionStorage.getItem("user")) || null)
+  const [userState, setUserState] = useState(user || null)
 
   const updateUserState = (user) => {
     setUser(user)
@@ -43,9 +47,10 @@ const MenuButton = () => {
         "Content-Type": "application/json",
       },
     });
-  
+
     if (response.ok) {
       sessionStorage.removeItem("user")
+      // await apiCalendar.handleSignOutClick();
       setUser(null)
     }
   }
@@ -58,13 +63,14 @@ const MenuButton = () => {
       {!user ? (
         <div id={dropdownClassname}>
           {transitioning || !showMenu ? null : <Link to='/booking'className="menu-dropdown-button">Book Now</Link>}
-          {transitioning || !showMenu ? null : <OpenModalButton modalComponent={<LoginFormModal updateUser={updateUserState} />} buttonText={"Login"} buttonClassName={"menu-dropdown-button"}/>}
-          {transitioning || !showMenu ? null : <OpenModalButton modalComponent={<SignupFormModal updateUser={updateUserState} />} buttonText={"Sign Up"} buttonClassName={"menu-dropdown-button"}/> }
+          {transitioning || !showMenu ? null : <OpenModalButton modalComponent={<LoginFormModal />} buttonText={"Login"} buttonClassName={"menu-dropdown-button"}/>}
+          {transitioning || !showMenu ? null : <OpenModalButton modalComponent={<SignupFormModal />} buttonText={"Sign Up"} buttonClassName={"menu-dropdown-button"}/> }
         </div>
       ) : (
         <div id={dropdownClassname}>
           {transitioning || !showMenu ? null : <p className="menu-dropdown-button">{user.email}</p>}
-          {transitioning || !showMenu ? null : <Link to='/booking'className="menu-dropdown-button">Book Now</Link>}
+          {/* {transitioning || !showMenu ? null : <Link to='/booking'className="menu-dropdown-button">Book Now</Link>} */}
+          {transitioning || !showMenu ? null : <Link to="manage-bookings" className="menu-dropdown-button">Manage Bookings</Link>}
           {transitioning || !showMenu ? null : <p className="menu-dropdown-button" onClick={logout}>Log Out</p>}
         </div>
       )}

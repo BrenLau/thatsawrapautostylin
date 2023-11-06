@@ -1,45 +1,42 @@
 #about-me {
-  /* display: flex; */
-  background-color: #BA8F2F;
+  background-color: #060606;
   margin: 20px;
   padding: 10px;
+  color: #BA8F2F;
 }
 
 #about-me-title {
   text-align: center;
 }
 
-
 #map-contact-container {
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
-
-
 }
 
 #google-map {
-  border: 1px solid black;
+  border: 2px solid #BA8F2F;
   background-color: white;
   margin: 20px;
   padding: 10px;
-  /* width:45% */
   flex-grow:1;
-
 }
 
 #contact-info {
-  border: 1px solid black;
-  background-color: white;
+  border: 2px solid #BA8F2F;
+  background-color: #060606;
   margin: 20px;
   padding: 10px;
-  /* width:45%; */
   flex-grow:1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 #contact-form {
-  border: 1px solid black;
-  background-color: white;
+  border: 2px solid #BA8F2F;
+  background-color: #060606;
   margin: 20px;
   padding: 10px;
   width:100%;
@@ -63,5 +60,20 @@
 
 /* for computer screens */
 @media screen and (min-width: 1200px) {
+  #google-map {
+    width: 60%;
+  }
 
+  .contact-header {
+    font-size: 36px;
+    margin-bottom: 0;
+  }
+
+  .contact-body {
+    font-size: 24px;
+  }
+
+  .fa-instagram {
+    font-size: 24px;
+  }
 }

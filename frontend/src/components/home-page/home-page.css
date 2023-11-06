@@ -1,0 +1,98 @@
+#splash-wrapper {
+  padding: 1rem;
+  background-color: #060606;
+  display: flex;
+  justify-content: center;  
+  margin-bottom: 6rem;
+}
+
+#splash-image {
+  height: 85vh;
+  object-fit: contain;
+  border: 2px solid #BA8F2F;
+  z-index: 0;
+}
+
+#splash-text-wrapper {
+  font-family: Gabarito;
+  color: #BA8F2F;
+  position: absolute;
+  top: 45%;
+  right: 15%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 400px;
+}
+
+#splash-header {
+  font-size: 48px;
+  top: 50%;
+  margin: 0;
+}
+
+#splash-body {
+  font-size: 36px;
+  margin: 0;
+}
+
+#book-button {
+  font-size: 48px;
+  border: 2px solid #BA8F2F;
+  padding: 1rem 2rem;
+}
+
+#splash-text-foreground {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+@media screen and (max-width: 600px) {
+  #splash-text-background {
+    height: 100%;
+    width: 100%;
+    background-color: #060606;
+    opacity: 0.6;
+    position: absolute;
+    z-index: 1;
+    margin-top: -2rem;
+    border-radius: 1rem;
+  }
+
+  #splash-text-foreground {
+    z-index: 2;
+  }
+}
+
+/* for larger devices */
+@media screen and (min-width: 600px) and (max-width: 1200px) {
+  #splash-text-background {
+    height: 100%;
+    width: 100%;
+    background-color: #060606;
+    opacity: 0.6;
+    position: absolute;
+    z-index: 1;
+    margin-top: -2rem;
+    border-radius: 1rem;
+  }
+
+  #splash-text-foreground {
+    z-index: 2;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  
+  #book-button:hover {
+    cursor: pointer;
+    font-size: 56px;
+    transition: font-size 200ms ease;
+    padding: auto;
+  }
+}
