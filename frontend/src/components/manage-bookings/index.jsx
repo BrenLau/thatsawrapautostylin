@@ -21,9 +21,7 @@ const ManageBookings = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [bookings, setBookings] = useState({});
   const [errors, setErrors] = useState({})
-
   const {apiCalendar, setApiCalendar} = useContext(CalendarContext)
-
   useEffect(() => {
     if (!user) return
     setIsAdmin(user.is_admin)
@@ -65,16 +63,18 @@ const ManageBookings = () => {
     const resource = {
       summary: `${booking.service.description} for ${booking.user.name}`,
       start: {
-        "dateTime": startTime
+        "dateTime": startTime.toISOString(),
+        "timeZone": Intl.DateTimeFormat().resolvedOptions().timeZone
       }, 
       end: {
-        "dateTime": endTime
+        "dateTime": endTime.toISOString(),
+        "timeZone": Intl.DateTimeFormat().resolvedOptions().timeZone
       },
       attendees: [
         {"email": booking.user.email}
       ]
     }
-    apiCalendar.handleAuthClick()
+    apiCalendar.apiCalendar.handleAuthClick()
     .then(() => {
     const bookedEvent = Object.values(bookings.approved).filter(current_booking => {
       const start = new Date(current_booking.times)
@@ -95,12 +95,12 @@ const ManageBookings = () => {
       return
     } 
     setBookings(approvedBookings)
-
-  })
-  .then(() => {
+    
+    })
+    .then(() => {
     if (errors.error) return
     console.log(resource)
-    const calEvent = apiCalendar.createEvent(resource)
+    const calEvent = apiCalendar.apiCalendar.createEvent(resource, apiCalendar.calId)
     console.log(calEvent)
 
   })
@@ -140,6 +140,8 @@ const ManageBookings = () => {
 
       )
   }
+
+  if (!Object.values(bookings)) return
 
   return (
     <div id="manage-bookings">

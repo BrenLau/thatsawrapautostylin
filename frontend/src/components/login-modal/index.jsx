@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Modal, useModal } from "../../context/modal";
-import { UserContext } from "../../main";
+import { UserContext, CalendarContext } from "../../main";
 
 import "./login-modal.css";
 
@@ -10,6 +10,7 @@ const LoginFormModal = () => {
   const [errors, setErrors] = useState([]);
   const { closeModal } = useModal();
   const { user, setUser } = useContext(UserContext);
+  const { apiCalendar } = useContext(CalendarContext)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,8 +30,11 @@ const LoginFormModal = () => {
     } else {
       let data = await res.json()
       sessionStorage.setItem("user", JSON.stringify(data))
-      setUser(data)
-      closeModal();
+      // apiCalendar.handleAuthClick()
+      // .then(() => {
+        setUser(data)
+        closeModal();
+    // })
     }
   };
 
