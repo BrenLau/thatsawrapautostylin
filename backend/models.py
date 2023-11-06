@@ -68,6 +68,7 @@ class Service(db.Model):
     car_type = db.Column(db.Integer, db.ForeignKey(
         "car_types.id"), nullable=False)
     duration = db.Column(db.Integer, nullable=False)
+    bookings = db.relationship("Booking", back_populates="service")
 
     def to_dict(self):
         return {
@@ -78,7 +79,6 @@ class Service(db.Model):
             "image_url": self.image_url,
             "car_type": self.car_type,
             "duration": self.duration
-
         }
 
 
@@ -87,22 +87,23 @@ class Booking(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
-    total_price = db.Column(db.Float(2), nullable=False)
+    # total_price = db.Column(db.Float(2), nullable=False)
     times = db.Column(db.String(50), nullable=False)
     service_id = db.Column(db.Integer, db.ForeignKey(
         "services.id"), nullable=False)
-    car = db.Column(db.String(50), nullable=False)
+    # car = db.Column(db.String(50), nullable=False)
     is_approved = db.Column(db.Boolean, nullable=False)
     user = db.relationship("User", back_populates="bookings")
+    service = db.relationship("Service", back_populates="bookings")
 
     def to_dict(self):
         return {
             "id": self.id,
-            "user_id": self.user_id,
-            "total_price": self.total_price,
+            "user_id": self.user.to_dict(),
+            # "total_price": self.total_price,
             "times": self.times,
-            "service_id": self.service_id,
-            "car": self.car,
+            "service_id": self.service.to_dict(),
+            # "car": self.car,
             "is_approved": self.is_approved
         }
 
