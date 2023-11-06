@@ -15,6 +15,7 @@ const HomePage = () => {
       {/* {!user?.errors?<button onClick={() => navigate('/add_review')}>Create A Review</button> : null} */}
       {/* <AllReviews /> */}
       <Services />
+      {/* <AllReviews /> */}
       <AboutMe />
 
 

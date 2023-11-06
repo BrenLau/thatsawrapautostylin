@@ -1,11 +1,21 @@
 import './booking.css'
-// import { DateTimePickerComponent } from '@syncfusion/ej2-react-calendars';
-
 import { useEffect, useState } from 'react';
 import "react-datetime/css/react-datetime.css"
 import DateTime from 'react-datetime'
+import { useContext } from 'react';
+import { UserContext } from '../../main';
+import { useNavigate } from 'react-router-dom';
+// import SignupFormModal from '../signup-form-modal';
 
 const Booking = () => {
+    const { user } = useContext(UserContext)
+    const [referral, setReferral] = useState("")
+    const [times, setTimes] = useState("")
+    const [servic, setService] = useState("")
+    const [errors, setErrors] = useState({})
+    const navigate = useNavigate()
+
+    // console.log('services', servic)
     const [name, setName] = useState("")
     const [email, setEmail] = useState("");
     const [number, setNumber] = useState("");
@@ -14,28 +24,82 @@ const Booking = () => {
     const [price, setPrice] = useState(0)
     const [selected, setSelected] = useState(null)
     const services = JSON.parse(sessionStorage.getItem("services"))
+    console.log(services)
 
     useEffect(() => {
         const user = sessionStorage.getItem("user");
         console.log(user)
 
         if (user) {
-            const { name, email, phone_number, instagram} = JSON.parse(user);
+            const { name, email, phone_number, instagram } = JSON.parse(user);
+            console.log("instagram from user: ", instagram)
+            console.log("insta state: ", insta)
             setName(name)
             setEmail(email)
-            setNumber(phone_number)
-            setInsta(instagram)
+            if (number) setNumber(phone_number)
+            
+            if (instagram) {
+                console.log("truthy")
+                setInsta(instagram)}
+            // setInsta("" || instagram)
         }
     }, []);
 
-    let inputProps = {
-        placeholder:"Select a date and time*"
+    const booked = () => {
+        window.alert('Your service has been booked')
     }
 
-    function selectService(e){
-        setSelected(e.target.name)
-        setPrice(e.target.value)
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        console.log("submitting... ")
+        setErrors({})
+        const res = await fetch('/api/booking', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                user_id: user.id,
+                car,
+                times,
+                service_id: servic.id,
+                total_price: servic.price
+            })
+        })
+        console.log('ressss', res)
+        let data = await res.json()
+        console.log('data', data)
+        if (data.errors) {
+            setErrors(data.errors);
+        } else {
+            sessionStorage.setItem("booking", JSON.stringify(data))
+            // navigate('/')
+            return booked()
+
+        }
+
+        if (times < new Date()) {
+            errors.times = "Date must be in future"
+        }
     }
+    // console.log('times', times)
+
+    // console.log('serice price', servic)
+
+    let inputProps = {
+        placeholder: "Select a date and time*"
+    }
+
+    const serviceList = services.filter(service => service.car_type !== Number(car))
+    // console.log('car', Number(car))
+    // console.log('service list', serviceList)
+
+    // if(car === 2){
+    //      const serviceList = services.filter( service => service.car_type !== 3)
+    // } else if(car === 3){
+    //     services.filter(service => service.car_type == 2)
+    // }
+
     return (
         <form>
             <div className='top-form'>
@@ -74,7 +138,7 @@ const Booking = () => {
                                 type='number'
                                 placeholder='Phone Number*'
                                 value={number}
-                                onChamge={(e) => setNumber(e.target.value)}
+                                onChange={(e) => setNumber(e.target.value)}
                                 minLength={10}
                                 maxLength={10}
                                 required
@@ -88,96 +152,81 @@ const Booking = () => {
                                 className='insta'
                                 placeholder='Instagram'
                                 type='text'
-                                value={insta || ""}
+                                value={insta}
                                 onChange={(e) => setInsta(e.target.value)}
 
                             />
                         </label>
                     </div>
                     <div className='car-div'>
-                        <label>
-                            {/* Car Model/Type: */}
-                            <input
-                                className='car-type'
-                                placeholder='Car Type*'
-                                type='text'
-                                // value={car}
-                                // onChange={(e) = setCar(e.target.value)}
-                                required
-                            />
-                        </label>
+                        <select name="cars" id="car-select" value={car} onChange={(e) => {
+                            console.log(e.target.value)
+                            setCar(e.target.value)}} required>
+                            <option value="hi">--Please choose a car type--</option>
+                            <option value={Number(3)}>Coupe/Sedan</option>
+                            <option value={Number(2)}>SUV/Truck</option>
+                        </select>
                     </div>
                 </div>
                 <div className='dates'>
                     <div className='date-div'>
-                        {/* <div>Select 3 dates and times</div> */}
                         <div className='date-select'>
-                            {/* <DateTimePickerComponent id="datetimepicker" placeholder="Select a date and time*" required/> */}
-                            {/* <DateTimePickerComponent id="datetimepicker" placeholder="Select a date and time*" required/> */}
-                            {/* <DateTimePickerComponent id="datetimepicker" placeholder="Select a date and time*" required/> */}
-                            {/* <input type='datetime-local' placeholder="Select a date and time*"></input> */}
-                            <DateTime inputProps={inputProps} />
-
+                            <DateTime
+                                required
+                                inputProps={inputProps}
+                                // minLength=''
+                                stepMinute={60}
+                                // minDetail='hour'
+                                maxDetail='hour'
+                                minDate={new Date()}
+                                value={times}
+                                onChange={(e) => {
+                                    console.log(e._d)
+                                    setTimes(e._d)
+                                }}
+                            />
+                            {errors.times && <p className="errors">{errors.times}</p>}
+                            <div className='referral-div'>
+                                <label>
+                                    {/* Referral Code: */}
+                                    <input
+                                        type='text'
+                                        placeholder='Referral Code'
+                                        value={referral}
+                                        onChange={(e) => setReferral(e.target.value)}
+                                    />
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div className='service-referral'>
-                    <div className='service-div' onChange={selectService}>
-                        {services.map(service => (
-                            <label className='service-label'>
-                                {console.log(service)}
-                                <span><input type='checkbox' value={service.price} name={service.title} checked={selected === service.title}/>{service.title}</span>
-                                <label>${service.price}</label>
-                            </label>
-                        ))}
-                        {/* <label>
-                            <input
-                                type='checkbox'
-                            />
-                            <label>Service 1</label>
-                            <input
-                                type='checkbox'
-                            />
-                            <label>Service 2</label>
-                            <input
-                                type='checkbox'
-                            />
-                            <label>Service 3</label>
-                        </label> */}
-                    </div>
-                    {/* <div className='addon-div'>
-                        <label>
-                            <input
-                                type='checkbox'
-                            />
-                            <label>Add-on 1</label>
-                            <input
-                                type='checkbox'
-                            />
-                            <label>Add-on 2</label>
-                            <input
-                                type='checkbox'
-                            />
-                            <label>Add-on 3</label>
-                        </label>
-                    </div> */}
-                    <div className='referral-div'>
-                        <label>
-                            {/* Referral Code: */}
-                            <input
-                                type='text'
-                                placeholder='Referral Code'
-                            />
-                        </label>
+                    <div className='service-div'>
+                        <select onChange={(e) => setService(e.target.value)} value={servic}>
+                         
+                        {serviceList.map((service) => {
+                            return (
+                                <option key={service.id}>
+                                    {/* <input type="radio"
+                                        name='service'
+                                        value={servic}
+                                        onChange={(e) => console.log(e.target)} /> */}
+                                    <div>{service.title}</div>
+                                    <div>{service.description}</div>
+                                    <div>${service.price}</div>
+                                </option>
+                            )
+                        })}
+                        </select>
                     </div>
                 </div>
             </div>
             <div className='price-submit'>
                 <div className='price-div'>
-                    Total Price: ${price}
+                    Total Price: ${servic.price}
                 </div>
 
-                <button className='booking-submit'>Submit</button>
+                <button className='booking-submit' onSubmit={handleSubmit} >Submit</button>
             </div>
         </form>
     )
