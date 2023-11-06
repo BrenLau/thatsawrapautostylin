@@ -60,8 +60,12 @@ const ManageBookings = () => {
     const endTime = new Date()
     endTime.setTime(startTime.getTime())
     endTime.setTime(endTime.getTime() + 7200000)
+    console.log({
+      startTime,
+      endTime
+    })
     const resource = {
-      summary: `${booking.service.description} for ${booking.user.name}`,
+      summary: `${booking.service_id.description} for ${booking.user_id.name}`,
       start: {
         "dateTime": startTime.toISOString(),
         "timeZone": Intl.DateTimeFormat().resolvedOptions().timeZone
@@ -71,7 +75,7 @@ const ManageBookings = () => {
         "timeZone": Intl.DateTimeFormat().resolvedOptions().timeZone
       },
       attendees: [
-        {"email": booking.user.email}
+        {"email": booking.user_id.email}
       ]
     }
     apiCalendar.handleAuthClick()
@@ -121,7 +125,8 @@ const ManageBookings = () => {
     }
     return Object.values(filteredBookings)?.map((booking)=>
        (
-        <table id="bookings-table" key={booking.id}>
+         <table id="bookings-table" key={booking.id}>
+          {console.log(booking)}
           <tbody>
 
           <tr id="headings">
@@ -132,11 +137,11 @@ const ManageBookings = () => {
             <th>user</th>
           </tr>
           <tr id="data">
-            <td>{booking.car}</td>
-            <td>{booking.service_id}</td>
+            <td>{booking.service_id.car_type === 2 ? "Sedan/Coupe" : "Truck/SUV"}</td>
+            <td>{booking.service_id.title}</td>
             <td>{booking.times}</td>
-            <td>${booking.total_price}</td>
-            <td>{booking.user.name}</td>
+            <td>${booking.service_id.price}</td>
+            <td>{booking.user_id.name}</td>
             {!isApproved ? (
               <td id='approve-button' onClick={() => handleApprove(booking)}>
                 approve
