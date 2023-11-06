@@ -50,7 +50,7 @@ async function initCalendar() {
 		method: "GET"
 	});
 	const envVar = await res.json();
-	("initiating... ", config)
+	console.log("initiating... ", envVar)
 
 	const cal = new ApiCalendar(envVar.config, envVar.calendar) 
 
@@ -102,7 +102,7 @@ function App() {
           <Route exact path='/booking' element={<Booking />}>
           </Route>
 
-          <Route exact path='/manage_bookings' element={<ManageBookings />}>
+          <Route exact path='/manage-bookings' element={<ManageBookings />}>
           </Route>
           <Route exact path='/calendar' element={<Calendar />}>
           </Route>

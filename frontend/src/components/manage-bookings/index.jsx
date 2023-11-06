@@ -62,10 +62,12 @@ const ManageBookings = () => {
     const resource = {
       summary: `${booking.service.description} with ${booking.user.name}`,
       start: {
-        "dateTime": startTime
+        "dateTime": startTime,
+        "timeZone": "America/New_York"
       }, 
       end: {
-        "dateTime": endTime
+        "dateTime": endTime,
+        "timeZone": "America/New_York"
       },
       attendees: [
         {"email": booking.user.email}
@@ -92,8 +94,10 @@ const ManageBookings = () => {
 
   })
   .then(() => {
+    console.log(resource)
+    console.log(apiCalendar)
     const calEvent = apiCalendar.createEvent(resource)
-
+    console.log(calEvent)
   })
 
   }
