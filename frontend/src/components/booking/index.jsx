@@ -9,52 +9,20 @@ import { useNavigate } from 'react-router-dom';
 
 const Booking = () => {
     const { user } = useContext(UserContext)
-    // const [name, setName] = useState(user?.name)
-    // const [email, setEmail] = useState(user?.email);
-    // const [phone_number, setNumber] = useState(user?.phone_number);
-    // const [instagram, setInstagram] = useState(user?.instagram);
-    // const [car, setCar] = useState("")
     const [referral, setReferral] = useState("")
     const [times, setTimes] = useState("")
     const [servic, setService] = useState("")
     const [errors, setErrors] = useState({})
     const navigate = useNavigate()
-    // const [services, setServices] = useState([])
 
-
-    // console.log('user in the booking', user)
-
-    // if (!user) {
-    //     return (
-    //         <div>
-    //             <div>Sign Up</div>
-    //             <SignupFormModal />
-    //         </div>
-    //     )
-    // }
-    // async function getServices() {
-    //     const response = await fetch("http://127.0.0.1:5000/api/services")
-
-    //     if (response.ok) {
-    //         const res = await response.json()
-    //         if (res.services) {
-    //             setServices(res.services)
-    //         }
-    //     }
-    // }
-    // useEffect(() => {
-    //     getServices()
-    //     // setServices()
-    // }, [car])
-
-    console.log('services', servic)
+    // console.log('services', servic)
     const [name, setName] = useState("")
     const [email, setEmail] = useState("");
     const [number, setNumber] = useState("");
     const [insta, setInsta] = useState("");
     const [car, setCar] = useState("");
     const services = JSON.parse(sessionStorage.getItem("services"))
-    console.log(services)
+    console.log("name: ", name, "email: ", email, "number: ", number, "insta: ", insta, "car: ", car, "times: ", times)
 
     useEffect(() => {
         const user = sessionStorage.getItem("user");
@@ -62,10 +30,16 @@ const Booking = () => {
 
         if (user) {
             const { name, email, phone_number, instagram } = JSON.parse(user);
+            console.log("instagram from user: ", instagram)
+            console.log("insta state: ", insta)
             setName(name)
             setEmail(email)
-            setNumber(phone_number)
-            setInsta(instagram)
+            if (number) setNumber(phone_number)
+            
+            if (instagram) {
+                console.log("truthy")
+                setInsta(instagram)}
+            // setInsta("" || instagram)
         }
     }, []);
 
@@ -75,6 +49,7 @@ const Booking = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+        console.log("submitting... ")
         setErrors({})
         const res = await fetch('/api/booking', {
             method: "POST",
@@ -96,7 +71,7 @@ const Booking = () => {
             setErrors(data.errors);
         } else {
             sessionStorage.setItem("booking", JSON.stringify(data))
-            navigate('/')
+            // navigate('/')
             return booked()
 
         }
@@ -105,17 +80,17 @@ const Booking = () => {
             errors.times = "Date must be in future"
         }
     }
-    console.log('times', times)
+    // console.log('times', times)
 
-    console.log('serice price', servic)
+    // console.log('serice price', servic)
 
     let inputProps = {
         placeholder: "Select a date and time*"
     }
 
     const serviceList = services.filter(service => service.car_type !== Number(car))
-    console.log('car', Number(car))
-    console.log('service list', serviceList)
+    // console.log('car', Number(car))
+    // console.log('service list', serviceList)
 
     // if(car === 2){
     //      const serviceList = services.filter( service => service.car_type !== 3)
@@ -182,7 +157,9 @@ const Booking = () => {
                         </label>
                     </div>
                     <div className='car-div'>
-                        <select name="cars" id="car-select" value={car} onChange={(e) => setCar(e.target.value)} required>
+                        <select name="cars" id="car-select" value={car} onChange={(e) => {
+                            console.log(e.target.value)
+                            setCar(e.target.value)}} required>
                             <option value="hi">--Please choose a car type--</option>
                             <option value={Number(3)}>Coupe/Sedan</option>
                             <option value={Number(2)}>SUV/Truck</option>

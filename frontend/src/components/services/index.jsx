@@ -82,7 +82,7 @@ function ServiceTile({ service, user }) {
 const Services = () => {
     const [services, setServices] = useState([])
     const { user, setUser } = useContext(UserContext);
-    console.log(user)
+    // console.log(user)
 
     async function getServices() {
         const response = await fetch("http://127.0.0.1:5000/api/services")
