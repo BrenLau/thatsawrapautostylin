@@ -1,14 +1,8 @@
 """empty message
 
-<<<<<<<< HEAD:migrations/versions/c9998768607b_.py
-Revision ID: c9998768607b
-Revises: 
-Create Date: 2023-11-05 20:55:18.152768
-========
 Revision ID: fff5f932bb13
 Revises: 
 Create Date: 2023-11-05 18:07:30.408318
->>>>>>>> dev:migrations/versions/fff5f932bb13_.py
 
 """
 from alembic import op
@@ -19,11 +13,7 @@ environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
 # revision identifiers, used by Alembic.
-<<<<<<<< HEAD:migrations/versions/c9998768607b_.py
-revision = 'c9998768607b'
-========
 revision = 'fff5f932bb13'
->>>>>>>> dev:migrations/versions/fff5f932bb13_.py
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -62,10 +52,7 @@ def upgrade():
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('times', sa.String(length=50), nullable=False),
     sa.Column('service_id', sa.Integer(), nullable=False),
-<<<<<<<< HEAD:migrations/versions/c9998768607b_.py
-========
     sa.Column('car', sa.String(length=50), nullable=False),
->>>>>>>> dev:migrations/versions/fff5f932bb13_.py
     sa.Column('is_approved', sa.Boolean(), nullable=False),
     sa.ForeignKeyConstraint(['service_id'], ['services.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),

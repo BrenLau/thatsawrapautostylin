@@ -319,7 +319,6 @@ button .booking-submit {
         width: 15rem;
     }
 
-<<<<<<< HEAD
     .car-div select {
         width: 250px
     }
@@ -329,10 +328,4 @@ button .booking-submit {
     }
 
 
-=======
-    .service-label{
-        display: flex;
-        justify-content: space-between;
-    }
->>>>>>> dev
 }

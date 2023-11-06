@@ -6,10 +6,6 @@ const DeleteService = ({ id }) => {
         })
         if (response.ok) {
             const res = await response.json()
-<<<<<<< HEAD
-            // console.log(res)
-=======
->>>>>>> dev
         }
     }
     return (
