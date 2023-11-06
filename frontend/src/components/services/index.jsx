@@ -23,10 +23,10 @@ function ServiceTile({ service, user }) {
             image = tint
             break;
         case "Sedan Side Window Tint":
-                image = tint
+                image = "https://m.media-amazon.com/images/I/81NDm2mZn-L._AC_SX679_.jpg"
                 break;
         case "Head light/tail light Tint":
-            image = tint
+            image = "https://m.media-amazon.com/images/I/7103oV3VMjL._AC_UF894,1000_QL80_.jpg"
             break;
         case "SUV Rear Window Tint":
             image = tint
@@ -52,6 +52,12 @@ function ServiceTile({ service, user }) {
         case "Exterior detailing":
             image = extDetail;
             break;    
+        case "Door chrome delete":
+            image = "https://m.media-amazon.com/images/I/61rzQ45BGKL.jpg"
+            break
+        case "Full chrome delete":
+            image = "https://m.media-amazon.com/images/I/61rzQ45BGKL.jpg"
+            break
         default:
             break;
     }
