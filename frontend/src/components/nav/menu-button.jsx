@@ -3,12 +3,13 @@ import { Link } from "react-router-dom";
 import OpenModalButton from "../open-modal-button";
 import LoginFormModal from "../login-modal";
 import SignupFormModal from "../signup-form-modal";
-import { UserContext } from '../../main';
+import { UserContext, CalendarContext } from '../../main';
 import { useContext } from 'react';
 import { useNavigate } from "react-router-dom";
 
 const MenuButton = () => {
   const { user, setUser } = useContext(UserContext)
+  const apiCalendar = useContext(CalendarContext);
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
   const [transitioning, setTransitioning] = useState(false)
@@ -51,6 +52,7 @@ const MenuButton = () => {
 
     if (response.ok) {
       sessionStorage.removeItem("user")
+      // await apiCalendar.handleSignOutClick();
       setUser(null)
       navigate('/')
     }
@@ -70,7 +72,8 @@ const MenuButton = () => {
       ) : (
         <div id={dropdownClassname}>
           {transitioning || !showMenu ? null : <p className="menu-dropdown-button">{user.email}</p>}
-          {transitioning || !showMenu ? null : <Link to='/booking'className="menu-dropdown-button">Book Now</Link>}
+          {/* {transitioning || !showMenu ? null : <Link to='/booking'className="menu-dropdown-button">Book Now</Link>} */}
+          {transitioning || !showMenu ? null : <Link to="manage-bookings" className="menu-dropdown-button">Manage Bookings</Link>}
           {transitioning || !showMenu ? null : <p className="menu-dropdown-button" onClick={logout}>Log Out</p>}
         </div>
       )}

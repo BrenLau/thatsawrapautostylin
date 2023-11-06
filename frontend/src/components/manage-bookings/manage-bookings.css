@@ -1,6 +1,49 @@
-#bookings-table {
-  border: 1px solid black;
+#manage-bookings {
+  min-height: 100vh;
 }
-#bookings-table > tr > td {
-  border: 1px solid black;
+
+#bookings-table {
+  border: 1px solid #BA8F2F;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: center;
+  margin: 1rem auto;
+  width: 60%;
+  border-spacing: 3rem;
+}
+
+tbody {
+  width: 100%;
+  gap: 10rem
+}
+
+tr {
+  font-size: 36px;
+  border-right: 1px solid #BA8F2F;
+}
+
+td {
+  text-align: center;
+  vertical-align: center;
+  font-size: 24px;
+}
+
+#approve-button {
+  padding: 1rem 2rem;
+  border: 1px solid #BA8F2F;
+}
+
+@media screen and (max-width: 600px) {
+  
+}
+
+/* for larger devices */
+@media screen and (min-width: 600px) and (max-width: 1200px) {
+
+}
+
+@media screen and (min-width: 1200px) {
+  #approve-button:hover {
+    cursor: pointer;
+  }
 }

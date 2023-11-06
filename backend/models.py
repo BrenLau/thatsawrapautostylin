@@ -40,8 +40,14 @@ class User(db.Model, UserMixin):
             "name": self.name,
             "email": self.email,
             "phone_number": self.phone_number,
+<<<<<<< HEAD
             "instagram": self.instagram,
             "is_admin": self.is_admin
+=======
+            "is_admin": self.is_admin,
+            "name": self.name,
+            "instagram": self.instagram
+>>>>>>> dev
         }
 
 
@@ -99,12 +105,22 @@ class Booking(db.Model):
     def to_dict(self):
         return {
             "id": self.id,
+<<<<<<< HEAD
             "user_id": self.user.to_dict(),
             # "total_price": self.total_price,
             "times": self.times,
             "service_id": self.service.to_dict(),
             # "car": self.car,
             "is_approved": self.is_approved
+=======
+            "total_price": self.total_price,
+            "times": self.times,
+            "service_id": self.service_id,
+            "car": self.car,
+            "is_approved": self.is_approved,
+            "user": self.user.to_dict(),
+            "service": self.service.to_dict()
+>>>>>>> dev
         }
 
 

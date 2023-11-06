@@ -19,13 +19,19 @@ function ServiceTile({ service, user }) {
     const navigate = useNavigate();
     let image
     switch (service.title) {
-        case "Side Window Tint":
+        case "SUV Side Window Tint":
             image = tint
             break;
+        case "Sedan Side Window Tint":
+                image = tint
+                break;
         case "Head light/tail light Tint":
             image = tint
             break;
-        case "Rear Window Tint":
+        case "SUV Rear Window Tint":
+            image = tint
+            break;
+        case "Sedan Rear Window Tint":
             image = tint
             break;
         case "Sedan full car wrap":
