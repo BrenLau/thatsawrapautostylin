@@ -96,7 +96,6 @@ class Booking(db.Model):
     is_approved = db.Column(db.Boolean, nullable=False)
     user = db.relationship("User", back_populates="bookings")
     service = db.relationship("Service", back_populates="bookings")
-    service = db.relationship("Service", back_populates="bookings")
 
     def to_dict(self):
         return {
