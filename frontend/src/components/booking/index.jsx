@@ -15,33 +15,32 @@ const Booking = () => {
     const [errors, setErrors] = useState({})
     const navigate = useNavigate()
 
-    // console.log('services', servic)
-    const [name, setName] = useState("")
-    const [email, setEmail] = useState("");
-    const [number, setNumber] = useState("");
-    const [insta, setInsta] = useState("");
+    // const [name, setName] = useState("")
+    // const [email, setEmail] = useState("");
+    // const [number, setNumber] = useState("");
+    // const [insta, setInsta] = useState("");
     const [car, setCar] = useState("");
     const services = JSON.parse(sessionStorage.getItem("services"))
-    console.log("name: ", name, "email: ", email, "number: ", number, "insta: ", insta, "car: ", car, "times: ", times)
+    // console.log("name: ", name, "email: ", email, "number: ", number, "insta: ", insta, "car: ", car, "times: ", times)
 
-    useEffect(() => {
-        const user = sessionStorage.getItem("user");
-        console.log(user)
+    // useEffect(() => {
+    //     const user = sessionStorage.getItem("user");
+    //     console.log(user)
 
-        if (user) {
-            const { name, email, phone_number, instagram } = JSON.parse(user);
-            console.log("instagram from user: ", instagram)
-            console.log("insta state: ", insta)
-            setName(name)
-            setEmail(email)
-            if (number) setNumber(phone_number)
+    //     if (user) {
+    //         const { name, email, phone_number, instagram } = JSON.parse(user);
+    //         console.log("instagram from user: ", instagram)
+    //         console.log("insta state: ", insta)
+    //         setName(name)
+    //         setEmail(email)
+    //         if (number) setNumber(phone_number)
 
-            if (instagram) {
-                console.log("truthy")
-                setInsta(instagram)}
-            // setInsta("" || instagram)
-        }
-    }, []);
+    //         if (instagram) {
+    //             console.log("truthy")
+    //             setInsta(instagram)}
+
+    //     }
+    // }, []);
 
     const booked = () => {
         window.alert('Your service has been booked')
@@ -51,38 +50,61 @@ const Booking = () => {
         e.preventDefault()
         console.log("submitting... ")
         setErrors({})
-        const res = await fetch('/api/booking', {
+        console.log('times in submit', times)
+        console.log('userid ', user.id)
+        console.log('serviceid', servic)
+        const res = await fetch('http://127.0.0.1:5000/api/booking', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                user_id: user.id,
-                car,
+                // user_id: user.id,
+                // car,
                 times,
-                service_id: servic.id,
-                total_price: servic.price
+                service_id: Number(servic),
+                // is_approved: false
+                // total_price: servic.price
             })
         })
         console.log('ressss', res)
-        let data = await res.json()
-        console.log('data', data)
-        if (data.errors) {
-            setErrors(data.errors);
-        } else {
-            sessionStorage.setItem("booking", JSON.stringify(data))
-            navigate('/')
-            return booked()
+        // let data = await res.json()
+        if (!res.ok) {
+            console.error('Error:', res.status);
+            // Handle the error, prevent page refresh if necessary
+            throw new Error('Booking failed');  // Add this line to throw an error
+        }
 
+
+        try {
+            const data = await res.json();
+            // Handle the JSON data
+            console.log('data', data);
+            if (data.errors) {
+                setErrors(data.errors);
+            } else {
+                sessionStorage.setItem("booking", JSON.stringify(data))
+                navigate('/')
+                return booked()
+            }
+        } catch (error) {
+            console.error('Error parsing JSON:', error);
+            // Handle parsing error
         }
-console.log('service price', servic.split("$"))
-        if (times < new Date()) {
-            errors.times = "Date must be in future"
-        }
+        // console.log('data', data)
+        // if (data.errors) {
+        //     setErrors(data.errors);
+        // } else {
+        //     sessionStorage.setItem("booking", JSON.stringify(data))
+        //     navigate('/')
+        //     return booked()
+        // }
+
+        // if (times < new Date()) {
+        //     console.log(new Date())
+        //     errors.times = "Date must be in future"
+        // }
     }
-    // console.log('times', times)
-
-    // console.log('serice price', servic)
 
     let inputProps = {
         placeholder: "Select a date and time*"
@@ -99,13 +121,13 @@ console.log('service price', servic.split("$"))
     // }
 
     return (
-        <form>
+        <form onSubmit={handleSubmit}>
             <div className='top-form'>
                 <h1>Book Service</h1>
                 <div className='name-car'>
-                    <div className='name-div'>
+                    {/* <div className='name-div'>
                         <label className='name'>
-                            {/* Name: */}
+
                             <input
                                 type="text"
                                 placeholder="Name*"
@@ -114,10 +136,10 @@ console.log('service price', servic.split("$"))
                                 required
                             />
                         </label>
-                    </div>
-                    <div className='email-div'>
+                    </div> */}
+                    {/* <div className='email-div'>
                         <label>
-                            {/* Email: */}
+
                             <input
                                 className="email"
                                 type="email"
@@ -127,10 +149,10 @@ console.log('service price', servic.split("$"))
                                 required
                             />
                         </label>
-                    </div>
-                    <div className='number-div'>
+                    </div> */}
+                    {/* <div className='number-div'>
                         <label>
-                            {/* Phone Number: */}
+
                             <input
                                 className='phone'
                                 type='number'
@@ -142,10 +164,10 @@ console.log('service price', servic.split("$"))
                                 required
                             />
                         </label>
-                    </div>
-                    <div className='insta-div'>
+                    </div> */}
+                    {/* <div className='insta-div'>
                         <label>
-                            {/* Instagram: */}
+
                             <input
                                 className='insta'
                                 placeholder='Instagram'
@@ -155,7 +177,7 @@ console.log('service price', servic.split("$"))
 
                             />
                         </label>
-                    </div>
+                    </div> */}
                     <div className='car-div'>
                         <select name="cars" id="car-select" value={car} onChange={(e) => {
                             console.log(e.target.value)
@@ -184,9 +206,9 @@ console.log('service price', servic.split("$"))
                                 }}
                             />
                             {errors.times && <p className="errors">{errors.times}</p>}
-                            <div className='referral-div'>
+                            {/* <div className='referral-div'>
                                 <label>
-                                    {/* Referral Code: */}
+
                                     <input
                                         type='text'
                                         placeholder='Referral Code'
@@ -194,16 +216,16 @@ console.log('service price', servic.split("$"))
                                         onChange={(e) => setReferral(e.target.value)}
                                     />
                                 </label>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>
                 <div className='service-referral'>
                     <div className='service-div'>
-                        <select onChange={(e) => console.log('e, ', e.target.value)}>
+                        <select onChange={(e) => setService(e.target.value)}>
                             {serviceList.map((service) => {
                                 return (
-                                    <option key={service.id} onChange={(e) => console.log('eeee', e)} value={service.id}>
+                                    <option key={service.id} value={service.id}>
                                         {service.title}
                                         {service.description}
                                         ${service.price}
@@ -219,7 +241,7 @@ console.log('service price', servic.split("$"))
                     Total Price: ${servic.price}
                 </div>
 
-                <button className='booking-submit' onSubmit={handleSubmit} >Submit</button>
+                <button className='booking-submit'>Submit</button>
             </div>
         </form>
     )

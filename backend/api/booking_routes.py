@@ -20,19 +20,22 @@ def get_logged_users_bookings():
 #POST BOOKING
 @booking_routes.route('/', methods=['POST'])
 def post_booking():
+    print('HELLLLLOOOOO')
+    print('request in the abckend', request.json)
     if not current_user.is_authenticated:
         return {
             'unauthorized: "user is not authorized'
         }
     form = BookingForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    if form.valdiate_on_submit():
+    if form.validate_on_submit():
         new_booking = Booking(
             user_id = current_user.id,
             times = form.data['times'],
             service_id = form.data["service_id"],
             is_approved = False
         )
+        print('new booking', new_booking)
         db.session.add(new_booking)
         db.session.commit()
         return new_booking.to_dict()
