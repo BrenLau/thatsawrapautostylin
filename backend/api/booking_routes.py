@@ -23,9 +23,8 @@ def post_booking():
     print('HELLLLLOOOOO')
     print('request in the abckend', request.json)
     if not current_user.is_authenticated:
-        return {
-            'unauthorized: "user is not authorized'
-        }
+       print('useerrrrr', current_user)
+       return {'unauthorized': 'user is not authorized'}
     form = BookingForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():

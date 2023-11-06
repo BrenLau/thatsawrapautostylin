@@ -142,18 +142,18 @@ def seed_data():
 
     Booking1 = Booking(
         user_id = 1,
-        total_price = 9999,
+        # total_price = 9999,
         times = "1 AM",
         service_id= 1,
-        car="Car 1",
+        # car="Car 1",
         is_approved=True
         )
     Booking2 = Booking(
         user_id = 2,
-        total_price = 1,
+        # total_price = 1,
         times = "12 PM",
         service_id= 2,
-        car="Car 2",
+        # car="Car 2",
         is_approved=False
     )
 
