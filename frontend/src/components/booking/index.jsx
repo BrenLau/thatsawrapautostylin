@@ -1,27 +1,30 @@
 import './booking.css'
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import "react-datetime/css/react-datetime.css"
 import DateTime from 'react-datetime'
 import { useContext } from 'react';
 import { UserContext } from '../../main';
 import { useNavigate } from 'react-router-dom';
-// import SignupFormModal from '../signup-form-modal';
+import SignupFormModal from '../signup-form-modal';
 
 const Booking = () => {
     const { user } = useContext(UserContext)
-    const [referral, setReferral] = useState("")
     const [times, setTimes] = useState("")
     const [servic, setService] = useState("")
     const [errors, setErrors] = useState({})
-    const navigate = useNavigate()
-
-    // const [name, setName] = useState("")
-    // const [email, setEmail] = useState("");
-    // const [number, setNumber] = useState("");
-    // const [insta, setInsta] = useState("");
     const [car, setCar] = useState("");
+    const navigate = useNavigate()
+    console.log('user in the frontend', user)
+
+
+
+    if (!user) {
+        return (
+            <SignupFormModal />
+        )
+    }
+
     const services = JSON.parse(sessionStorage.getItem("services"))
-    // console.log("name: ", name, "email: ", email, "number: ", number, "insta: ", insta, "car: ", car, "times: ", times)
 
     // useEffect(() => {
     //     const user = sessionStorage.getItem("user");
@@ -46,23 +49,23 @@ const Booking = () => {
         window.alert('Your service has been booked')
     }
 
+    console.log('Document cookie:', document.cookie);
+
     const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log("submitting... ")
         setErrors({})
-        console.log('times in submit', times)
-        console.log('userid ', user.id)
-        console.log('serviceid', servic)
         const res = await fetch('http://127.0.0.1:5000/api/booking', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
+            credentials: 'include',
             body: JSON.stringify({
                 // user_id: user.id,
                 // car,
                 times,
-                service_id: Number(servic),
+                user_id: user.id,
+                service: Number(servic),
                 // is_approved: false
                 // total_price: servic.price
             })
@@ -70,35 +73,16 @@ const Booking = () => {
         console.log('ressss', res)
         // let data = await res.json()
         if (!res.ok) {
+            let data = await res.json();
             console.error('Error:', res.status);
-            // Handle the error, prevent page refresh if necessary
-            throw new Error('Booking failed');  // Add this line to throw an error
+            setErrors(data.errors);
         }
-
-
-        try {
-            const data = await res.json();
-            // Handle the JSON data
-            console.log('data', data);
-            if (data.errors) {
-                setErrors(data.errors);
-            } else {
-                sessionStorage.setItem("booking", JSON.stringify(data))
-                navigate('/')
-                return booked()
-            }
-        } catch (error) {
-            console.error('Error parsing JSON:', error);
-            // Handle parsing error
+        else {
+            let data = await res.json()
+            sessionStorage.setItem("booking", JSON.stringify(data))
+            navigate('/')
+            return booked()
         }
-        // console.log('data', data)
-        // if (data.errors) {
-        //     setErrors(data.errors);
-        // } else {
-        //     sessionStorage.setItem("booking", JSON.stringify(data))
-        //     navigate('/')
-        //     return booked()
-        // }
 
         // if (times < new Date()) {
         //     console.log(new Date())
@@ -110,15 +94,10 @@ const Booking = () => {
         placeholder: "Select a date and time*"
     }
 
-    const serviceList = services.filter(service => service.car_type !== Number(car))
-    // console.log('car', Number(car))
-    // console.log('service list', serviceList)
+    const selectedService = services.find((service) => service.id === Number(servic));
+    const totalPrice = selectedService ? selectedService.price : 0;
 
-    // if(car === 2){
-    //      const serviceList = services.filter( service => service.car_type !== 3)
-    // } else if(car === 3){
-    //     services.filter(service => service.car_type == 2)
-    // }
+    const serviceList = services.filter(service => service.car_type !== Number(car))
 
     return (
         <form onSubmit={handleSubmit}>
@@ -181,7 +160,8 @@ const Booking = () => {
                     <div className='car-div'>
                         <select name="cars" id="car-select" value={car} onChange={(e) => {
                             console.log(e.target.value)
-                            setCar(e.target.value)}} required>
+                            setCar(e.target.value)
+                        }} required>
                             <option value="hi">--Please choose a car type--</option>
                             <option value={Number(3)}>Coupe/Sedan</option>
                             <option value={Number(2)}>SUV/Truck</option>
@@ -238,7 +218,7 @@ const Booking = () => {
             </div>
             <div className='price-submit'>
                 <div className='price-div'>
-                    Total Price: ${servic.price}
+                    Total Price: ${totalPrice}
                 </div>
 
                 <button className='booking-submit'>Submit</button>
