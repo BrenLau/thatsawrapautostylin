@@ -1,21 +1,51 @@
-cachetools==5.3.2
-certifi==2023.7.22
-charset-normalizer==3.3.1
-google-api-core==2.12.0
-google-api-python-client==2.106.0
-google-auth==2.23.4
-google-auth-httplib2==0.1.1
-google-auth-oauthlib==1.1.0
-googleapis-common-protos==1.61.0
-httplib2==0.22.0
-idna==3.4
-oauthlib==3.2.2
-protobuf==4.24.4
-pyasn1==0.5.0
-pyasn1-modules==0.3.0
-pyparsing==3.1.1
-requests==2.31.0
-requests-oauthlib==1.3.1
-rsa==4.9
-uritemplate==4.1.1
-urllib3==2.0.7
+-i https://pypi.org/simple
+alembic==1.12.1
+beautifulsoup4==4.12.2 ; python_full_version >= '3.6.0'
+blinker==1.7.0 ; python_version >= '3.8'
+certifi==2023.7.22 ; python_version >= '3.6'
+charset-normalizer==3.3.2 ; python_full_version >= '3.7.0'
+click==8.1.7 ; python_version >= '3.7'
+dnspython==2.4.2 ; python_version >= '3.8' and python_version < '4.0'
+email-validator==2.1.0.post1
+flask==2.3.1
+flask-cors==4.0.0
+flask-googlemaps==0.4.1
+flask-login==0.6.3
+flask-migrate==4.0.5
+flask-sqlalchemy==3.1.1
+flask-wtf==1.2.1
+ghp-import==2.1.0
+google==3.0.0
+greenlet==3.0.1 ; platform_machine == 'aarch64' or (platform_machine == 'ppc64le' or (platform_machine == 'x86_64' or (platform_machine == 'amd64' or (platform_machine == 'AMD64' or (platform_machine == 'win32' or platform_machine == 'WIN32')))))
+htmlmin==0.1.12
+idna==3.4 ; python_version >= '3.5'
+itsdangerous==2.1.2 ; python_version >= '3.7'
+jinja2==3.1.2 ; python_version >= '3.7'
+jsmin==3.0.1
+mako==1.2.4 ; python_version >= '3.7'
+markdown==3.5.1 ; python_version >= '3.8'
+markupsafe==2.1.3 ; python_version >= '3.7'
+mergedeep==1.3.4 ; python_version >= '3.6'
+mkdocs==1.5.3 ; python_version >= '3.7'
+mkdocs-material==5.5.14
+mkdocs-material-extensions==1.3 ; python_version >= '3.8'
+mkdocs-minify-plugin==0.3.0 ; python_version >= '2.7'
+packaging==23.2 ; python_version >= '3.7'
+pathspec==0.11.2 ; python_version >= '3.7'
+platformdirs==3.11.0 ; python_version >= '3.7'
+psycopg2-binary==2.9.9
+pygments==2.16.1 ; python_version >= '3.7'
+pymdown-extensions==10.3.1 ; python_version >= '3.8'
+python-dateutil==2.8.2 ; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'
+python-dotenv==1.0.0
+pyyaml==6.0.1 ; python_version >= '3.6'
+pyyaml-env-tag==0.1 ; python_version >= '3.6'
+requests==2.31.0 ; python_version >= '3.7'
+six==1.16.0 ; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'
+soupsieve==2.5 ; python_version >= '3.8'
+sqlalchemy==2.0.23
+typing-extensions==4.8.0 ; python_version >= '3.8'
+urllib3==2.0.7 ; python_version >= '3.7'
+watchdog==3.0.0 ; python_version >= '3.7'
+werkzeug==2.3.0
+wtforms==3.1.1
