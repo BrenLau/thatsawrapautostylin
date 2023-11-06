@@ -165,6 +165,10 @@ button .booking-submit {
     gap: 1rem
 }
 
+.service-div select{
+    width: 320px
+}
+
 .price-div {
     margin-bottom: 1rem;
 }
@@ -202,6 +206,10 @@ button .booking-submit {
     display: flex;
     flex-direction: column;
     gap: 1rem
+}
+
+.car-div select{
+    width: 320px
 }
 
 
