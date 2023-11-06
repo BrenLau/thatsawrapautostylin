@@ -5,6 +5,7 @@ import LoginFormModal from "../login-modal";
 import SignupFormModal from "../signup-form-modal";
 import { UserContext, CalendarContext } from '../../main';
 import { useContext } from 'react';
+import { useNavigate } from "react-router-dom";
 
 const MenuButton = () => {
   const { user, setUser } = useContext(UserContext)
@@ -13,6 +14,7 @@ const MenuButton = () => {
   const ulRef = useRef();
   const [transitioning, setTransitioning] = useState(false)
   const [userState, setUserState] = useState(user || null)
+  const navigate = useNavigate()
 
   const updateUserState = (user) => {
     setUser(user)
@@ -52,6 +54,7 @@ const MenuButton = () => {
       sessionStorage.removeItem("user")
       // await apiCalendar.handleSignOutClick();
       setUser(null)
+      navigate('/')
     }
   }
 

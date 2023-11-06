@@ -1,113 +1,112 @@
 import './booking.css'
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import "react-datetime/css/react-datetime.css"
 import DateTime from 'react-datetime'
 import { useContext } from 'react';
 import { UserContext } from '../../main';
 import { useNavigate } from 'react-router-dom';
-// import SignupFormModal from '../signup-form-modal';
+import SignupFormModal from '../signup-form-modal';
 
 const Booking = () => {
     const { user } = useContext(UserContext)
-    const [referral, setReferral] = useState("")
     const [times, setTimes] = useState("")
     const [servic, setService] = useState("")
     const [errors, setErrors] = useState({})
-    const navigate = useNavigate()
-
-    // console.log('services', servic)
-    const [name, setName] = useState("")
-    const [email, setEmail] = useState("");
-    const [number, setNumber] = useState("");
-    const [insta, setInsta] = useState("");
     const [car, setCar] = useState("");
-    const [price, setPrice] = useState(0)
-    const [selected, setSelected] = useState(null)
+    const navigate = useNavigate()
+    console.log('user in the frontend', user)
+
+
+
+    if (!user) {
+        return (
+            <SignupFormModal />
+        )
+    }
+
     const services = JSON.parse(sessionStorage.getItem("services"))
-    console.log(services)
 
-    useEffect(() => {
-        const user = sessionStorage.getItem("user");
-        console.log(user)
+    // useEffect(() => {
+    //     const user = sessionStorage.getItem("user");
+    //     console.log(user)
 
-        if (user) {
-            const { name, email, phone_number, instagram } = JSON.parse(user);
-            console.log("instagram from user: ", instagram)
-            console.log("insta state: ", insta)
-            setName(name)
-            setEmail(email)
-            if (number) setNumber(phone_number)
-            
-            if (instagram) {
-                console.log("truthy")
-                setInsta(instagram)}
-            // setInsta("" || instagram)
-        }
-    }, []);
+    //     if (user) {
+    //         const { name, email, phone_number, instagram } = JSON.parse(user);
+    //         console.log("instagram from user: ", instagram)
+    //         console.log("insta state: ", insta)
+    //         setName(name)
+    //         setEmail(email)
+    //         if (number) setNumber(phone_number)
+
+    //         if (instagram) {
+    //             console.log("truthy")
+    //             setInsta(instagram)}
+
+    //     }
+    // }, []);
 
     const booked = () => {
         window.alert('Your service has been booked')
     }
 
+    console.log('Document cookie:', document.cookie);
+
     const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log("submitting... ")
         setErrors({})
-        const res = await fetch('/api/booking', {
+        const res = await fetch('/api/bookings', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
+            credentials: 'include',
             body: JSON.stringify({
-                user_id: user.id,
-                car,
+                // user_id: user.id,
+                // car,
                 times,
-                service_id: servic.id,
-                total_price: servic.price
+                user_id: user.id,
+                service: Number(servic),
+                // is_approved: false
+                // total_price: servic.price
             })
         })
         console.log('ressss', res)
-        let data = await res.json()
-        console.log('data', data)
-        if (data.errors) {
+        // let data = await res.json()
+        if (!res.ok) {
+            let data = await res.json();
+            console.error('Error:', res.status);
             setErrors(data.errors);
-        } else {
+        }
+        else {
+            let data = await res.json()
             sessionStorage.setItem("booking", JSON.stringify(data))
-            // navigate('/')
+            navigate('/')
             return booked()
-
         }
 
-        if (times < new Date()) {
-            errors.times = "Date must be in future"
-        }
+        // if (times < new Date()) {
+        //     console.log(new Date())
+        //     errors.times = "Date must be in future"
+        // }
     }
-    // console.log('times', times)
-
-    // console.log('serice price', servic)
 
     let inputProps = {
         placeholder: "Select a date and time*"
     }
 
-    const serviceList = services.filter(service => service.car_type !== Number(car))
-    // console.log('car', Number(car))
-    // console.log('service list', serviceList)
+    const selectedService = services.find((service) => service.id === Number(servic));
+    const totalPrice = selectedService ? selectedService.price : 0;
 
-    // if(car === 2){
-    //      const serviceList = services.filter( service => service.car_type !== 3)
-    // } else if(car === 3){
-    //     services.filter(service => service.car_type == 2)
-    // }
+    const serviceList = services.filter(service => service.car_type !== Number(car))
 
     return (
-        <form>
+        <form onSubmit={handleSubmit}>
             <div className='top-form'>
                 <h1>Book Service</h1>
                 <div className='name-car'>
-                    <div className='name-div'>
+                    {/* <div className='name-div'>
                         <label className='name'>
-                            {/* Name: */}
+
                             <input
                                 type="text"
                                 placeholder="Name*"
@@ -116,10 +115,10 @@ const Booking = () => {
                                 required
                             />
                         </label>
-                    </div>
-                    <div className='email-div'>
+                    </div> */}
+                    {/* <div className='email-div'>
                         <label>
-                            {/* Email: */}
+
                             <input
                                 className="email"
                                 type="email"
@@ -129,10 +128,10 @@ const Booking = () => {
                                 required
                             />
                         </label>
-                    </div>
-                    <div className='number-div'>
+                    </div> */}
+                    {/* <div className='number-div'>
                         <label>
-                            {/* Phone Number: */}
+
                             <input
                                 className='phone'
                                 type='number'
@@ -144,10 +143,10 @@ const Booking = () => {
                                 required
                             />
                         </label>
-                    </div>
-                    <div className='insta-div'>
+                    </div> */}
+                    {/* <div className='insta-div'>
                         <label>
-                            {/* Instagram: */}
+
                             <input
                                 className='insta'
                                 placeholder='Instagram'
@@ -157,11 +156,12 @@ const Booking = () => {
 
                             />
                         </label>
-                    </div>
+                    </div> */}
                     <div className='car-div'>
                         <select name="cars" id="car-select" value={car} onChange={(e) => {
                             console.log(e.target.value)
-                            setCar(e.target.value)}} required>
+                            setCar(e.target.value)
+                        }} required>
                             <option value="hi">--Please choose a car type--</option>
                             <option value={Number(3)}>Coupe/Sedan</option>
                             <option value={Number(2)}>SUV/Truck</option>
@@ -186,9 +186,9 @@ const Booking = () => {
                                 }}
                             />
                             {errors.times && <p className="errors">{errors.times}</p>}
-                            <div className='referral-div'>
+                            {/* <div className='referral-div'>
                                 <label>
-                                    {/* Referral Code: */}
+
                                     <input
                                         type='text'
                                         placeholder='Referral Code'
@@ -196,37 +196,32 @@ const Booking = () => {
                                         onChange={(e) => setReferral(e.target.value)}
                                     />
                                 </label>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>
                 <div className='service-referral'>
                     <div className='service-div'>
-                        <select onChange={(e) => setService(e.target.value)} value={servic}>
-                         
-                        {serviceList.map((service) => {
-                            return (
-                                <option key={service.id}>
-                                    {/* <input type="radio"
-                                        name='service'
-                                        value={servic}
-                                        onChange={(e) => console.log(e.target)} /> */}
-                                    <div>{service.title}</div>
-                                    <div>{service.description}</div>
-                                    <div>${service.price}</div>
-                                </option>
-                            )
-                        })}
+                        <select onChange={(e) => setService(e.target.value)}>
+                            {serviceList.map((service) => {
+                                return (
+                                    <option key={service.id} value={service.id}>
+                                        {service.title}
+                                        {service.description}
+                                        ${service.price}
+                                    </option>
+                                )
+                            })}
                         </select>
                     </div>
                 </div>
             </div>
             <div className='price-submit'>
                 <div className='price-div'>
-                    Total Price: ${servic.price}
+                    Total Price: ${totalPrice}
                 </div>
 
-                <button className='booking-submit' onSubmit={handleSubmit} >Submit</button>
+                <button className='booking-submit'>Submit</button>
             </div>
         </form>
     )

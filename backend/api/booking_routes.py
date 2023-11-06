@@ -20,25 +20,27 @@ def get_logged_users_bookings():
     bookings = Booking.query.filter(Booking.user_id == current_user.id).all()
     return {'bookings': [booking.to_dict() for booking in bookings]}
 
-#POST BOOKING
+# POST BOOKING
 @booking_routes.route('/', methods=['POST'])
 def post_booking():
-    if not current_user.is_authenticated:
-        return {
-            'unauthorized: "user is not authorized'
-        }
+    # if not current_user.is_authenticated:
+    #    return {'unauthorized': 'user is not authorized'}
     form = BookingForm()
-    form['csrf_token'].data = request.cookies['csrf_token']
-    if form.valdiate_on_submit():
-        new_booking = Booking(
-            user_id = current_user.id,
-            times = form.data['times'],
-            service_id = form.data["service_id"],
-            is_approved = False
-        )
-        db.session.add(new_booking)
-        db.session.commit()
-        return new_booking.to_dict()
+    # print("*** form ***", request.cookies)
+    # form['csrf_token'].data = request.cookies['csrf_token']
+    # print("*** csrf token added ***")
+    # if form.validate_on_submit():
+    new_booking = Booking(
+        user_id = form.data['user_id'],
+        times = form.data['times'],
+        service_id = form.data["service"],
+        is_approved = False
+    )
+    db.session.add(new_booking)
+    db.session.commit()
+    return new_booking.to_dict()
+
+
 
 #DELETE BOOKING BY BOOKING ID
 @booking_routes.route('/<int:booking_id>/delete', methods=['DELETE'])

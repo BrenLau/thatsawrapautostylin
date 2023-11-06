@@ -146,6 +146,7 @@ def seed_data():
         times = "2023-11-09T12:00:00",
         service_id= 1,
         # car="Car 1",
+        # car="Car 1",
         is_approved=True
         )
     Booking2 = Booking(
@@ -153,6 +154,7 @@ def seed_data():
         # total_price = 1,
         times = "2023-11-10T12:00:00",
         service_id= 2,
+        # car="Car 2",
         # car="Car 2",
         is_approved=False
     )

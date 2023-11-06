@@ -1,5 +1,5 @@
 from backend.api.maps import maps_route
-from flask import Flask, send_from_directory
+from flask import Flask, send_from_directory, jsonify
 from flask_cors import CORS
 from backend.models import db, User
 from .models import db
@@ -51,7 +51,8 @@ db.init_app(app)
 
 Migrate(app, db)
 
-CORS(app)
+CORS(app, supports_credentials=True, resources={r"/api/*": {"origins": "http://localhost:5173"}})
+
 
 
 @app.after_request
@@ -83,6 +84,16 @@ def react_root(path):
 @app.errorhandler(404)
 def not_found(e):
     return app.send_static_file('index.html')
+
+@app.route('/api/booking', methods=['OPTIONS'])
+def handle_preflight():
+    response = jsonify({'message': 'Preflight request successful'})
+    response.headers.add('Access-Control-Allow-Origin', 'http://localhost:5173')
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type, X-CSRFToken')
+    response.headers.add('Access-Control-Allow-Methods', 'POST, OPTIONS')
+    response.headers.add('Access-Control-Allow-Credentials', 'true')
+    return response
+
 
 
 # from flask_googlemaps import GoogleMaps
