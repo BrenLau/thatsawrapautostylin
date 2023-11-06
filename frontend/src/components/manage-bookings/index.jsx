@@ -20,8 +20,14 @@ const ManageBookings = () => {
   const { user, setUser } = useContext(UserContext);
   const [isAdmin, setIsAdmin] = useState(false);
   const [bookings, setBookings] = useState({});
+  const [errors, setErrors] = useState({})
 
   const {apiCalendar, setApiCalendar} = useContext(CalendarContext)
+
+  useEffect(() => {
+    if (!user) return
+    setIsAdmin(user.is_admin)
+  }, [user])
 
   useEffect(()=>{
 
@@ -29,18 +35,13 @@ const ManageBookings = () => {
       try{
         if(!user) return;
         let res;
-        console.log(user, "user??")
-        console.log(isAdmin, "admin??")
         if(user && isAdmin){//fetch all as admin, fetch current user as current user
-          res = await fetch("/api/booking");
-          console.log("admin?")
+          res = await fetch("/api/bookings");
         } else if(user && !isAdmin) {
-          res = await fetch("/api/booking/current")
-          console.log("not admin?")
+          res = await fetch("/api/bookings/current")
         }
         const userBookings = await res.json()
-        console.log(userBookings, 'USER BOOKINGS')
-        setBookings(userBookings.bookings);
+        setBookings(userBookings);
 
       } catch (error) {
         console.error("Error fetching bookings: ", error)
@@ -50,17 +51,19 @@ const ManageBookings = () => {
 
 
     getBookings();
-  }, [isAdmin, user]);
+  }, [isAdmin]);
 
   if (!Object.values(bookings).length) return
 
   const handleApprove = async (booking) => {
+    setErrors({})
+    console.log(apiCalendar)
     const startTime = new Date(booking.times)
     const endTime = new Date()
     endTime.setTime(startTime.getTime())
     endTime.setTime(endTime.getTime() + 7200000)
     const resource = {
-      summary: `${booking.service.description} with ${booking.user.name}`,
+      summary: `${booking.service.description} for ${booking.user.name}`,
       start: {
         "dateTime": startTime
       }, 
@@ -81,9 +84,12 @@ const ManageBookings = () => {
         return true
       }
     })
-    if (bookedEvent.length) return
+    if (bookedEvent.length) setErrors({
+      "error": "Time already booked"
+    })
   })
   .then(() => {
+    if (errors.error) return
     const approvedBookings = approveBooking(booking.id)
     if (approvedBookings.unauthorized) {
       return
@@ -92,17 +98,21 @@ const ManageBookings = () => {
 
   })
   .then(() => {
+    if (errors.error) return
+    console.log(resource)
     const calEvent = apiCalendar.createEvent(resource)
+    console.log(calEvent)
 
   })
   }
+
+
 
   const populateTable = (filteredBookings, isApproved) => {
     return Object.values(filteredBookings)?.map((booking)=>
        (
         <table id="bookings-table" key={booking.id}>
           <tbody>
-
 
           <tr id="headings">
             <th>car</th>
@@ -130,6 +140,7 @@ const ManageBookings = () => {
 
       )
   }
+
   return (
     <div id="manage-bookings">
       { !user? (

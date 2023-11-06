@@ -53,7 +53,7 @@ async function initCalendar() {
 		method: "GET"
 	});
 	const envVar = await res.json();
-	("initiating... ", config)
+	("initiating... ", envVar)
 
 	const cal = new ApiCalendar(envVar.config, envVar.calendar) 
 
